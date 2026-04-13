@@ -1,0 +1,299 @@
+--- "a"
++++ "b"
+@@ -14,6 +14,8 @@
+ #include "GuardList.h"
+ #include "utl/concurrency.h"
+ 
++using namespace retro::vault::amiga;
++
+ namespace vamiga {
+ 
+ /* All main API functions are annotated with one of the following keywords:
+@@ -103,26 +105,26 @@
+ // Components (Agnus)
+ //
+ 
+-const LogicAnalyzerConfig &
+-LogicAnalyzerAPI::getConfig() const
+-{
+-    VAMIGA_PUBLIC
+-    return logicAnalyzer->getConfig();
+-}
+-
+-const LogicAnalyzerInfo &
+-LogicAnalyzerAPI::getInfo() const
+-{
+-    VAMIGA_PUBLIC
+-    return logicAnalyzer->info.current();
+-}
+-
+-const LogicAnalyzerInfo &
+-LogicAnalyzerAPI::getCachedInfo() const
+-{
+-    VAMIGA_PUBLIC
+-    return logicAnalyzer->info.backed();
+-}
++// const LogicAnalyzerConfig &
++// LogicAnalyzerAPI::getConfig() const
++// {
++//     VAMIGA_PUBLIC
++//     return logicAnalyzer->getConfig();
++// }
++// 
++// const LogicAnalyzerInfo &
++// LogicAnalyzerAPI::getInfo() const
++// {
++//     VAMIGA_PUBLIC
++//     return logicAnalyzer->info.current();
++// }
++// 
++// const LogicAnalyzerInfo &
++// LogicAnalyzerAPI::getCachedInfo() const
++// {
++//     VAMIGA_PUBLIC
++//     return logicAnalyzer->info.backed();
++// }
+ 
+ const DmaDebuggerConfig &
+ DmaDebuggerAPI::getConfig() const
+@@ -1653,94 +1655,94 @@
+ // RemoteManagerAPI
+ //
+ 
+-const RemoteManagerInfo &
+-RemoteManagerAPI::getInfo() const
+-{
+-    VAMIGA_PUBLIC
+-    return remoteManager->info.current();
+-}
+-
+-const RemoteManagerInfo &
+-RemoteManagerAPI::getCachedInfo() const
+-{
+-    VAMIGA_PUBLIC
+-    return remoteManager->info.backed();
+-}
+-
++// const RemoteManagerInfo &
++// RemoteManagerAPI::getInfo() const
++// {
++//     VAMIGA_PUBLIC
++//     return remoteManager->info.current();
++// }
++// 
++// const RemoteManagerInfo &
++// RemoteManagerAPI::getCachedInfo() const
++// {
++//     VAMIGA_PUBLIC
++//     return remoteManager->info.backed();
++// }
++// 
+ 
+ //
+ // RetroShellAPI
+ //
+ 
+-const RetroShellInfo &
+-RetroShellAPI::getInfo() const
+-{
+-    VAMIGA_PUBLIC
+-    return retroShell->info.current();
+-}
+-
+-const RetroShellInfo &
+-RetroShellAPI::getCachedInfo() const
+-{
+-    VAMIGA_PUBLIC
+-    return retroShell->info.backed();
+-}
+-
+-const char *
+-RetroShellAPI::text()
+-{
+-    VAMIGA_PUBLIC_SUSPEND
+-    return retroShell->text();
+-}
+-
+-void
+-RetroShellAPI::press(RSKey key, bool shift)
+-{
+-    VAMIGA_PUBLIC_SUSPEND
+-    retroShell->press(key, shift);
+-}
+-
+-void
+-RetroShellAPI::press(char c)
+-{
+-    VAMIGA_PUBLIC_SUSPEND
+-    retroShell->press(c);
+-}
+-
+-void
+-RetroShellAPI::press(const string &s)
+-{
+-    VAMIGA_PUBLIC_SUSPEND
+-    retroShell->press(s);
+-}
+-
+-void
+-RetroShellAPI::execScript(const fs::path &path)
+-{
+-    VAMIGA_PUBLIC_SUSPEND
+-    retroShell->asyncExecScript(path);
+-}
+-
+-void
+-RetroShellAPI::execScript(std::stringstream &ss)
+-{
+-    VAMIGA_PUBLIC_SUSPEND
+-    retroShell->asyncExecScript(ss);
+-}
+-
+-void
+-RetroShellAPI::execScript(const std::ifstream &fs)
+-{
+-    VAMIGA_PUBLIC_SUSPEND
+-    retroShell->asyncExecScript(fs);
+-}
+-
+-void
+-RetroShellAPI::execScript(const string &contents)
+-{
+-    VAMIGA_PUBLIC_SUSPEND
+-    retroShell->asyncExecScript(contents);
+-}
++// const RetroShellInfo &
++// RetroShellAPI::getInfo() const
++// {
++//     VAMIGA_PUBLIC
++//     return retroShell->info.current();
++// }
++// 
++// const RetroShellInfo &
++// RetroShellAPI::getCachedInfo() const
++// {
++//     VAMIGA_PUBLIC
++//     return retroShell->info.backed();
++// }
++// 
++// const char *
++// RetroShellAPI::text()
++// {
++//     VAMIGA_PUBLIC_SUSPEND
++//     return retroShell->text();
++// }
++// 
++// void
++// RetroShellAPI::press(RSKey key, bool shift)
++// {
++//     VAMIGA_PUBLIC_SUSPEND
++//     retroShell->press(key, shift);
++// }
++// 
++// void
++// RetroShellAPI::press(char c)
++// {
++//     VAMIGA_PUBLIC_SUSPEND
++//     retroShell->press(c);
++// }
++// 
++// void
++// RetroShellAPI::press(const string &s)
++// {
++//     VAMIGA_PUBLIC_SUSPEND
++//     retroShell->press(s);
++// }
++// 
++// void
++// RetroShellAPI::execScript(const fs::path &path)
++// {
++//     VAMIGA_PUBLIC_SUSPEND
++//     retroShell->asyncExecScript(path);
++// }
++// 
++// void
++// RetroShellAPI::execScript(std::stringstream &ss)
++// {
++//     VAMIGA_PUBLIC_SUSPEND
++//     retroShell->asyncExecScript(ss);
++// }
++// 
++// void
++// RetroShellAPI::execScript(const std::ifstream &fs)
++// {
++//     VAMIGA_PUBLIC_SUSPEND
++//     retroShell->asyncExecScript(fs);
++// }
++// 
++// void
++// RetroShellAPI::execScript(const string &contents)
++// {
++//     VAMIGA_PUBLIC_SUSPEND
++//     retroShell->asyncExecScript(contents);
++// }
+ 
+ /*
+ void
+@@ -1779,20 +1781,20 @@
+ }
+ */
+ 
+-void
+-RetroShellAPI::exportBlocks(const std::filesystem::path &path)
+-{
+-    VAMIGA_PUBLIC_SUSPEND
+-    retroShell->navigator.exportBlocks(path);
+-}
+-
+-void
+-RetroShellAPI::setStream(std::ostream &os)
+-{
+-    VAMIGA_PUBLIC_SUSPEND
+-    retroShell->setStream(os);
+-}
+-
++// void
++// RetroShellAPI::exportBlocks(const std::filesystem::path &path)
++// {
++//     VAMIGA_PUBLIC_SUSPEND
++//     retroShell->navigator.exportBlocks(path);
++// }
++// 
++// void
++// RetroShellAPI::setStream(std::ostream &os)
++// {
++//     VAMIGA_PUBLIC_SUSPEND
++//     retroShell->setStream(os);
++// }
++// 
+ 
+ //
+ // VAmiga API
+@@ -1810,8 +1812,8 @@
+ 
+     agnus.emu = emu;
+     agnus.agnus = &emu->main.agnus;
+-    agnus.logicAnalyzer.emu = emu;
+-    agnus.logicAnalyzer.logicAnalyzer = &emu->main.logicAnalyzer;
++    // agnus.logicAnalyzer.emu = emu;
++    // agnus.logicAnalyzer.logicAnalyzer = &emu->main.logicAnalyzer;
+     agnus.dmaDebugger.emu = emu;
+     agnus.dmaDebugger.dmaDebugger = &emu->main.agnus.dmaDebugger;
+     agnus.copper.emu = emu;
+@@ -1927,11 +1929,11 @@
+     msgQueue.emu = emu;
+     msgQueue.msgQueue = &emu->main.msgQueue;
+ 
+-    remoteManager.emu = emu;
+-    remoteManager.remoteManager = &emu->main.remoteManager;
+-
+-    retroShell.emu = emu;
+-    retroShell.retroShell = &emu->main.retroShell;
++    // remoteManager.emu = emu;
++    // remoteManager.remoteManager = &emu->main.remoteManager;
++    // 
++    // retroShell.emu = emu;
++    // retroShell.retroShell = &emu->main.retroShell;
+ }
+ 
+ VAmiga::~VAmiga()

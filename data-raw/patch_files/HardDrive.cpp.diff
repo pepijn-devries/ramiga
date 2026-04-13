@@ -1,0 +1,15 @@
+--- "a"
++++ "b"
+@@ -15,10 +15,12 @@
+ #include "Memory.h"
+ #include "MsgQueue.h"
+ #include "utl/io.h"
++#include "FileSystem.h"
+ 
+ namespace vamiga {
+ 
+ using namespace retro::vault;
++using namespace amiga;
+ 
+ std::fstream HardDrive::wtStream[4];
+ 

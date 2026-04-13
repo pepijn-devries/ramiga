@@ -1,0 +1,11 @@
+--- "a"
++++ "b"
+@@ -12,6 +12,8 @@
+ #include "ImageError.h"
+ #include "utl/io.h"
+ #include "utl/support/Strings.h"
++#include "xdms/cdata.h"
++#include "xdms/pfile.h"
+ #include <format>
+ 
+ extern "C" {

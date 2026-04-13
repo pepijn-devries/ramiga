@@ -1,0 +1,22 @@
+Package: ramiga
+Title: Emulating the Amiga Using the vAmiga Engine
+Version: 0.0.0.9000
+Authors@R:
+    c(
+      person("Pepijn", "de Vries", role = c("aut", "cre"),
+             email = "pepijn.devries@outlook.com",
+             comment = c(ORCID = "0000-0002-7961-6646")),
+      person("Dirk", "Hoffmann", role = c("aut", "cph"))
+    )
+Description: This is an Amiga emulator based on the vAmiga project
+    <https://github.com/dirkwhoffmann/vAmiga>.
+    It provides low level access to the emulator and allows users
+    to interact with the emulated machine through the console or
+    scripts.
+License: GPL (>= 3)
+SystemRequirements: C++20, lz4: liblz4-dev (deb), lz4-devel (rpm)
+Encoding: UTF-8
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.3.2
+LinkingTo: 
+    cpp11

@@ -1,0 +1,26 @@
+--- "a"
++++ "b"
+@@ -101,10 +101,10 @@
+         case Opt::DMA_DEBUG_COLOR6:          return numParser();
+         case Opt::DMA_DEBUG_COLOR7:          return numParser();
+ 
+-        case Opt::LA_PROBE0:                 return enumParser.template operator()<ProbeEnum,Probe>();
+-        case Opt::LA_PROBE1:                 return enumParser.template operator()<ProbeEnum,Probe>();
+-        case Opt::LA_PROBE2:                 return enumParser.template operator()<ProbeEnum,Probe>();
+-        case Opt::LA_PROBE3:                 return enumParser.template operator()<ProbeEnum,Probe>();
++        // case Opt::LA_PROBE0:                 return enumParser.template operator()<ProbeEnum,Probe>();
++        // case Opt::LA_PROBE1:                 return enumParser.template operator()<ProbeEnum,Probe>();
++        // case Opt::LA_PROBE2:                 return enumParser.template operator()<ProbeEnum,Probe>();
++        // case Opt::LA_PROBE3:                 return enumParser.template operator()<ProbeEnum,Probe>();
+         case Opt::LA_ADDR0:                  return hexParser();
+         case Opt::LA_ADDR1:                  return hexParser();
+         case Opt::LA_ADDR2:                  return hexParser();
+@@ -194,7 +194,7 @@
+ 
+         case Opt::SRV_ENABLE:                return boolParser();
+         case Opt::SRV_PORT:                  return numParser();
+-        case Opt::SRV_PROTOCOL:              return enumParser.template operator()<ServerProtocolEnum,ServerProtocol>();
++        // case Opt::SRV_PROTOCOL:              return enumParser.template operator()<ServerProtocolEnum,ServerProtocol>();
+         case Opt::SRV_VERBOSE:               return boolParser();
+ 
+         default:
