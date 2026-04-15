@@ -49,11 +49,13 @@ TODO
 
 ## Things to do
 
-- Remove all calls to `(v)sprintf`, `std::cout` and alike, in order to
-  comply with CRAN policy
+- Remove all calls to `(v)sprintf`, `std::cout`, `rand` and alike, in
+  order to comply with CRAN policy
 - Ensure that the package builds on all major operating systems.
 - Make sure that all structs are named (either upstream or in this
   fork). CRAN allows only ISO compliant code. Anonymous structs are not
   ISO.
 - Remove any redundant/unused code. The size of the package will trigger
   a warning as is. So, try to keep it as small as possible.
+- Add CRAN comments to justify non-compliance to CRAN policies (e.g.,
+  -Wa,-mbig-obj flags required on Windows)
