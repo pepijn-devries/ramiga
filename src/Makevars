@@ -55,8 +55,7 @@ PKG_CPPFLAGS = -I. \
                -IvAmiga/Core/utlib/include/storage \
                -IvAmiga/Core/utlib/include/support \
                -IvAmiga/Core/utlib/include/types \
-               -IvAmiga/Core/utlib/include/wrappers \
-               -Wa,-mbig-obj
+               -IvAmiga/Core/utlib/include/wrappers
 
 PKG_LIBS = $(LAPACK_LIBS) $(BLAS_LIBS) $(FLIBS) -llz4
 

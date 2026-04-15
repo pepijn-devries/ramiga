@@ -13,5 +13,6 @@
 #include "FloppyDrive.h"
 
 using namespace vamiga;
+using namespace cpp11::literals;
 
 void check_amiga(cpp11::external_pointer<VAmiga> amiga);

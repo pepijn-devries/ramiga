@@ -25,39 +25,15 @@ cpp11::external_pointer<VAmiga> create_amiga_() {
 
 [[cpp11::register]]
 SEXP start_amiga_(cpp11::external_pointer<VAmiga> amiga) {
-  // cpp11::package("utils")["flush.console"]();
   check_amiga(amiga);
-  // cpp11::package("utils")["flush.console"]();
   if (!amiga->amiga.amiga->mem.hasRom()) {
+    cpp11::package("utils")["flush.console"]();
     cpp11::warning("Emulator has not loaded a ROM.");
   }
   amiga->powerOn();
   return amiga;
 }
 
-[[cpp11::register]]
-SEXP load_rom_(cpp11::external_pointer<VAmiga> amiga, std::string path) {
-  check_amiga(amiga);
-  std::filesystem::path p(path);
-  amiga->amiga.amiga->mem.loadRom(p);
-  return amiga;
-}
-
-[[cpp11::register]]
-SEXP load_rom_ext_(cpp11::external_pointer<VAmiga> amiga, std::string path) {
-  check_amiga(amiga);
-  std::filesystem::path p(path);
-  amiga->amiga.amiga->mem.loadExt(p);
-  return amiga;
-}
-
-[[cpp11::register]]
-bool has_rom_(cpp11::external_pointer<VAmiga> amiga) {
-  check_amiga(amiga);
-  return amiga->amiga.amiga->mem.hasRom();
-}
-
-//TODO cleanup function:
 [[cpp11::register]]
 cpp11::integers get_framebuffer_vport_(cpp11::external_pointer<VAmiga> amiga) {
   check_amiga(amiga);
@@ -146,6 +122,7 @@ void run_until_interrupted_(cpp11::external_pointer<VAmiga> amiga) {
       } catch (...) {
         amiga->pause();
         // TODO this message is not shown consistently
+        cpp11::package("utils")["flush.console"]();
         cpp11::message("Emulator is paused");
         return;
       }

@@ -1,0 +1,5 @@
+#!/bin/sh
+rm -f *.o *.so *.dll
+find . -name "*.o" -type f -delete
+find . -name "*.so" -type f -delete
+find . -name "*.dll" -type f -delete

@@ -14,6 +14,10 @@ Description: This is an Amiga emulator based on the vAmiga project
     to interact with the emulated machine through the console or
     scripts.
 License: GPL (>= 3)
+Depends:
+    R (>= 4.5)
+Imports:
+    R6
 SystemRequirements: C++20, lz4: liblz4-dev (deb), lz4-devel (rpm)
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
