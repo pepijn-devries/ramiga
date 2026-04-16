@@ -24,8 +24,8 @@ create_amiga_ <- function() {
   .Call(`_ramiga_create_amiga_`)
 }
 
-start_amiga_ <- function(amiga) {
-  .Call(`_ramiga_start_amiga_`, amiga)
+poweron_amiga_ <- function(amiga) {
+  .Call(`_ramiga_poweron_amiga_`, amiga)
 }
 
 get_framebuffer_vport_ <- function(amiga) {

@@ -38,7 +38,7 @@ RamigaEmulator <-
       
       #' @description
       #' TODO
-      get_pointer() = function(...) return(private$emulator),
+      get_pointer = function(...) private$emulator,
       
       #' @description
       #' TODO
