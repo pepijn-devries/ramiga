@@ -24,7 +24,7 @@ RamigaEmulator <-
       #' @description
       #' TODO
       #' @returns TODO
-      start = function() {start_amiga_(private$emulator); self },
+      power_on = function() {poweron_amiga_(private$emulator); self },
       
       #' @description
       #' TODO
@@ -35,6 +35,10 @@ RamigaEmulator <-
       #' TODO
       #' @returns TODO
       info = function() emulator_info_(private$emulator),
+      
+      #' @description
+      #' TODO
+      get_pointer() = function(...) return(private$emulator),
       
       #' @description
       #' TODO

@@ -12,7 +12,7 @@ FloppyDrive& get_floppy_drive_(cpp11::external_pointer<VAmiga> amiga,
   check_amiga(amiga);
   if (drive_number < 0 || drive_number > 3)
     cpp11::stop("Invalid drive number");
-  auto& drive = amiga->amiga.amiga->df[drive_number];
+  auto& drive = amiga->df[drive_number]->drive;
   if (!drive) cpp11::stop("Failed to access requested drive");
   return *drive;
 }

@@ -4,7 +4,7 @@
 SEXP load_rom_(cpp11::external_pointer<VAmiga> amiga, std::string path) {
   check_amiga(amiga);
   std::filesystem::path p(path);
-  amiga->amiga.amiga->mem.loadRom(p);
+  amiga->mem.loadRom(p);
   return amiga;
 }
 
@@ -12,12 +12,12 @@ SEXP load_rom_(cpp11::external_pointer<VAmiga> amiga, std::string path) {
 SEXP load_rom_ext_(cpp11::external_pointer<VAmiga> amiga, std::string path) {
   check_amiga(amiga);
   std::filesystem::path p(path);
-  amiga->amiga.amiga->mem.loadExt(p);
+  amiga->mem.loadExt(p);
   return amiga;
 }
 
 [[cpp11::register]]
 bool has_rom_(cpp11::external_pointer<VAmiga> amiga) {
   check_amiga(amiga);
-  return amiga->amiga.amiga->mem.hasRom();
+  return amiga->mem.mem->hasRom();
 }
