@@ -9,7 +9,7 @@
       exit 1
   fi
   
-  RAMIGA_INCLUDES=$(find src -mindepth 1 -type d | grep -v "utlib/include/utl" | grep -v "utlib/src" | sed 's|^src/|-I|' | tr '\n' ' ' | tr -s ' ')
+  RAMIGA_INCLUDES=$(find src -mindepth 1 -type d | grep -v "utlib/include/utl" | grep -v "utlib/src" | sed 's|^src/|-I./|' | tr '\n' ' ' | tr -s ' ')
   RAMIGA_FLAGS=""
   
   # Find source files
