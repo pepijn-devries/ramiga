@@ -43,7 +43,7 @@ jobs:
       - name: Install macOS system dependencies
         if: runner.os == 'macOS'
         run: |
-          curl -O https://r-project.org
+          curl -L https://r-project.org -o install.R
           Rscript install.R lz4
         shell: bash
 
