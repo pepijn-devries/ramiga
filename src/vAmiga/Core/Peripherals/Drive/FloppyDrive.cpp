@@ -18,7 +18,7 @@
 #include "CmdQueue.h"
 #include "DeviceError.h"
 #include "Volume.h"
-#include "FileSystem.h"
+#include "FileSystems/Amiga/FileSystem.h"
 #include "FileSystems/FSError.h"
 // #include "OSDescriptors.h"
 #include "utl/io.h"

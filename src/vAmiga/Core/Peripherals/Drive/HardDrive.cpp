@@ -15,7 +15,7 @@
 #include "Memory.h"
 #include "MsgQueue.h"
 #include "utl/io.h"
-#include "FileSystem.h"
+#include "FileSystems/Amiga/FileSystem.h"
 
 namespace vamiga {
 
