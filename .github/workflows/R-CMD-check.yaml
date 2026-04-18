@@ -39,6 +39,13 @@ jobs:
           r-version: ${{ matrix.config.r }}
           http-user-agent: ${{ matrix.config.http-user-agent }}
           use-public-rspm: true
+      
+      - name: Install macOS system dependencies
+        if: runner.os == 'macOS'
+        run: |
+          curl -O https://r-project.org
+          Rscript install.R lz4
+        shell: bash
 
       - uses: r-lib/actions/setup-r-dependencies@v2
         with:

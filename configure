@@ -1,22 +1,36 @@
 #!/bin/sh
 
+RAMIGA_FLAGS=""
+
 if [ "$(uname)" = "Darwin" ]; then
   echo "Applying macOS-specific type fixes to src/cpp11.cpp..."
   sed -i '' 's/R_useDynamicSymbols(dll, FALSE)/R_useDynamicSymbols(dll, (Rboolean)0)/g' src/cpp11.cpp
   sed -i '' 's/R_forceSymbols(dll, TRUE)/R_forceSymbols(dll, (Rboolean)1)/g' src/cpp11.cpp
+  ARCH=$(uname -m)
+  CRAN_PATH="/opt/R/${ARCH}"
+  
+  if [ -d "${CRAN_PATH}/include" ]; then
+    RAMIGA_FLAGS="-I${CRAN_PATH}/include"
+    LZ4_LIBS="-L${CRAN_PATH}/lib -llz4"
+  fi
+fi
+
+# Check if pkg-config is available
+if ! command -v pkg-config > /dev/null; then
+  echo "Error: pkg-config is required but not installed."
+  exit 1
 fi
 
 # 1. Test for LZ4
 if pkg-config --exists liblz4; then
     LZ4_LIBS=$(pkg-config --libs liblz4)
-    LZ4_CFLAGS=$(pkg-config --cflags liblz4)
+    RAMIGA_FLAGS=$(pkg-config --cflags liblz4)
 else
     echo "Error: liblz4 not found. Please install liblz4-dev (Ubuntu) or lz4-devel (Fedora)."
     exit 1
 fi
 
 RAMIGA_INCLUDES=$(find src -mindepth 1 -type d | grep -v "utlib/include/utl" | grep -v "utlib/src" | sed 's|^src/|-I./|' | tr '\n' ' ' | tr -s ' ')
-RAMIGA_FLAGS=""
 
 # Find source files
 RAMIGA_CFILES=$(cd src && find . -type f -name "*.c" | sed 's|^src/||' | tr '\n' ' ')
