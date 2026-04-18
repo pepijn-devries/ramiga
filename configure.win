@@ -1,0 +1,17 @@
+#!/bin/sh
+
+RAMIGA_FLAGS="-Wa,-mbig-obj"
+
+# Find source files
+RAMIGA_CFILES=$(find src -type f -name "*.c" | sed 's|^src/||' | tr '\n' ' ')
+RAMIGA_CPPFILES=$(find src -type f -name "*.cpp" | sed 's|^src/||' | tr '\n' ' ')
+
+# Write to Makevars
+sed -e "s|@RAMIGA_CFILES@|$RAMIGA_CFILES|" \
+    -e "s|@RAMIGA_CPPFILES@|$RAMIGA_CPPFILES|" \
+    -e "s|@RAMIGA_FLAGS@|$RAMIGA_FLAGS|" \
+    -e "s|@PKG_LIBS_EXTRA@|-lws2_32|" \
+    src/Makevars.in > src/Makevars
+
+# Success
+exit 0

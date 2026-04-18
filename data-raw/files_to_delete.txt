@@ -39,6 +39,7 @@ Core/Misc/RemoteServers/Socket.cpp
 Core/Misc/RemoteServers/Socket.h
 Core/Misc/RemoteServers/SocketServer.cpp
 Core/Misc/RemoteServers/SocketServer.h
+Core/Misc/RetroShell/CBMNavigator.cpp
 Core/Misc/RetroShell/CMakeLists.txt
 Core/Misc/RetroShell/CommanderConsole.cpp
 Core/Misc/RetroShell/Console.cpp

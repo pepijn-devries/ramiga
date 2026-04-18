@@ -21,6 +21,6 @@ Imports:
 SystemRequirements: C++20, lz4: liblz4-dev (deb), lz4-devel (rpm)
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.3.2
+RoxygenNote: 7.3.3
 LinkingTo: 
     cpp11

@@ -25,9 +25,10 @@ TODO
 \item \href{#method-RamigaEmulator-new}{\code{RamigaEmulator$new()}}
 \item \href{#method-RamigaEmulator-get_memory}{\code{RamigaEmulator$get_memory()}}
 \item \href{#method-RamigaEmulator-get_floppy_drive}{\code{RamigaEmulator$get_floppy_drive()}}
-\item \href{#method-RamigaEmulator-start}{\code{RamigaEmulator$start()}}
+\item \href{#method-RamigaEmulator-power_on}{\code{RamigaEmulator$power_on()}}
 \item \href{#method-RamigaEmulator-run}{\code{RamigaEmulator$run()}}
 \item \href{#method-RamigaEmulator-info}{\code{RamigaEmulator$info()}}
+\item \href{#method-RamigaEmulator-get_pointer}{\code{RamigaEmulator$get_pointer()}}
 \item \href{#method-RamigaEmulator-print}{\code{RamigaEmulator$print()}}
 \item \href{#method-RamigaEmulator-clone}{\code{RamigaEmulator$clone()}}
 }
@@ -63,12 +64,12 @@ TODO
 
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-RamigaEmulator-start"></a>}}
-\if{latex}{\out{\hypertarget{method-RamigaEmulator-start}{}}}
-\subsection{Method \code{start()}}{
+\if{html}{\out{<a id="method-RamigaEmulator-power_on"></a>}}
+\if{latex}{\out{\hypertarget{method-RamigaEmulator-power_on}{}}}
+\subsection{Method \code{power_on()}}{
 TODO
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{RamigaEmulator$start()}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{RamigaEmulator$power_on()}\if{html}{\out{</div>}}
 }
 
 }
@@ -89,6 +90,16 @@ TODO
 TODO
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{RamigaEmulator$info()}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-RamigaEmulator-get_pointer"></a>}}
+\if{latex}{\out{\hypertarget{method-RamigaEmulator-get_pointer}{}}}
+\subsection{Method \code{get_pointer()}}{
+TODO
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{RamigaEmulator$get_pointer(...)}\if{html}{\out{</div>}}
 }
 
 }
