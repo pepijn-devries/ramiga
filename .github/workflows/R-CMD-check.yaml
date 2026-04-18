@@ -31,6 +31,9 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
+      # TODO temp debug:
+      - name: Locate vAmiga.h
+        run: find . -name "vAmiga.h"
 
       - uses: r-lib/actions/setup-pandoc@v2
 
