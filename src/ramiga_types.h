@@ -1,7 +1,7 @@
 #include <cpp11.hpp>
 #include <config.h>
 #include <VAmigaTypes.h>
-#include <vAmiga.h>
+#include <VAmiga.h>
 #include <Amiga.h>
 #include <Memory.h>
 #include <utl/storage/Buffer.h>
