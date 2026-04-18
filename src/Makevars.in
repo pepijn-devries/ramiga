@@ -1,55 +1,9 @@
 CXX_STD = CXX20
 
 PKG_CPPFLAGS = -I. \
-               -IvAmiga/Core \
-               -IvAmiga/Core/Components \
-               -IvAmiga/Core/Components/Agnus \
-               -IvAmiga/Core/Components/Agnus/Blitter \
-               -IvAmiga/Core/Components/Agnus/Copper \
-               -IvAmiga/Core/Components/Agnus/DmaDebugger \
-               -IvAmiga/Core/Components/Agnus/Sequencer \
-               -IvAmiga/Core/Components/CIA \
-               -IvAmiga/Core/Components/CPU \
-               -IvAmiga/Core/Components/CPU/Moira \
-               -IvAmiga/Core/Components/Denise \
-               -IvAmiga/Core/Components/Memory \
-               -IvAmiga/Core/Components/Paula \
-               -IvAmiga/Core/Components/Paula/Audio \
-               -IvAmiga/Core/Components/Paula/DiskController \
-               -IvAmiga/Core/Components/Paula/UART \
-               -IvAmiga/Core/Components/RTC \
-               -IvAmiga/Core/Components/Zorro \
-               -IvAmiga/Core/Infrastructure \
-               -IvAmiga/Core/Media \
-               -IvAmiga/Core/Media/Rom \
-               -IvAmiga/Core/Peripherals/Drive \
-               -IvAmiga/Core/Peripherals/Joystick \
-               -IvAmiga/Core/Peripherals/Keyboard \
-               -IvAmiga/Core/Peripherals/Monitor \
-               -IvAmiga/Core/Peripherals/Mouse \
-               -IvAmiga/Core/Ports \
-               -IvAmiga/Core/RetroVault \
-               -IvAmiga/Core/RetroVault/Devices \
-               -IvAmiga/Core/RetroVault/FileSystems \
-               -IvAmiga/Core/RetroVault/FileSystems/Amiga \
-               -IvAmiga/Core/RetroVault/FileSystems/CBM \
-               -IvAmiga/Core/RetroVault/Images \
-               -IvAmiga/Core/RetroVault/Images/ADF \
-               -IvAmiga/Core/RetroVault/Images/D64 \
-               -IvAmiga/Core/RetroVault/Images/DMS \
-               -IvAmiga/Core/RetroVault/Images/EADF \
-               -IvAmiga/Core/RetroVault/Images/Encoders \
-               -IvAmiga/Core/RetroVault/Images/EXE \
-               -IvAmiga/Core/RetroVault/Images/HDF \
-               -IvAmiga/Core/RetroVault/Images/IMG \
-               -IvAmiga/Core/RetroVault/Images/ST \
-               -IvAmiga/Core/RetroVault/ThirdParty \
-               -IvAmiga/Core/RetroVault/ThirdParty/xdms \
-               -IvAmiga/Core/ThirdParty \
-               -IvAmiga/Core/utlib/include \
-               @RAMIGA_FLAGS@
+               @RAMIGA_INCLUDES@ @RAMIGA_FLAGS@
 
-PKG_LIBS = $(LAPACK_LIBS) $(BLAS_LIBS) $(FLIBS) @PKG_LIBS_EXTRA@ -llz4
+PKG_LIBS = $(LAPACK_LIBS) $(BLAS_LIBS) $(FLIBS) @PKG_LIBS_EXTRA@
 
 CFILES = @RAMIGA_CFILES@
 CPPFILES = @RAMIGA_CPPFILES@
@@ -57,5 +11,3 @@ CPPFILES = @RAMIGA_CPPFILES@
 SOURCES = $(CFILES) $(CPPFILES)
 
 OBJECTS = $(CFILES:.c=.o) $(CPPFILES:.cpp=.o)
-
-all: $(SHLIB)

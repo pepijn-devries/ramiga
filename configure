@@ -1,17 +1,28 @@
-#!/bin/sh
-
-RAMIGA_FLAGS=""
-
-# Find source files
-RAMIGA_CFILES=$(find src -type f -name "*.c" | sed 's|^src/||' | tr '\n' ' ')
-RAMIGA_CPPFILES=$(find src -type f -name "*.cpp" | sed 's|^src/||' | tr '\n' ' ')
-
-# Write to Makevars
-sed -e "s|@RAMIGA_CFILES@|$RAMIGA_CFILES|" \
-    -e "s|@RAMIGA_CPPFILES@|$RAMIGA_CPPFILES|" \
-    -e "s|@RAMIGA_FLAGS@|$RAMIGA_FLAGS|" \
-    -e "s|@PKG_LIBS_EXTRA@||" \
-    src/Makevars.in > src/Makevars
-
-# Success
-exit 0
+  #!/bin/sh
+  
+  # 1. Test for LZ4
+  if pkg-config --exists liblz4; then
+      LZ4_LIBS=$(pkg-config --libs liblz4)
+      LZ4_CFLAGS=$(pkg-config --cflags liblz4)
+  else
+      echo "Error: liblz4 not found. Please install liblz4-dev (Ubuntu) or lz4-devel (Fedora)."
+      exit 1
+  fi
+  
+  RAMIGA_INCLUDES=$(find src -mindepth 1 -type d | grep -v "utlib/include/utl" | grep -v "utlib/src" | sed 's|^src/|-I|' | tr '\n' ' ' | tr -s ' ')
+  RAMIGA_FLAGS=""
+  
+  # Find source files
+  RAMIGA_CFILES=$(cd src && find . -type f -name "*.c" | sed 's|^src/||' | tr '\n' ' ')
+  RAMIGA_CPPFILES=$(cd src && find . -type f -name "*.cpp" | sed 's|^src/||' | tr '\n' ' ')
+  
+  # Write to Makevars
+  sed -e "s|@RAMIGA_CFILES@|$RAMIGA_CFILES|" \
+      -e "s|@RAMIGA_CPPFILES@|$RAMIGA_CPPFILES|" \
+      -e "s|@RAMIGA_FLAGS@|$RAMIGA_FLAGS|" \
+      -e "s|@PKG_LIBS_EXTRA@|$LZ4_LIBS|" \
+      -e "s|@RAMIGA_INCLUDES@|$RAMIGA_INCLUDES|g" \
+      src/Makevars.in > src/Makevars
+  
+  # Success
+  exit 0
