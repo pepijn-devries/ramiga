@@ -12,7 +12,7 @@ RAMIGA_CPPFILES=$(find src -type f -name "*.cpp" | sed 's|^src/||' | tr '\n' ' '
 sed -e "s|@RAMIGA_CFILES@|$RAMIGA_CFILES|" \
     -e "s|@RAMIGA_CPPFILES@|$RAMIGA_CPPFILES|" \
     -e "s|@RAMIGA_FLAGS@|$RAMIGA_FLAGS|" \
-    -e "s|@PKG_LIBS_EXTRA@|-llz4 -lws2_32|" \
+    -e "s|@PKG_LIBS_EXTRA@|-lws2_32|" \
     -e "s|@RAMIGA_INCLUDES@|$RAMIGA_INCLUDES|g" \
     src/Makevars.in > src/Makevars
 

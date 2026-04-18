@@ -1,6 +1,8 @@
 ## Downloading source from repo: ------------------
 
 message("Downloading vAmiga...")
+## The versioned zip file is not static and changes over time.
+## It may not be the most reliable way to patch the source code
 repo_zip <- "https://github.com/dirkwhoffmann/vAmiga/archive/refs/tags/v4.4b12.zip"
 temp_zip <- tempfile(fileext = ".zip")
 temp_dir <- tempdir()

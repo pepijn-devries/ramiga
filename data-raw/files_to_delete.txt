@@ -59,5 +59,3 @@ Core/ThirdParty/CMakeLists.txt
 Core/ThirdParty/httplib.h
 Core/ThirdParty/json.h
 Core/ThirdParty/json_fwd.h
-Core/utlib/thirdparty/lz4.c
-Core/utlib/thirdparty/lz4.h
