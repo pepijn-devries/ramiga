@@ -1,0 +1,228 @@
+--- "a"
++++ "b"
+@@ -131,12 +131,9 @@
+             ret = Process_Track(fi,NULL,b1,b2,cmd,opt,(geninfo & 2)?pwd:0);
+         else {
+             while ( (ret=Process_Track(fi,fo,b1,b2,cmd,opt,(geninfo & 2)?pwd:0)) == NO_PROBLEM ) ;
+-            if ((cmd == CMD_UNPACK) && (opt == OPT_VERBOSE)) fprintf(stderr,"\n");
+         }
+     }
+     
+-    if ((cmd == CMD_VIEWFULL) || (cmd == CMD_SHOWDIZ) || (cmd == CMD_SHOWBANNER)) printf("\n");
+-    
+     if (ret == FILE_END) ret = NO_PROBLEM;
+     
+     
+@@ -233,25 +230,7 @@
+ 
+     if ( (cmd == CMD_VIEW) || (cmd == CMD_VIEWFULL) ) {
+ 
+-        if (iname)
+-            printf("\n File : %s\n",iname);
+-        else
+-            printf("\n Data from stdin\n");
+-
+-
+         pv = (USHORT)(c_version/100);
+-        printf(" Created with DMS version %d.%02d ",pv,c_version-pv*100);
+-        if (geninfo & 0x80)
+-            printf("Registered\n");
+-        else
+-            printf("Evaluation\n");
+-
+-        printf(" Creation date : %s",ctime(&date));
+-        printf(" Lowest track in archive : %d\n",from);
+-        printf(" Highest track in archive : %d\n",to);
+-        printf(" Packed data size : %u\n",pkfsize);
+-        printf(" Unpacked data size : %u\n",unpkfsize);
+-        printf(" Disk type of archive : ");
+ 
+         /*  The original DMS from SDS software (DMS up to 1.11) used other values    */
+         /*  in disk type to indicate formats as MS-DOS, AMax and Mac, but it was     */
+@@ -262,50 +241,23 @@
+             case 0:
+             case 1:
+                 /* Can also be a non-dos disk */
+-                printf("AmigaOS 1.0 OFS\n");
+                 break;
+             case 2:
+-                printf("AmigaOS 2.0 FFS\n");
+                 break;
+             case 3:
+-                printf("AmigaOS 3.0 OFS / International\n");
+                 break;
+             case 4:
+-                printf("AmigaOS 3.0 FFS / International\n");
+                 break;
+             case 5:
+-                printf("AmigaOS 3.0 OFS / Dir Cache\n");
+                 break;
+             case 6:
+-                printf("AmigaOS 3.0 FFS / Dir Cache\n");
+                 break;
+             case 7:
+-                printf("FMS Amiga System File\n");
+                 break;
+             default:
+-                printf("Unknown\n");
++                break;
+         }
+ 
+-        printf(" Compression mode used : ");
+-        if (cmode>6)
+-            printf("Unknown !\n");
+-        else
+-            printf("%s\n",modes[cmode]);
+-
+-        printf(" General info : ");
+-        if ((geninfo==0)||(geninfo==0x80)) printf("None");
+-        if (geninfo & 1) printf("NoZero ");
+-        if (geninfo & 2) printf("Encrypted ");
+-        if (geninfo & 4) printf("Appends ");
+-        if (geninfo & 8) printf("Banner ");
+-        if (geninfo & 16) printf("HD ");
+-        if (geninfo & 32) printf("MS-DOS ");
+-        if (geninfo & 64) printf("DMS_DEV_Fixed ");
+-        if (geninfo & 256) printf("FILEID.DIZ");
+-        printf("\n");
+-
+-        printf(" Info Header CRC : %04X\n\n",hcrc);
+-
+     }
+ 
+     if (disktype == 7) {
+@@ -318,11 +270,6 @@
+     }
+ 
+ 
+-    if (cmd == CMD_VIEWFULL)    {
+-        printf(" Track   Plength  Ulength  Cmode   USUM  HCRC  DCRC Cflag\n");
+-        printf(" ------  -------  -------  ------  ----  ----  ---- -----\n");
+-    }
+-
+     if (((cmd==CMD_UNPACK) || (cmd==CMD_SHOWBANNER)) && (geninfo & 2) && (!pwd))
+         return ERR_NOPASSWD;
+ 
+@@ -350,11 +297,9 @@
+             ret = Process_Track(fi,NULL,b1,b2,cmd,opt,(geninfo & 2)?pwd:0);
+         else {
+             while ( (ret=Process_Track(fi,fo,b1,b2,cmd,opt,(geninfo & 2)?pwd:0)) == NO_PROBLEM ) ;
+-            if ((cmd == CMD_UNPACK) && (opt == OPT_VERBOSE)) fprintf(stderr,"\n");
+         }
+     }
+ 
+-    if ((cmd == CMD_VIEWFULL) || (cmd == CMD_SHOWDIZ) || (cmd == CMD_SHOWBANNER)) printf("\n");
+ 
+     if (ret == FILE_END) ret = NO_PROBLEM;
+ 
+@@ -412,27 +357,12 @@
+     usum = (USHORT)((b1[14] << 8) | b1[15]);    /*  Track Data CheckSum AFTER unpacking  */
+     dcrc = (USHORT)((b1[16] << 8) | b1[17]);    /*  Track Data CRC BEFORE unpacking  */
+ 
+-    if (cmd == CMD_VIEWFULL) {
+-        if (number==80)
+-            printf(" FileID   ");
+-        else if (number==0xffff)
+-            printf(" Banner   ");
+-        else if ((number==0) && (unpklen==1024))
+-            printf(" FakeBB   ");
+-        else
+-            printf("   %2d     ",(short)number);
+-
+-        printf("%5d    %5d   %s  %04X  %04X  %04X    %0d\n", pklen1, unpklen, modes[cmode], usum, hcrc, dcrc, flags);
+-    }
+-
+     if ((pklen1 > TRACK_BUFFER_LEN) || (pklen2 >TRACK_BUFFER_LEN) || (unpklen > TRACK_BUFFER_LEN)) return ERR_BIGTRACK;
+ 
+     if (fread(b1,1,(size_t)pklen1,fi) != pklen1) return ERR_SREAD;
+ 
+     if (CreateCRC(b1,(ULONG)pklen1) != dcrc) {
+         if (OverrideErrors) {
+-            fprintf(stderr, "Detected a CRC error on "
+-                "track %d, but overriding.\n", number);
+         } else {
+             return ERR_TDCRC;
+         }
+@@ -452,9 +382,6 @@
+         r = Unpack_Track(b1, b2, pklen2, unpklen, cmode, flags);
+         if (r != NO_PROBLEM) {
+             if (OverrideErrors) {
+-                fprintf(stderr, "Detected an error while "
+-                    "unpacking track %d, but "
+-                    "overriding.\n", number);
+             } else {
+                 if (pwd)
+                     return ERR_BADPASSWD;
+@@ -464,9 +391,6 @@
+         }
+         if (usum != Calc_CheckSum(b2,(ULONG)unpklen)) {
+             if (OverrideErrors) {
+-                fprintf(stderr, "Detected an error after "
+-                    "unpacking track %d, but "
+-                    "overriding.\n", number);
+             } else {
+                 if (pwd)
+                     return ERR_BADPASSWD;
+@@ -479,8 +403,6 @@
+             return ERR_CANTWRITE;
+ 
+         if (opt == OPT_VERBOSE) {
+-            fprintf(stderr,"#");
+-            fflush(stderr);
+         }
+     }
+ 
+@@ -488,8 +410,6 @@
+         r = Unpack_Track(b1, b2, pklen2, unpklen, cmode, flags);
+         if (r != NO_PROBLEM) {
+             if (OverrideErrors) {
+-                fprintf(stderr, "Detected an error while "
+-                    "unpacking bannder, but overriding.\n");
+             } else {
+                 if (pwd)
+                     return ERR_BADPASSWD;
+@@ -499,8 +419,6 @@
+         }
+         if (usum != Calc_CheckSum(b2,(ULONG)unpklen)) {
+             if (OverrideErrors) {
+-                fprintf(stderr, "Detected an error after "
+-                    "unpacking banner, but overriding.\n");
+             } else {
+                 if (pwd)
+                     return ERR_BADPASSWD;
+@@ -515,16 +433,12 @@
+         r = Unpack_Track(b1, b2, pklen2, unpklen, cmode, flags);
+         if (r != NO_PROBLEM) {
+             if (OverrideErrors) {
+-                fprintf(stderr, "Detected an error while "
+-                    "unpacking showdiz, but overriding.\n");
+             } else {
+                 return r;
+             }
+         }
+         if (usum != Calc_CheckSum(b2,(ULONG)unpklen)) {
+             if (OverrideErrors) {
+-                fprintf(stderr, "Detected an error after "
+-                    "unpacking showdiz, but overriding.\n");
+             } else {
+                 return ERR_CSUM;
+             }
+@@ -608,18 +522,6 @@
+ 
+ 
+ static void printbandiz(UCHAR *m, USHORT len){
+-    UCHAR *i,*j;
+-
+-    i=j=m;
+-    while (i<m+len) {
+-        if (*i == 10) {
+-            *i=0;
+-            printf("%s\n",j);
+-            j=i+1;
+-        }
+-        i++;
+-    }
+-
+ }
+ 
+ #endif

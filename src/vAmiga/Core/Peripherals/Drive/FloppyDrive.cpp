@@ -20,7 +20,6 @@
 #include "Volume.h"
 #include "FileSystems/Amiga/FileSystem.h"
 #include "FileSystems/FSError.h"
-// #include "OSDescriptors.h"
 #include "utl/io.h"
 
 namespace vamiga {
@@ -1175,21 +1174,6 @@ FloppyDrive::catchFile(const fs::path &path)
     auto &file = fs.fetch(*blockNr).mutate();
     file.extractData(buffer);
 
-    // Parse hunks
-    // auto descr = ProgramUnitDescriptor(buffer);
-    
-    // Seek the code section and read the first instruction word
-    // auto offset = descr.seek(HUNK_CODE);
-    // if (!offset) throw CoreError(CoreError::HUNK_CORRUPTED);
-    // u16 instr = HI_LO(buffer[*offset + 8], buffer[*offset + 9]);
-    
-    // Replace the first instruction word by a software trap
-    // auto trap = cpu.debugger.swTraps.create(instr);
-    // buffer[*offset + 8] = HI_BYTE(trap);
-    // buffer[*offset + 9] = LO_BYTE(trap);
-    
-    // Write the modification back to the file system
-    // file.overwriteData(buffer);
 
     // Replace the old disk
     fs.flush();
@@ -1234,9 +1218,6 @@ FloppyDrive::insertNew(FSFormat dos, BootBlockId bb, string name, const fs::path
 
     // Make the volume bootable
     fs.makeBootable(bb);
-
-    // Check file system consistency
-    if constexpr (debug::FS_DEBUG) fs.doctor.xray(true, std::cout, false);
 
     // Force the ADF to update
     fs.flush();

@@ -195,9 +195,6 @@ DiagBoard::processInit(u32 ptr1)
         
         loginfo(DBD_DEBUG, "processInit\n");
         
-        // auto exec = osDebugger.getExecBase();
-        // tasks.push_back(exec.ThisTask);
-
     } catch (...) {
 
         logwarn("processInit failed\n");
@@ -207,77 +204,13 @@ DiagBoard::processInit(u32 ptr1)
 void
 DiagBoard::processAddTask(u32 ptr1)
 {
-    // try {
-    //     
-    //     loginfo(DBD_DEBUG, "processAddTask\n");
-    // 
-        // Read task
-        // os::Task task;
-        // osDebugger.read(ptr1, &task);
-
-        // Read task name
-        // string name;
-        // osDebugger.read(task.tc_Node.ln_Name, name);
-
-        // Read task type
-        // auto type = task.tc_Node.ln_Type;
-        // if (type != os::NT_TASK && type != os::NT_PROCESS) {
-
-            // logwarn("AddTask %x (%s): Wrong type: %d\n", ptr1, name.c_str(), type);
-    //         return;
-    //     }
-    // 
-    //     // Check if the task has already been added
-    //     auto it = std::find(tasks.begin(), tasks.end(), ptr1);
-    //     if (it != tasks.end()) {
-    //         
-    //         logwarn("AddTask: %s '%s' already added\n",
-    //              type == os::NT_TASK ? "task" : "process", name.c_str());
-    //         return;
-    //     }
-    // 
-    //     // Add task
-    //     tasks.push_back(ptr1);
-    //     loginfo(DBD_DEBUG, "Added %s '%s'\n",
-    //           type == os::NT_TASK ? "task" : "process", name.c_str());
-    // 
-    // } catch (...) {
-
-        logwarn("processAddTask failed\n");
-    // }
+    logwarn("processAddTask failed\n");
 }
 
 void
 DiagBoard::processRemTask(u32 ptr1)
 {
-    // try {
-    //     
-    //     loginfo(DBD_DEBUG, "processRemTask\n");
-    //     
-    //     // Read task
-    //     os::Task task;
-    //     // osDebugger.read(ptr1, &task);
-    // 
-    //     // Read task name
-    //     string name;
-    //     // osDebugger.read(task.tc_Node.ln_Name, name);
-    // 
-    //     // Check if the task is under observation
-    //     auto it = std::find(tasks.begin(), tasks.end(), ptr1);
-    //     if (it == tasks.end()) {
-    //         
-    //         logwarn("RemTask: '%s' (%x) not found\n", name.c_str(), ptr1);
-    //         return;
-    //     }
-    // 
-    //     // Remove task
-    //     tasks.erase(it);
-    //     loginfo(DBD_DEBUG, "Removed '%s'\n", name.c_str());
-    //     
-    // } catch (...) {
-        
-        logwarn("processRemTask failed\n");
-    // }
+    logwarn("processRemTask failed\n");
 }
 
 void
@@ -288,15 +221,7 @@ DiagBoard::processLoadSeg(u32 ptr1, u32 ptr2, bool bstr)
         loginfo(DBD_DEBUG, "processLoadSeg(%x,%x)\n", ptr1, ptr2);
 
         // Read task name
-        string name;
-        if (bstr) {
-            auto length = (isize)mem.spypeek8 <Accessor::CPU> (4 * ptr1);
-            loginfo(DBD_DEBUG, "Length = %ld\n", length);
-            // osDebugger.read(4 * ptr1 + 1, name, length);
-        } else {
-            // osDebugger.read(ptr1, name);
-        }
-        loginfo(DBD_DEBUG, "LoadSeg: '%s' (%x)\n", name.c_str(), ptr2);
+        string name="";
         
         auto it = std::find(targets.begin(), targets.end(), name);
         if (it != targets.end()) {

@@ -38,7 +38,6 @@ CoreObject::dump(Category category, std::ostream &ss) const
 void
 CoreObject::dump(Category category) const
 {
-    dump(category, std::cout);
 }
 
 }

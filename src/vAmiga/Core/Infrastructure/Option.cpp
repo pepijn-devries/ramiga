@@ -101,15 +101,6 @@ OptionParser::create(Opt opt, i64 arg)
         case Opt::DMA_DEBUG_COLOR6:          return numParser();
         case Opt::DMA_DEBUG_COLOR7:          return numParser();
 
-        // case Opt::LA_PROBE0:                 return enumParser.template operator()<ProbeEnum,Probe>();
-        // case Opt::LA_PROBE1:                 return enumParser.template operator()<ProbeEnum,Probe>();
-        // case Opt::LA_PROBE2:                 return enumParser.template operator()<ProbeEnum,Probe>();
-        // case Opt::LA_PROBE3:                 return enumParser.template operator()<ProbeEnum,Probe>();
-        case Opt::LA_ADDR0:                  return hexParser();
-        case Opt::LA_ADDR1:                  return hexParser();
-        case Opt::LA_ADDR2:                  return hexParser();
-        case Opt::LA_ADDR3:                  return hexParser();
-
         case Opt::VID_WHITE_NOISE:           return boolParser();
             
         case Opt::CPU_REVISION:              return enumParser.template operator()<CPURevEnum,CPURev>();
@@ -194,7 +185,6 @@ OptionParser::create(Opt opt, i64 arg)
 
         case Opt::SRV_ENABLE:                return boolParser();
         case Opt::SRV_PORT:                  return numParser();
-        // case Opt::SRV_PROTOCOL:              return enumParser.template operator()<ServerProtocolEnum,ServerProtocol>();
         case Opt::SRV_VERBOSE:               return boolParser();
 
         default:

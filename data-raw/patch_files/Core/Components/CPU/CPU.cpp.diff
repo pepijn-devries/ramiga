@@ -1,0 +1,10 @@
+--- "a"
++++ "b"
+@@ -147,7 +147,6 @@
+             
+             char str[128];
+             disassemble(str, reg.pc0);
+-            printf("%s\n", str);
+             break;
+         }
+     }

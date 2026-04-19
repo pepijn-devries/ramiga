@@ -7,6 +7,7 @@
 // See https://www.gnu.org for license information
 // -----------------------------------------------------------------------------
 
+#include <R_ext/Random.h>
 #include "config.h"
 #include "AudioStream.h"
 #include <algorithm>
@@ -214,8 +215,11 @@ AudioStream::draw(u32 *buffer, isize width, isize height, float highest,
             // Draw some noise to make it look sexy
             unsigned *ptr = buffer + width * height / 2 + w;
             *ptr = color;
-            if (rand() % 2) *(ptr + width) = color;
-            if (rand() % 2) *(ptr - width) = color;
+            
+            GetRNGstate();
+            if ((unif_rand() < 0.5) ? 0 : 1) *(ptr + width) = color;
+            if ((unif_rand() < 0.5) ? 0 : 1) *(ptr - width) = color;
+            PutRNGstate();
 
         } else {
 

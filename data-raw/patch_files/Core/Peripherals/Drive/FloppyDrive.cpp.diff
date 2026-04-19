@@ -1,0 +1,46 @@
+--- "a"
++++ "b"
+@@ -16,7 +16,10 @@
+ #include "Media.h"
+ #include "MsgQueue.h"
+ #include "CmdQueue.h"
+-#include "OSDescriptors.h"
++#include "DeviceError.h"
++#include "Volume.h"
++#include "FileSystems/Amiga/FileSystem.h"
++#include "FileSystems/FSError.h"
+ #include "utl/io.h"
+ 
+ namespace vamiga {
+@@ -1171,21 +1174,6 @@
+     auto &file = fs.fetch(*blockNr).mutate();
+     file.extractData(buffer);
+ 
+-    // Parse hunks
+-    auto descr = ProgramUnitDescriptor(buffer);
+-    
+-    // Seek the code section and read the first instruction word
+-    auto offset = descr.seek(HUNK_CODE);
+-    if (!offset) throw CoreError(CoreError::HUNK_CORRUPTED);
+-    u16 instr = HI_LO(buffer[*offset + 8], buffer[*offset + 9]);
+-    
+-    // Replace the first instruction word by a software trap
+-    auto trap = cpu.debugger.swTraps.create(instr);
+-    buffer[*offset + 8] = HI_BYTE(trap);
+-    buffer[*offset + 9] = LO_BYTE(trap);
+-    
+-    // Write the modification back to the file system
+-    file.overwriteData(buffer);
+ 
+     // Replace the old disk
+     fs.flush();
+@@ -1231,9 +1219,6 @@
+     // Make the volume bootable
+     fs.makeBootable(bb);
+ 
+-    // Check file system consistency
+-    if constexpr (debug::FS_DEBUG) fs.doctor.xray(true, std::cout, false);
+-
+     // Force the ADF to update
+     fs.flush();
+ 

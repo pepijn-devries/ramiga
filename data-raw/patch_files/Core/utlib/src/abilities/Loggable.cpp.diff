@@ -1,0 +1,27 @@
+--- "a"
++++ "b"
+@@ -85,24 +85,6 @@
+     auto &channel = channels().at(c);
+     if (!channel.level || level > *channel.level) return;
+ 
+-    fprintf(stderr, "%s", prefix(level, loc).c_str());
+-
+-    switch (level) {
+-
+-        case LogLevel::LOG_EMERG:   fprintf(stderr, "EMERGENCY: "); break;
+-        case LogLevel::LOG_CRIT:    fprintf(stderr, "CRITICAL: ");  break;
+-        case LogLevel::LOG_ERR:     fprintf(stderr, "ERROR: ");     break;
+-        case LogLevel::LOG_WARNING: fprintf(stderr, "WARNING: ");   break;
+-        case LogLevel::LOG_NOTICE:  fprintf(stderr, "NOTICE: ");    break;
+-
+-        default:
+-            break;
+-    }
+-
+-    va_list ap;
+-    va_start(ap, fmt);
+-    vfprintf(stderr, fmt, ap);
+-    va_end(ap);
+ }
+ 
+ string

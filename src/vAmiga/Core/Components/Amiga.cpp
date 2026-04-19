@@ -74,12 +74,7 @@ Amiga::Amiga(class Emulator& ref, isize id) : CoreComponent(ref, id)
         &ciaA,
         &ciaB,
         &mem,
-        &cpu//,
-        // &logicAnalyzer,
-        // &remoteManager,
-        // &retroShell,
-        // &osDebugger,
-        // &regressionTester
+        &cpu,
     };
 
     info.bind([this] { return cacheInfo(); } );
@@ -316,13 +311,8 @@ Amiga::loadWorkspace(const fs::path &path)
         
     } catch(Error &exc) {
         
-        printf("Error: %s\n", exc.what());
         throw;
     }
-
-    // Execute the setup script
-    // retroShell.asyncExec("commander");
-    // retroShell.asyncExecScript(ss);
 }
 
 void
@@ -826,7 +816,6 @@ Amiga::_pause()
 {
     loginfo(RUN_DEBUG, "_pause\n");
 
-    // remoteManager.gdbServer.breakpointReached();
     msgQueue.put(Msg::PAUSE);
 }
 
@@ -965,7 +954,6 @@ Amiga::update(CmdQueue &queue)
                 
             case Cmd::RSH_EXECUTE:
 
-                // retroShell.exec();
                 break;
 
             case Cmd::FOCUS:
@@ -981,11 +969,6 @@ Amiga::update(CmdQueue &queue)
     // Inform the GUI about a changed machine configuration
     if (cmdConfig) { msgQueue.put(Msg::CONFIG, isize(cmd.type)); }
 
-    // Inform the GUI about new RetroShell content
-    // if (retroShell.isDirty) { retroShell.isDirty = false; msgQueue.put(Msg::RSH_UPDATE); }
-
-    // Update subcomponents
-    // remoteManager.update();
 }
 
 void

@@ -1,0 +1,109 @@
+--- "a"
++++ "b"
+@@ -54,106 +54,12 @@
+     bmBlocks        = layout.bmBlocks;
+     bmExtBlocks     = layout.bmExtBlocks;
+ 
+-    if constexpr (debug::FS_DEBUG) dumpState();
+-
+     // Set the current directory to '/'
+     current = rootBlock;
+ 
+     loginfo(FS_DEBUG, "Success\n");
+ }
+ 
+-void
+-FileSystem::dumpInfo(std::ostream &os) const noexcept
+-{
+-    os << "Type   Size             Used    Free    Full  Name" << std::endl;
+-    dumpState(os);
+-}
+-
+-void
+-FileSystem::dumpState(std::ostream &os) const noexcept
+-{
+-    using namespace utl;
+-
+-    auto st = stat();
+-
+-    auto size = std::to_string(traits.blocks) + " (x " + std::to_string(traits.bsize) + ")";
+-
+-    if (isFormatted()) {
+-
+-        auto fill = 100.0 * double(st.usedBlocks) / double(st.traits.blocks);
+-        
+-        os << std::setw(5) << std::left << ("DOS" + std::to_string(isize(traits.dos)));
+-        os << "  ";
+-        os << std::setw(15) << std::left << std::setfill(' ') << size;
+-        os << "  ";
+-        os << std::setw(6) << std::left << std::setfill(' ') << st.usedBlocks;
+-        os << "  ";
+-        os << std::setw(6) << std::left << std::setfill(' ') << st.freeBlocks;
+-        os << "  ";
+-        os << std::setw(3) << std::right << std::setfill(' ') << isize(fill);
+-        os << "%  ";
+-        os << st.name.c_str() << std::endl;
+-
+-    } else {
+-
+-        os << std::setw(5) << std::left << "NODOS";
+-        os << "  ";
+-        os << std::setw(15) << std::left << std::setfill(' ') << size;
+-        os << "  ";
+-        os << std::setw(6) << std::left << std::setfill(' ') << "--";
+-        os << "  ";
+-        os << std::setw(6) << std::left << std::setfill(' ') << "--";
+-        os << "  ";
+-        os << std::setw(3) << std::left << std::setfill(' ') << "--";
+-        os << "   ";
+-        os << "--" << std::endl;
+-    }
+-}
+-
+-void
+-FileSystem::dumpProps(std::ostream &os) const noexcept
+-{
+-    using namespace utl;
+-
+-    auto st   = stat();
+-    auto bst  = bootStat();
+-    auto fill = 100.0 * double(st.usedBlocks) / double(st.traits.blocks);
+-
+-    os << tab("Name");
+-    os << st.name << std::endl;
+-    os << tab("Created");
+-    os << st.bDate.str() << std::endl;
+-    os << tab("Modified");
+-    os << st.mDate.str() << std::endl;
+-    os << tab("Boot block");
+-    os << bst.name << std::endl;
+-    os << tab("Capacity");
+-    os << utl::byteCountAsString(traits.blocks * traits.bsize) << std::endl;
+-    os << tab("Block size");
+-    os << dec(traits.bsize) << " Bytes" << std::endl;
+-    os << tab("Blocks");
+-    os << dec(traits.blocks) << std::endl;
+-    os << tab("Used");
+-    os << dec(st.usedBlocks);
+-    os << tab("Free");
+-    os << dec(st.freeBlocks);
+-    os << " (" <<  std::fixed << std::setprecision(2) << fill << "%)" << std::endl;
+-    os << tab("Root block");
+-    os << dec(rootBlock) << std::endl;
+-    os << tab("Bitmap blocks");
+-    for (auto& it : bmBlocks) { os << dec(it) << " "; }
+-    os << std::endl;
+-    os << tab("Extension blocks");
+-    for (auto& it : bmExtBlocks) { os << dec(it) << " "; }
+-    os << std::endl;
+-}
+-
+-void
+-FileSystem::dumpBlocks(std::ostream &os) const noexcept
+-{
+-    cache.dump(os);
+-}
+-
+ vector<string>
+ FileSystem::describe() const noexcept
+ {

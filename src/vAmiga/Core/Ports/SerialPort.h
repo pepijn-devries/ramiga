@@ -197,7 +197,7 @@ private:
     void recordOutgoingByte(int byte);
 
     // Dumps a byte to RetroShell
-    // void dumpByte(int byte);
+    void dumpByte(int byte);
 };
 
 }

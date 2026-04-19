@@ -1,0 +1,264 @@
+--- "a"
++++ "b"
+@@ -13,8 +13,6 @@
+ #include "Amiga.h"
+ #include "HDFFile.h"
+ #include "FloppyDrive.h"
+-#include "OSDebugger.h"
+-#include "OSDescriptors.h"
+ #include "utl/io.h"
+ 
+ namespace vamiga {
+@@ -335,75 +333,6 @@
+ void
+ HdController::processCmd(u32 ptr)
+ {
+-    u8 error = 0;
+-    u32 actual = 0;
+-    
+-    // Read the IOStdReq struct from memory
+-    os::IOStdReq stdReq;
+-    osDebugger.read(ptr, &stdReq);
+-    
+-    // Extract information
+-    auto cmd = IoCommand(stdReq.io_Command);
+-    auto offset = isize(stdReq.io_Offset);
+-    auto length = isize(stdReq.io_Length);
+-    auto addr = u32(stdReq.io_Data);
+-    
+-    if constexpr (debug::HDR_DEBUG) {
+-
+-        [[maybe_unused]] auto unit = mem.spypeek32 <Accessor::CPU> (stdReq.io_Unit + 0x2A);
+-        [[maybe_unused]] auto blck = offset / 512;
+-        
+-        loginfo(HDR_DEBUG, "%d.%ld: %s\n", unit, blck, IoCommandEnum::key(cmd));
+-    }
+-    
+-    // Update the usage profile
+-    if (IoCommandEnum::isValid(cmd)) _metrics.cmdCount[long(cmd)]++;
+-    
+-    switch (cmd) {
+-            
+-        case IoCommand::READ:
+-
+-            if (offset) changeHdcState(HdcState::READY);
+-            
+-            error = drive.read(offset, length, addr);
+-            actual = u32(length);
+-            break;
+-
+-        case IoCommand::WRITE:
+-        case IoCommand::TD_FORMAT:
+-
+-            error = drive.write(offset, length, addr);
+-            actual = u32(length);
+-            break;
+-
+-        case IoCommand::RESET:
+-        case IoCommand::UPDATE:
+-        case IoCommand::CLEAR:
+-        case IoCommand::STOP:
+-        case IoCommand::START:
+-        case IoCommand::FLUSH:
+-        case IoCommand::TD_MOTOR:
+-        case IoCommand::TD_SEEK:
+-        case IoCommand::TD_REMOVE:
+-        case IoCommand::TD_CHANGENUM:
+-        case IoCommand::TD_CHANGESTATE:
+-        case IoCommand::TD_PROTSTATUS:
+-        case IoCommand::TD_ADDCHANGEINT:
+-        case IoCommand::TD_REMCHANGEINT:
+-            
+-            break;
+-            
+-        default:
+-            
+-            loginfo(HDR_DEBUG, "Unsupported cmd: %ld (%s)\n", long(cmd), IoCommandEnum::key(cmd));
+-            error = u8(IOERR_NOCMD);
+-    }
+-    
+-    // Write back the return code
+-    mem.patch(ptr + IO_ERROR, error);
+-    
+-    // On success, report the number of processed bytes
+-    if (!error) mem.patch(ptr + IO_ACTUAL, actual);
+ }
+ 
+ void
+@@ -510,48 +439,6 @@
+ void
+ HdController::processResource(u32 ptr)
+ {
+-    loginfo(HDR_DEBUG, "processResource(%x)\n", ptr);
+-
+-    // Read the file system resource
+-    os::FileSysResource fsResource;
+-    osDebugger.read(ptr, &fsResource);
+-
+-    // Read file system entries
+-    std::vector <os::FileSysEntry> entries;
+-    osDebugger.read(fsResource.fsr_FileSysEntries.lh_Head, entries);
+-
+-    auto &drivers = drive.drivers;
+-    
+-    for (const auto &fse : entries) {
+-        
+-        loginfo(HDR_DEBUG, "Providing %s %s\n",
+-              OSDebugger::dosTypeStr(fse.fse_DosType).c_str(),
+-              OSDebugger::dosVersionStr(fse.fse_Version).c_str());
+-        
+-        for (auto it = drivers.begin(); it != drivers.end(); ) {
+-
+-            if constexpr (debug::HDR_FS_LOAD_ALL) {
+-
+-                it++;
+-                continue;
+-            }
+-
+-            if (fse.fse_DosType == it->dosType && fse.fse_Version >= it->dosVersion) {
+-                
+-                loginfo(HDR_DEBUG, "Not needed: %s %s\n",
+-                      OSDebugger::dosTypeStr(it->dosType).c_str(),
+-                      OSDebugger::dosVersionStr(it->dosVersion).c_str());
+-
+-                it = drivers.erase(it);
+-
+-            } else {
+-                
+-                it++;
+-            }
+-        }
+-    }
+-    
+-    loginfo(HDR_DEBUG, "Remaining drivers: %zu\n", drivers.size());
+ }
+ 
+ void
+@@ -561,10 +448,6 @@
+     
+     // Keep in sync with exprom.asm
+     static constexpr u16 fsinfo_num = 0x00;
+-    static constexpr u16 fsinfo_dosType = 0x02;
+-    static constexpr u16 fsinfo_version = 0x06;
+-    static constexpr u16 fsinfo_numHunks = 0x0a;
+-    static constexpr u16 fsinfo_hunk = 0x0e;
+ 
+     try {
+ 
+@@ -575,27 +458,13 @@
+         if (num >= drive.drivers.size()) {
+             throw CoreError(CoreError::HDC_INIT, "Invalid driver number: " + std::to_string(num));
+         }
+-        auto &driver = drive.drivers[num];
+ 
+         // Read driver
+         Buffer<u8> code;
+         drive.readDriver(num, code);
+-        ProgramUnitDescriptor descr(code);
+-        descr.dump(Category::Sections);
+-        
+-        // We accept up to three hunks
+-        auto numHunks = descr.numHunks();
+-        if (numHunks == 0 || numHunks > 3) {
+-            throw CoreError(CoreError::HUNK_CORRUPTED);
+-        }
+-        
+-        // Pass the hunk information back to the driver
+-        mem.patch(ptr + fsinfo_dosType, u32(driver.dosType));
+-        mem.patch(ptr + fsinfo_version, u32(driver.dosVersion));
+-        mem.patch(ptr + fsinfo_numHunks, u32(numHunks));
+-        for (isize i = 0; i < numHunks; i++) {
+-            mem.patch(u32(ptr + fsinfo_hunk + 4 * i), descr.hunks[i].memRaw);
+-        }
++
++        // We accept up to three hunks: TODO OSDebugger not included
++        throw CoreError(CoreError::HUNK_CORRUPTED);
+ 
+     } catch(Error &e) {
+ 
+@@ -608,7 +477,6 @@
+ {
+     loginfo(HDR_DEBUG, "processInitSeg(%x)\n", ptr);
+     
+-    static constexpr u16 fsinitseg_hunk = 0x00;
+     static constexpr u16 fsinitseg_num = 0x0c;
+     
+     try {
+@@ -624,74 +492,12 @@
+         // Read driver
+         Buffer<u8> code;
+         drive.readDriver(num, code);
+-        ProgramUnitDescriptor descr(code);
+-
+-        // We accept up to three hunks
+-        auto numHunks = descr.numHunks();
+-        if (numHunks == 0 || numHunks > 3) {
+-            throw CoreError(CoreError::HUNK_CORRUPTED);
+-        }
+-        
+-        // Extract pointers to the allocated memory
+-        std::vector<u32> segPtrs;
+-        for (isize i = 0; i < numHunks; i++) {
+-            
+-            auto segPtrAddr = u32(ptr + fsinitseg_hunk + 4 * i);
+-            auto segPtr = mem.spypeek32 <Accessor::CPU> (segPtrAddr);
+-            
+-            if (segPtr == 0) {
+-                throw CoreError(CoreError::HDC_INIT, "Memory allocation failed inside AmigaOS");
+-            }
+-            loginfo(HDR_DEBUG, "Allocated memory at %x\n", segPtr);
+-            segPtrs.push_back(segPtr);
+-        }
+-        
+-        // Build seglist
+-        for (isize i = 0; i < numHunks; i++) {
+-
+-            bool last = (i == numHunks - 1);
+ 
+-            for (auto &s : descr.hunks[i].sections) {
+-                
+-                if (s.type == HUNK_CODE || s.type == HUNK_DATA) {
+-                    
+-                    // Write hunk size
+-                    mem.patch(segPtrs[i], u32(descr.hunks[i].memSize + 8));
++        // We accept up to three hunks: TODO OSDebugger not included
+ 
+-                    // Add a BPTR to the next hunk in the list
+-                    mem.patch(segPtrs[i] + 4, last ? 0 : (segPtrs[i + 1] + 4) >> 2);
++        // Extract pointers to the allocated memory
++        throw("Not implemented");
+ 
+-                    // Copy data
+-                    loginfo(HDR_DEBUG, "Copying %d bytes from %d\n", s.size, s.offset + 8);
+-                    mem.patch(segPtrs[i] + 8, code.ptr + s.offset + 8, s.size);
+-                }
+-            }
+-            
+-            // Apply relocations
+-            for (auto &s : descr.hunks[i].sections) {
+-                
+-                if (s.type == HUNK_RELOC32) {
+-                    
+-                    if (s.target >= numHunks) {
+-                        throw CoreError(CoreError::HDC_INIT, "Invalid relocation target");
+-                    }
+-                    loginfo(HDR_DEBUG, "Relocation target: %ld\n", s.target);
+-                    
+-                    for (auto &offset : s.relocations) {
+-                        
+-                        auto addr = segPtrs[i] + 8 + offset;
+-                        auto value = mem.spypeek32 <Accessor::CPU> (addr);
+-                        loginfo(HDR_DEBUG, "%x: %x -> %x\n",
+-                              addr, value, value + segPtrs[s.target] + 8);
+-                        mem.patch(addr, value + segPtrs[s.target] + 8);
+-                    }
+-                }
+-            }
+-        }
+-        
+-        // Remember a BPTR to the seglist
+-        drive.drivers[num].segList = (segPtrs[0] + 4) >> 2;
+-        
+     } catch(Error &e) {
+ 
+         logwarn("processInitSeg: %s\n", e.what());

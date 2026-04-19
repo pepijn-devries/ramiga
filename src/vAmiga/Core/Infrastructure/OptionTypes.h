@@ -102,17 +102,7 @@ enum class Opt : long
     DMA_DEBUG_COLOR5,
     DMA_DEBUG_COLOR6,
     DMA_DEBUG_COLOR7,
-    
-    // Logic analyzer
-    // LA_PROBE0,              ///< Probe on channel 0
-    // LA_PROBE1,              ///< Probe on channel 1
-    // LA_PROBE2,              ///< Probe on channel 2
-    // LA_PROBE3,              ///< Probe on channel 3
-    LA_ADDR0,               ///< Address for channel 0 (memory probing)
-    LA_ADDR1,               ///< Address for channel 1 (memory probing)
-    LA_ADDR2,               ///< Address for channel 2 (memory probing)
-    LA_ADDR3,               ///< Address for channel 3 (memory probing)
-    
+        
     // Video port
     VID_WHITE_NOISE,        ///< Generate white-noise when switched off
 
@@ -307,15 +297,6 @@ struct OptEnum : Reflectable<OptEnum, Opt>
             case Opt::DMA_DEBUG_COLOR6:          return "DMA.DEBUG_COLOR6";
             case Opt::DMA_DEBUG_COLOR7:          return "DMA.DEBUG_COLOR7";
                 
-            // case Opt::LA_PROBE0:                 return "LA.PROBE0";
-            // case Opt::LA_PROBE1:                 return "LA.PROBE1";
-            // case Opt::LA_PROBE2:                 return "LA.PROBE2";
-            // case Opt::LA_PROBE3:                 return "LA.PROBE3";
-            case Opt::LA_ADDR0:                  return "LA.ADDR0";
-            case Opt::LA_ADDR1:                  return "LA.ADDR1";
-            case Opt::LA_ADDR2:                  return "LA.ADDR2";
-            case Opt::LA_ADDR3:                  return "LA.ADDR3";
-                
             case Opt::VID_WHITE_NOISE:           return "VID.WHITE_NOISE";
                 
             case Opt::CPU_REVISION:              return "CPU.REVISION";
@@ -488,15 +469,6 @@ struct OptEnum : Reflectable<OptEnum, Opt>
             case Opt::DMA_DEBUG_COLOR5:          return "Bitplane color";
             case Opt::DMA_DEBUG_COLOR6:          return "CPU color";
             case Opt::DMA_DEBUG_COLOR7:          return "Memory refresh color";
-                
-            // case Opt::LA_PROBE0:                 return "Probe on channel 0";
-            // case Opt::LA_PROBE1:                 return "Probe on channel 1";
-            // case Opt::LA_PROBE2:                 return "Probe on channel 2";
-            // case Opt::LA_PROBE3:                 return "Probe on channel 3";
-            case Opt::LA_ADDR0:                  return "Channel 0 memory address";
-            case Opt::LA_ADDR1:                  return "Channel 1 memory address";
-            case Opt::LA_ADDR2:                  return "Channel 2 memory address";
-            case Opt::LA_ADDR3:                  return "Channel 3 memory address";
                 
             case Opt::VID_WHITE_NOISE:           return "White noise";
                 

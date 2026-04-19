@@ -15,7 +15,6 @@
 #include "utl/concurrency.h"
 
 using namespace retro::vault::amiga;
-
 namespace vamiga {
 
 /* All main API functions are annotated with one of the following keywords:
@@ -104,27 +103,6 @@ AmigaAPI::dump(Category category, std::ostream &os) const
 //
 // Components (Agnus)
 //
-
-// const LogicAnalyzerConfig &
-// LogicAnalyzerAPI::getConfig() const
-// {
-//     VAMIGA_PUBLIC
-//     return logicAnalyzer->getConfig();
-// }
-// 
-// const LogicAnalyzerInfo &
-// LogicAnalyzerAPI::getInfo() const
-// {
-//     VAMIGA_PUBLIC
-//     return logicAnalyzer->info.current();
-// }
-// 
-// const LogicAnalyzerInfo &
-// LogicAnalyzerAPI::getCachedInfo() const
-// {
-//     VAMIGA_PUBLIC
-//     return logicAnalyzer->info.backed();
-// }
 
 const DmaDebuggerConfig &
 DmaDebuggerAPI::getConfig() const
@@ -1650,152 +1628,6 @@ DefaultsAPI::remove(Opt option, std::vector <isize> objids)
     defaults->remove(option, objids);
 }
 
-
-//
-// RemoteManagerAPI
-//
-
-// const RemoteManagerInfo &
-// RemoteManagerAPI::getInfo() const
-// {
-//     VAMIGA_PUBLIC
-//     return remoteManager->info.current();
-// }
-// 
-// const RemoteManagerInfo &
-// RemoteManagerAPI::getCachedInfo() const
-// {
-//     VAMIGA_PUBLIC
-//     return remoteManager->info.backed();
-// }
-// 
-
-//
-// RetroShellAPI
-//
-
-// const RetroShellInfo &
-// RetroShellAPI::getInfo() const
-// {
-//     VAMIGA_PUBLIC
-//     return retroShell->info.current();
-// }
-// 
-// const RetroShellInfo &
-// RetroShellAPI::getCachedInfo() const
-// {
-//     VAMIGA_PUBLIC
-//     return retroShell->info.backed();
-// }
-// 
-// const char *
-// RetroShellAPI::text()
-// {
-//     VAMIGA_PUBLIC_SUSPEND
-//     return retroShell->text();
-// }
-// 
-// void
-// RetroShellAPI::press(RSKey key, bool shift)
-// {
-//     VAMIGA_PUBLIC_SUSPEND
-//     retroShell->press(key, shift);
-// }
-// 
-// void
-// RetroShellAPI::press(char c)
-// {
-//     VAMIGA_PUBLIC_SUSPEND
-//     retroShell->press(c);
-// }
-// 
-// void
-// RetroShellAPI::press(const string &s)
-// {
-//     VAMIGA_PUBLIC_SUSPEND
-//     retroShell->press(s);
-// }
-// 
-// void
-// RetroShellAPI::execScript(const fs::path &path)
-// {
-//     VAMIGA_PUBLIC_SUSPEND
-//     retroShell->asyncExecScript(path);
-// }
-// 
-// void
-// RetroShellAPI::execScript(std::stringstream &ss)
-// {
-//     VAMIGA_PUBLIC_SUSPEND
-//     retroShell->asyncExecScript(ss);
-// }
-// 
-// void
-// RetroShellAPI::execScript(const std::ifstream &fs)
-// {
-//     VAMIGA_PUBLIC_SUSPEND
-//     retroShell->asyncExecScript(fs);
-// }
-// 
-// void
-// RetroShellAPI::execScript(const string &contents)
-// {
-//     VAMIGA_PUBLIC_SUSPEND
-//     retroShell->asyncExecScript(contents);
-// }
-
-/*
-void
-RetroShellAPI::import(const FloppyDrive &dfn)
-{
-    VAMIGA_PUBLIC_SUSPEND
-    retroShell->navigator.import(dfn);
-}
-
-void
-RetroShellAPI::import(const HardDrive &hdn, isize part)
-{
-    VAMIGA_PUBLIC_SUSPEND
-    retroShell->navigator.import(hdn, part);
-}
-
-void
-RetroShellAPI::importDf(isize n)
-{
-    VAMIGA_PUBLIC_SUSPEND
-    retroShell->navigator.importDf(n);
-}
-
-void
-RetroShellAPI::importHd(isize n, isize part)
-{
-    VAMIGA_PUBLIC_SUSPEND
-    retroShell->navigator.importHd(n, part);
-}
-
-void
-RetroShellAPI::import(const fs::path &path, bool recursive, bool contents)
-{
-    VAMIGA_PUBLIC_SUSPEND
-    retroShell->navigator.import(path, recursive, contents);
-}
-*/
-
-// void
-// RetroShellAPI::exportBlocks(const std::filesystem::path &path)
-// {
-//     VAMIGA_PUBLIC_SUSPEND
-//     retroShell->navigator.exportBlocks(path);
-// }
-// 
-// void
-// RetroShellAPI::setStream(std::ostream &os)
-// {
-//     VAMIGA_PUBLIC_SUSPEND
-//     retroShell->setStream(os);
-// }
-// 
-
 //
 // VAmiga API
 //
@@ -1812,8 +1644,6 @@ VAmiga::VAmiga() {
 
     agnus.emu = emu;
     agnus.agnus = &emu->main.agnus;
-    // agnus.logicAnalyzer.emu = emu;
-    // agnus.logicAnalyzer.logicAnalyzer = &emu->main.logicAnalyzer;
     agnus.dmaDebugger.emu = emu;
     agnus.dmaDebugger.dmaDebugger = &emu->main.agnus.dmaDebugger;
     agnus.copper.emu = emu;
@@ -1929,11 +1759,6 @@ VAmiga::VAmiga() {
     msgQueue.emu = emu;
     msgQueue.msgQueue = &emu->main.msgQueue;
 
-    // remoteManager.emu = emu;
-    // remoteManager.remoteManager = &emu->main.remoteManager;
-    // 
-    // retroShell.emu = emu;
-    // retroShell.retroShell = &emu->main.retroShell;
 }
 
 VAmiga::~VAmiga()

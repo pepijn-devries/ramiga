@@ -169,11 +169,6 @@ public:
 
 public:
 
-    void dumpStatfs(std::ostream &os = std::cout) const noexcept;
-    void dumpProps(std::ostream &os = std::cout) const noexcept;
-    void dumpBlocks(std::ostream &os = std::cout) const noexcept;
-
-
     //
     // Querying file system properties
     //

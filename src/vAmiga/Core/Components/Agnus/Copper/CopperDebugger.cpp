@@ -236,8 +236,7 @@ CopperDebugger::disassemble(u32 addr, bool symbolic) const
             
             auto source = copper.getDW(addr);
             auto target = MemoryDebugger::regName(copper.getRA(addr));
-            snprintf(txt, sizeof(txt), "MOVE $%04X, %s", source, target);
-            
+
             return string(txt);
         }
         
@@ -246,18 +245,15 @@ CopperDebugger::disassemble(u32 addr, bool symbolic) const
         
         auto vp = copper.getVP(addr);
         auto hp = copper.getHP(addr);
-        snprintf(pos, sizeof(pos), "($%02X,$%02X)", vp, hp);
-        
+
         if (copper.getVM(addr) == 0xFF && copper.getHM(addr) == 0xFF) {
             mask[0] = 0;
         } else {
             
             auto hm = copper.getHM(addr);
             auto vm = copper.getVM(addr);
-            snprintf(mask, sizeof(mask), ", ($%02X,$%02X)", hm, vm);
         }
         
-        snprintf(txt, sizeof(txt), "%s%s %s%s", mnemonic, suffix, pos, mask);
         return string(txt);
         
     } else {

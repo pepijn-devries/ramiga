@@ -1,0 +1,19 @@
+--- "a"
++++ "b"
+@@ -43,16 +43,12 @@
+ hd3con(ref.hd3con),
+ host(ref.host),
+ keyboard(ref.keyboard),
+-logicAnalyzer(ref.logicAnalyzer),
+ mem(ref.mem),
+ monitor(ref.monitor),
+ msgQueue(ref.msgQueue),
+-osDebugger(ref.osDebugger),
+ paula(ref.paula),
+ pixelEngine(ref.denise.pixelEngine),
+ ramExpansion(ref.ramExpansion),
+-remoteManager(ref.remoteManager),
+-retroShell(ref.retroShell),
+ rtc(ref.rtc),
+ serialPort(ref.serialPort),
+ uart(ref.paula.uart),

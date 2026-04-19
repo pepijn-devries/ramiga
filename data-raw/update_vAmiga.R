@@ -35,16 +35,14 @@ unlink(all_dirs[!endsWith(all_dirs, "Core")], recursive = TRUE, force = TRUE)
 ### Loop remaining files and patch them if needed: ----------------
 
 all_files <- list.files(extracted_path, recursive = TRUE, full.names = TRUE)
-file_patches <- list.files("data-raw/patch_files/", full.names = TRUE)
+file_patches <- list.files("data-raw/patch_files/", full.names = TRUE, recursive = TRUE)
 
 if (Sys.which("patch") == "") stop("You need to have 'patch' installed")
 if (Sys.which("dos2unix") == "") stop("You need to have 'dos2unix' installed")
 
 for (fl in file_patches) {
   source <-
-    list.files(extracted_path,
-               paste0("^", gsub("\\.diff$", "", basename(fl))),
-               recursive = TRUE, full.names = TRUE) |>
+    file.path(extracted_path, gsub(".diff$", "", gsub("data-raw/patch_files/", "", fl))) |>
     shQuote()
   difffl <- fl |> shQuote()
   system(sprintf("dos2unix %s", source))

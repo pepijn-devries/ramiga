@@ -72,10 +72,6 @@ public:
     void dump(std::ostream &os, const DumpOpt &opt, const string &fmt) const {
         dump(os, opt, fmt, dataProvider());
     };
-    void hexDump(std::ostream &os = std::cout) const { hexDump(os, dataProvider()); }
-    void memDump(std::ostream &os = std::cout) const { memDump(os, dataProvider()); }
-    void ascDump(std::ostream &os = std::cout) const { ascDump(os, dataProvider()); }
-    void txtDump(std::ostream &os = std::cout) const { txtDump(os, dataProvider()); }
 };
 
 }

@@ -144,9 +144,6 @@ C64Encoder::encodeTrack(ByteView src, TrackNr t)
                 view.size(), totalBits, view.byteView().fnv32());
     }
 
-    // for (isize i = 0; i < 64; ++i) printf("%02X ", gcrbuffer[i]);
-    // printf("\n");
-    
     return view;
 }
 

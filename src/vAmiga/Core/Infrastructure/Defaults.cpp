@@ -112,15 +112,6 @@ Defaults::fallbacks()
     registerDefault(Opt::DMA_DEBUG_COLOR6,           0xFFFFFF00);
     registerDefault(Opt::DMA_DEBUG_COLOR7,           0xFF000000);
 
-    // registerDefault(Opt::LA_PROBE0,                  (i64)Probe::NONE);
-    // registerDefault(Opt::LA_PROBE1,                  (i64)Probe::NONE);
-    // registerDefault(Opt::LA_PROBE2,                  (i64)Probe::NONE);
-    // registerDefault(Opt::LA_PROBE3,                  (i64)Probe::NONE);
-    registerDefault(Opt::LA_ADDR0,                   0);
-    registerDefault(Opt::LA_ADDR1,                   0);
-    registerDefault(Opt::LA_ADDR2,                   0);
-    registerDefault(Opt::LA_ADDR3,                   0);
-
     registerDefault(Opt::VID_WHITE_NOISE,            true);
 
     registerDefault(Opt::CPU_REVISION,               (i64)CPURev::CPU_68000);
@@ -212,31 +203,6 @@ Defaults::fallbacks()
     registerDefault(Opt::AUD_FASTPATH,               true);
 
     registerDefault(Opt::DIAG_BOARD,                 false);
-
-    // registerDefaults(Opt::SRV_ENABLE,                 false,                  { (i64)ServerType::RSH });
-    // registerDefaults(Opt::SRV_PORT,                   8081,                   { (i64)ServerType::RSH });
-    // registerDefaults(Opt::SRV_PROTOCOL,               (i64)ServerProtocol::DEFAULT, { (i64)ServerType::RSH });
-    // registerDefaults(Opt::SRV_VERBOSE,                true,                   { (i64)ServerType::RSH });
-    // 
-    // registerDefaults(Opt::SRV_ENABLE,                 false,                  { (i64)ServerType::RPC });
-    // registerDefaults(Opt::SRV_PORT,                   8082,                   { (i64)ServerType::RPC });
-    // registerDefaults(Opt::SRV_PROTOCOL,               (i64)ServerProtocol::DEFAULT, { (i64)ServerType::RPC });
-    // registerDefaults(Opt::SRV_VERBOSE,                true,                   { (i64)ServerType::RPC });
-    // 
-    // registerDefaults(Opt::SRV_ENABLE,                 false,                  { (i64)ServerType::GDB });
-    // registerDefaults(Opt::SRV_PORT,                   8083,                   { (i64)ServerType::GDB });
-    // registerDefaults(Opt::SRV_PROTOCOL,               (i64)ServerProtocol::DEFAULT, { (i64)ServerType::GDB });
-    // registerDefaults(Opt::SRV_VERBOSE,                true,                   { (i64)ServerType::GDB });
-    // 
-    // registerDefaults(Opt::SRV_ENABLE,                 false,                  { (i64)ServerType::PROM });
-    // registerDefaults(Opt::SRV_PORT,                   8084,                   { (i64)ServerType::PROM });
-    // registerDefaults(Opt::SRV_PROTOCOL,               (i64)ServerProtocol::DEFAULT, { (i64)ServerType::PROM });
-    // registerDefaults(Opt::SRV_VERBOSE,                true,                   { (i64)ServerType::PROM });
-    // 
-    // registerDefaults(Opt::SRV_ENABLE,                 false,                  { (i64)ServerType::SER });
-    // registerDefaults(Opt::SRV_PORT,                   8085,                   { (i64)ServerType::SER });
-    // registerDefaults(Opt::SRV_PROTOCOL,               (i64)ServerProtocol::DEFAULT, { (i64)ServerType::SER });
-    // registerDefaults(Opt::SRV_VERBOSE,                true,                   { (i64)ServerType::SER });
 
     defaults.values["ROM_PATH"] = "";
     defaults.values["EXT_PATH"] = "";

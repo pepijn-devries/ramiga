@@ -315,9 +315,6 @@ Agnus::serviceREGEvent(Cycle until)
         }
     }
 
-    // Let the logic analyzer probe all observed signals
-    // if (syncEvent & EVFL::PROBE) { logicAnalyzer.recordSignals(); }
-
     scheduleNextREGEvent();
 }
 

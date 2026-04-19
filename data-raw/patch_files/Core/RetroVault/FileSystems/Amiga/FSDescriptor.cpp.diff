@@ -1,0 +1,10 @@
+--- "a"
++++ "b"
+@@ -101,7 +101,6 @@
+ void
+ FSDescriptor::dump() const
+ {
+-    dump(std::cout);
+ }
+ 
+ void

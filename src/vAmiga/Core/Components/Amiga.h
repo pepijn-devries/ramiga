@@ -36,14 +36,7 @@
 #include "Monitor.h"
 
 // Misc
-// #include "GdbServer.h"
 #include "Host.h"
-// #include "LogicAnalyzer.h"
-// #include "OSDebugger.h"
-// #include "RegressionTester.h"
-// #include "RemoteManager.h"
-// #include "RetroShell.h"
-// #include "RshServer.h"
 #include "SerialPort.h"
 #include "MidiManager.h"
 #include "Snapshot.h"
@@ -146,13 +139,6 @@ public:
 
     // Gateway to the GUI
     MsgQueue msgQueue = MsgQueue();
-
-    // Misc
-    // LogicAnalyzer logicAnalyzer = LogicAnalyzer(*this);
-    // RetroShell retroShell = RetroShell(*this);
-    // RemoteManager remoteManager = RemoteManager(*this);
-    // OSDebugger osDebugger = OSDebugger(*this);
-    // RegressionTester regressionTester = RegressionTester(*this);
 
     // Shortcuts
     FloppyDrive *df[4] = { &df0, &df1, &df2, &df3 };
@@ -258,11 +244,6 @@ public:
         CLONE(ciaB)
         CLONE(mem)
         CLONE(cpu)
-        // CLONE(remoteManager)
-        // CLONE(retroShell)
-        // CLONE(osDebugger)
-        // CLONE(regressionTester)
-
         CLONE(flags)
         CLONE(config)
 

@@ -281,9 +281,6 @@ static const int LZ4_minLength = (MFLIMIT+1);
    static int g_debuglog_enable = 1;
 #  define DEBUGLOG(l, ...) {                          \
         if ((g_debuglog_enable) && (l<=LZ4_DEBUG)) {  \
-            fprintf(stderr, __FILE__  " %i: ", __LINE__); \
-            fprintf(stderr, __VA_ARGS__);             \
-            fprintf(stderr, " \n");                   \
     }   }
 #else
 #  define DEBUGLOG(l, ...) {}    /* disabled */

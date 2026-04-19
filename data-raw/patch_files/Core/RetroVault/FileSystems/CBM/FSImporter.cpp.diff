@@ -1,0 +1,11 @@
+--- "a"
++++ "b"
+@@ -77,7 +77,7 @@
+     }
+ 
+     // Verify the result
+-    if constexpr (debug::FS_DEBUG) fs.doctor.xray(true, std::cout, false);
++    if constexpr (debug::FS_DEBUG) fs.doctor.xray(true);
+ }
+ 
+ void

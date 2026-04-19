@@ -46,7 +46,6 @@ FSTraits::init(FSFormat format, isize blocks)
 void
 FSTraits::dump() const
 {
-    dump(std::cout);
 }
 
 void

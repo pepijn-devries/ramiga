@@ -233,7 +233,6 @@ MidiManager::initMidi()
     clientCreated = true;
     
    // Useful to debug CoreMIDI
-   // printf("MIDI client initialized successfully - clientCreated=%d\n", clientCreated);
     logdebug(SER_DEBUG, "MIDI client initialized successfully\n");
     return true;
 }

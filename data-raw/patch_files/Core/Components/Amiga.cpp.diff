@@ -1,0 +1,56 @@
+--- "a"
++++ "b"
+@@ -75,11 +75,6 @@
+         &ciaB,
+         &mem,
+         &cpu,
+-        &logicAnalyzer,
+-        &remoteManager,
+-        &retroShell,
+-        &osDebugger,
+-        &regressionTester
+     };
+ 
+     info.bind([this] { return cacheInfo(); } );
+@@ -316,13 +311,8 @@
+         
+     } catch(Error &exc) {
+         
+-        printf("Error: %s\n", exc.what());
+         throw;
+     }
+-
+-    // Execute the setup script
+-    retroShell.asyncExec("commander");
+-    retroShell.asyncExecScript(ss);
+ }
+ 
+ void
+@@ -826,7 +816,6 @@
+ {
+     loginfo(RUN_DEBUG, "_pause\n");
+ 
+-    remoteManager.gdbServer.breakpointReached();
+     msgQueue.put(Msg::PAUSE);
+ }
+ 
+@@ -965,7 +954,6 @@
+                 
+             case Cmd::RSH_EXECUTE:
+ 
+-                retroShell.exec();
+                 break;
+ 
+             case Cmd::FOCUS:
+@@ -981,11 +969,6 @@
+     // Inform the GUI about a changed machine configuration
+     if (cmdConfig) { msgQueue.put(Msg::CONFIG, isize(cmd.type)); }
+ 
+-    // Inform the GUI about new RetroShell content
+-    if (retroShell.isDirty) { retroShell.isDirty = false; msgQueue.put(Msg::RSH_UPDATE); }
+-
+-    // Update subcomponents
+-    remoteManager.update();
+ }
+ 
+ void

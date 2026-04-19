@@ -14,18 +14,20 @@ for (fl in files_patched[files_patched %in% files_original]) {
   print(sprintf("Working on '%s'", fl))
   result <-
     system2(
-    command = "diff", 
-    args = c("-u",
-             file.path(dir_original_files, fl) |> normalizePath() |>
-               shQuote(),
-             file.path(dir_patched_files, fl) |> normalizePath() |>
-               shQuote()),
-    stdout = TRUE
-  )
-  if (length(result) > 0) {
+      command = "diff", 
+      args = c("-u",
+               file.path(dir_original_files, fl) |> normalizePath() |>
+                 shQuote(),
+               file.path(dir_patched_files, fl) |> normalizePath() |>
+                 shQuote()),
+      stdout = TRUE
+    )
+  if (length(result) > 2) {
     result[[1]] <- "--- \"a\""
     result[[2]] <- "+++ \"b\""
-    writeLines(result, file.path(destination, paste0(basename(fl), ".diff")))
+    dest <- normalizePath(file.path(destination, dirname(fl)))
+    if (!dir.exists(dest)) dir.create(dest, recursive = TRUE)
+    writeLines(result, file.path(dest, paste0(basename(fl), ".diff")))
   }
 }
 

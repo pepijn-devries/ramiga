@@ -21,14 +21,12 @@ Beamtraps::Beamtraps(Agnus& ref) : GuardList(ref.amiga), agnus(ref)
 void
 Beamtraps::setNeedsCheck(bool value)
 {
-    // printf("Beamtraps::setNeedsCheck(%d)\n", value);
     scheduleNextEvent();
 }
 
 void
 Beamtraps::serviceEvent()
 {
-    // printf("Beamtraps::serviceEvent()\n");
     agnus.amiga.setFlag(RL::BEAMTRAP_REACHED);
     scheduleNextEvent();
 }
@@ -45,7 +43,6 @@ Beamtraps::scheduleNextEvent()
         auto h = LO_WORD(guard->addr);
         auto d = agnus.pos.diff(v, h);
 
-        // printf("Beamtrap (%d,%d) diff: %lld\n", v, h, d);
         if (d >= 0 && d < next) {
 
             next = d;

@@ -510,18 +510,9 @@ Agnus::executeUntil(Cycle cycle) {
             if (isDue<SLOT_SNP>(cycle)) {
                 amiga.serviceSnpEvent(id[SLOT_KEY]);
             }
-            // if (isDue<SLOT_RSH>(cycle)) {
-            //     retroShell.serviceEvent();
-            // }
             if (isDue<SLOT_KEY>(cycle)) {
                 keyboard.serviceKeyEvent();
             }
-            // if (isDue<SLOT_SRV>(cycle)) {
-            //     remoteManager.serviceServerEvent();
-            // }
-            // if (isDue<SLOT_SER>(cycle)) {
-            //     remoteManager.serServer.serviceSerEvent();
-            // }
             if (isDue<SLOT_BTR>(cycle)) {
                 dmaDebugger.beamtraps.serviceEvent();
             }

@@ -1,0 +1,37 @@
+--- "a"
++++ "b"
+@@ -7,6 +7,7 @@
+ // See https://mozilla.org/MPL/2.0 for license information
+ // -----------------------------------------------------------------------------
+ 
++#include <R_ext/Random.h>
+ #include "config.h"
+ #include "Memory.h"
+ #include "Emulator.h"
+@@ -612,10 +613,11 @@
+             
+         case RamInitPattern::RANDOMIZED:
+ 
+-            srand(0);
+-            if (chip) for (isize i = 0; i < config.chipSize; i++) chip[i] = (u8)rand();
+-            if (slow) for (isize i = 0; i < config.slowSize; i++) slow[i] = (u8)rand();
+-            if (fast) for (isize i = 0; i < config.fastSize; i++) fast[i] = (u8)rand();
++            GetRNGstate();
++            if (chip) for (isize i = 0; i < config.chipSize; i++) chip[i] = (u8)(unif_rand() * 256);
++            if (slow) for (isize i = 0; i < config.slowSize; i++) slow[i] = (u8)(unif_rand() * 256);
++            if (fast) for (isize i = 0; i < config.fastSize; i++) fast[i] = (u8)(unif_rand() * 256);
++            PutRNGstate();
+             break;
+ 
+         default:
+@@ -1161,10 +1163,6 @@
+ template<> u16
+ Memory::peek16 <Accessor::CPU, MemSrc::FAST> (u32 addr)
+ {
+-    if (!((addr - FAST_RAM_STRT) < (u32)config.fastSize)) {
+-        printf("addr = %x (start: %x size: %x)\n", addr, FAST_RAM_STRT, (u32)config.fastSize);
+-    }
+-    
+     ASSERT_FAST_ADDR(addr);
+     
+     metrics.value.fastReads.raw++;

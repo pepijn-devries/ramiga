@@ -176,12 +176,6 @@ FSName::sanitize(const string &filename)
     // Avoid reserved Windows names
     if (isReserved(result)) result = "__" + result;
 
-    /*
-     if (filename != result) {
-     printf("sanitize: %s -> %s\n", filename.c_str(), result.c_str());
-     }
-     */
-
     return fs::path(result);
 }
 
@@ -251,12 +245,6 @@ FSName::unsanitize(const fs::path &filename)
             }
         }
     }
-
-    /*
-     if (filename.string() != result) {
-     printf("unsanitize: %s -> %s\n", filename.string().c_str(), result.c_str());
-     }
-     */
 
     return result;
 }
@@ -497,7 +485,6 @@ FSTime::dateStr() const
     
     time_t t = time();
     tm gm = utl::Time::gmtime(t);
-    snprintf(tmp, sizeof(tmp), "%02d-%s-%02d", gm.tm_mday, month[gm.tm_mon % 12], gm.tm_year % 100);
 
     return string(tmp);
 }
@@ -510,9 +497,6 @@ FSTime::timeStr() const
     time_t t = time();
     tm local = utl::Time::gmtime(t);
 
-    snprintf(tmp, sizeof(tmp), "%02d:%02d:%02d",
-             local.tm_hour, local.tm_min, local.tm_sec);
-    
     return string(tmp);
 }
 

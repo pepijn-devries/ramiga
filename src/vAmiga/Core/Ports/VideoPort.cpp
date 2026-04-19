@@ -7,6 +7,7 @@
 // See https://mozilla.org/MPL/2.0 for license information
 // -----------------------------------------------------------------------------
 
+#include <R_ext/Random.h>
 #include "config.h"
 #include "VideoPort.h"
 #include "Agnus.h"
@@ -18,9 +19,11 @@ VideoPort::VideoPort(Amiga &ref) : SubComponent(ref)
 {
     // Create random noise data
     noise.alloc(2 * PIXELS);
+    GetRNGstate();
     for (isize i = 0; i < noise.size; i++) {
-        noise[i] = rand() % 2 ? Texture::black : Texture::white;
+        noise[i] = unif_rand() < 0.5 ? Texture::black : Texture::white;
     }
+    PutRNGstate();
 
     // Setup the white-noise framebuffer (redirect the data source)
     whiteNoise.pixels.dealloc();
@@ -181,7 +184,6 @@ VideoPort::findInnerArea(isize &x1, isize &x2, isize &y1, isize &y2) const
     while (x1 < x2 && emptyCol(x1)) { x1 += 1; }
     while (y2 > 0  && emptyRow(y2)) { y2 -= 1; }
     while (y1 < y2 && emptyRow(y1)) { y1 += 1; }
-    // printf("Shrinked box: (%ld,%ld) - (%ld,%ld)\n", x1, y1, x2, y2);
 
     // Return a zero rect if the box is invalid
     if (x2 <= x1 || y2 <= y1) { x1 = x2 = y1 = y2 = 0; }

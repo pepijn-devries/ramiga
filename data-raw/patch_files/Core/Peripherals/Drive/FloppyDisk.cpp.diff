@@ -1,0 +1,86 @@
+--- "a"
++++ "b"
+@@ -7,6 +7,7 @@
+ // See https://mozilla.org/MPL/2.0 for license information
+ // -----------------------------------------------------------------------------
+ 
++#include <R_ext/Random.h>
+ #include "config.h"
+ #include "FloppyDisk.h"
+ #include "ImageTypes.h"
+@@ -294,10 +295,11 @@
+     setModified(force::DISK_MODIFIED);
+ 
+     // Initialize with random data
+-    srand(0);
++    GetRNGstate();
+     for (usize i = 0; i < sizeof(data.raw); i++) {
+-        data.raw[i] = rand() & 0xFF;
++        data.raw[i] = (uint8_t)(unif_rand() * 256.0);
+     }
++    PutRNGstate();
+     
+     /* In order to make some copy protected game titles work, we smuggle in
+      * some magic values. E.g., Crunch factory expects 0x44A2 on cylinder 80.
+@@ -324,10 +326,11 @@
+ {
+     assert(t < numTracks());
+ 
+-    srand(0);
++    GetRNGstate();
+     for (usize i = 0; i < sizeof(data.track[t]); ++i) {
+-        data.track[t][i] = rand() & 0xFF;
++        data.track[t][i] = (uint8_t)(unif_rand() * 256.0);
+     }
++    PutRNGstate();
+ }
+ 
+ void
+@@ -373,7 +376,6 @@
+     if constexpr (debug::IMG_DEBUG) {
+ 
+         string tmp = "/tmp/debug.img";
+-        fprintf(stderr, "Saving image to %s for debugging\n", tmp.c_str());
+         Codec::makeIMG(*this)->writeToFile(tmp);
+     }
+      */
+@@ -381,7 +383,6 @@
+ 
+         /*
+         string tmp = "/tmp/debug.img";
+-        fprintf(stderr, "Saving image to %s for debugging\n", tmp.c_str());
+         Codec::makeD64(*this)->writeToFile(tmp);
+         */
+     }
+@@ -392,7 +393,6 @@
+     if constexpr (debug::IMG_DEBUG) {
+ 
+         string tmp = "/tmp/debug.adf";
+-        fprintf(stderr, "Saving image to %s for debugging\n", tmp.c_str());
+         Codec::makeADF(*this)->writeToFile(tmp);
+     }
+     */
+@@ -438,7 +438,6 @@
+     if constexpr (debug::IMG_DEBUG) {
+ 
+         string tmp = "/tmp/debug.adf";
+-        fprintf(stderr, "Saving image to %s for debugging\n", tmp.c_str());
+         Codec::makeADF(*this)->writeToFile(tmp);
+     }
+ }
+@@ -485,7 +484,6 @@
+     if constexpr (debug::IMG_DEBUG) {
+ 
+         string tmp = "/tmp/debug.img";
+-        fprintf(stderr, "Saving image to %s for debugging\n", tmp.c_str());
+         Codec::makeIMG(*this)->writeToFile(tmp);
+     }
+ }
+@@ -531,7 +529,6 @@
+     if constexpr (debug::IMG_DEBUG) {
+ 
+         string tmp = "/tmp/debug.img";
+-        fprintf(stderr, "Saving image to %s for debugging\n", tmp.c_str());
+         Codec::makeIMG(*this)->writeToFile(tmp);
+     }
+ }

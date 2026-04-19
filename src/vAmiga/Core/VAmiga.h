@@ -179,24 +179,6 @@ public:
     const DmaDebuggerInfo &getCachedInfo() const;
 };
 
-// class LogicAnalyzerAPI : public API {
-// 
-//     friend class VAmiga;
-//     
-// public:
-// 
-//     class LogicAnalyzer *logicAnalyzer = nullptr;
-//     
-//     /** @brief  Returns the component's current configuration.
-//      */
-//     // const LogicAnalyzerConfig &getConfig() const;
-//     
-//     /** @brief  Returns the component's current state.
-//      */
-//     // const LogicAnalyzerInfo &getInfo() const;
-//     // const LogicAnalyzerInfo &getCachedInfo() const;
-// };
-
 class BlitterAPI : public API {
 
     friend class VAmiga;
@@ -264,7 +246,6 @@ public:
     CopperAPI copper;
     BlitterAPI blitter;
     DmaDebuggerAPI dmaDebugger;
-    // LogicAnalyzerAPI logicAnalyzer;
     
     /** @brief  Returns the component's current configuration.
      */
@@ -1470,130 +1451,6 @@ public:
     /// @}
 };
 
-
-//
-// Misc (RetroShell)
-//
-
-/** RetroShell Public API
- */
-// class RetroShellAPI : public API {
-// 
-//     friend class VAmiga;
-//     
-// public:
-// 
-//     class RetroShell *retroShell = nullptr;
-//     
-//     /// @name Querying the console
-//     /// @{
-//     ///
-// 
-//     /** @brief  Returns the component's current state.
-//      */
-//     const RetroShellInfo &getInfo() const;
-//     const RetroShellInfo &getCachedInfo() const;
-// 
-//     /** @brief  Returns a pointer to the text buffer.
-//      *  The text buffer contains the complete contents of the console. It
-//      *  will be expanded when new output is generated. When the buffer
-//      *  grows too large, old contents is cropped.
-//      */
-//     const char *text();
-// 
-//     /// @}
-//     /// @name Typing characters and strings
-//     /// @{
-// 
-//     /** @brief  Informs RetroShell that a key has been typed.
-//      *  @param  key     The pressed key
-//      *  @param  shift   Status of the shift key
-//      */
-//     void press(RSKey key, bool shift = false);
-// 
-//     /** @brief  Informs RetroShell that a key has been typed.
-//      *  @param  c       The pressed key
-//      */
-//     void press(char c);
-// 
-//     /** @brief  Informs RetroShell that multiple keys have been typed.
-//      *  @param  s       The typed text
-//      */
-//     void press(const string &s);
-// 
-//     /// @}
-//     /// @name Controlling the output stream
-//     /// @{
-// 
-//     /** @brief  Assign an additional output stream.
-//      *  In addition to writing the RetroShell output into the text buffer,
-//      *  RetroShell will write the output into the provides stream.
-//      */
-//     void setStream(std::ostream &os);
-// 
-//     /// @}
-//     /// @name Executing scripts
-//     /// @{
-// 
-//     /** @brief  Executes a script.
-//      *  The script is executes asynchroneously. However, RetroShell will
-//      *  send messages back to the GUI thread to inform about the execution
-//      *  state. After the last script command has been executed,
-//      *  MSG\_SCRIPT\_DONE is sent. If shell execution has been aborted due
-//      *  to an error, MSG\_SCRIPT\_ABORT is sent.
-//      */
-//     void execScript(const fs::path &path);
-//     void execScript(std::stringstream &ss);
-//     void execScript(const std::ifstream &fs);
-//     void execScript(const string &contents);
-// 
-//     
-//     /// @}
-//     /// @name Misc
-//     /// @{
-// 
-//     /** @brief  Installs a file system in the file system navigator
-//      */
-//     /*
-//     void import(const FloppyDrive &dfn);
-//     void import(const HardDrive &hdn, isize part);
-//     void importDf(isize n);
-//     void importHd(isize n, isize part);
-//     void import(const std::filesystem::path &path, bool recursive = true, bool contents = false);
-//     */
-// 
-//     /** @brief  Exports the file system in the file system navigator
-//      */
-//     void exportBlocks(const std::filesystem::path &path);
-// 
-//     /// @}
-// };
-
-
-//
-// Misc (RemoteManager)
-//
-
-// class RemoteManagerAPI : public API {
-// 
-//     friend class VAmiga;
-//     
-// public:
-// 
-//     class RemoteManager *remoteManager = nullptr;
-//     
-//     /// @name Analyzing the emulator
-//     /// @{
-// 
-//     /** @brief  Returns the component's current state.
-//      */
-//     const RemoteManagerInfo &getInfo() const;
-//     const RemoteManagerInfo &getCachedInfo() const;
-// 
-//     /// @}
-// };
-
-
 //
 // Top-level API
 //
@@ -1629,8 +1486,6 @@ public:
     GuardsAPI copperBreakpoints; // TODO: Move inside AgnusAPI
     MsgQueueAPI msgQueue;
     DebuggerAPI debugger; // TODO: No longer needed? It's not 'wired'
-    // RemoteManagerAPI remoteManager;
-    // RetroShellAPI retroShell;
 
     // Shortcuts
     FloppyDriveAPI *df[4] = { &df0, &df1, &df2, &df3 };

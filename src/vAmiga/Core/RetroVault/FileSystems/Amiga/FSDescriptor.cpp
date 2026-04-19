@@ -101,7 +101,6 @@ FSDescriptor::init(Diameter dia, Density den)
 void
 FSDescriptor::dump() const
 {
-    dump(std::cout);
 }
 
 void

@@ -1,0 +1,10 @@
+--- "a"
++++ "b"
+@@ -77,7 +77,6 @@
+     if (enable) {
+ 
+         auto elapsed = clock.stop();
+-        fprintf(stderr, "%s %1.4f sec\n", description.c_str(), elapsed.asSeconds());
+     }
+ }
+ 

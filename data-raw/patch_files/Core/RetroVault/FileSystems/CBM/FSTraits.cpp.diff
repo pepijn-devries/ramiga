@@ -1,0 +1,10 @@
+--- "a"
++++ "b"
+@@ -46,7 +46,6 @@
+ void
+ FSTraits::dump() const
+ {
+-    dump(std::cout);
+ }
+ 
+ void

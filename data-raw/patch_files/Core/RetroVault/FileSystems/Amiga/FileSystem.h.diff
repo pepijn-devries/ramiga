@@ -1,0 +1,14 @@
+--- "a"
++++ "b"
+@@ -184,11 +184,6 @@
+ 
+ public:
+ 
+-    void dumpInfo(std::ostream &ss = std::cout) const noexcept;
+-    void dumpState(std::ostream &ss = std::cout) const noexcept;
+-    void dumpProps(std::ostream &ss = std::cout) const noexcept;
+-    void dumpBlocks(std::ostream &ss = std::cout) const noexcept;
+-
+ 
+     //
+     // Querying file system properties

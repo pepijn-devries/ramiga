@@ -1,0 +1,12 @@
+--- "a"
++++ "b"
+@@ -281,9 +281,6 @@
+    static int g_debuglog_enable = 1;
+ #  define DEBUGLOG(l, ...) {                          \
+         if ((g_debuglog_enable) && (l<=LZ4_DEBUG)) {  \
+-            fprintf(stderr, __FILE__  " %i: ", __LINE__); \
+-            fprintf(stderr, __VA_ARGS__);             \
+-            fprintf(stderr, " \n");                   \
+     }   }
+ #else
+ #  define DEBUGLOG(l, ...) {}    /* disabled */

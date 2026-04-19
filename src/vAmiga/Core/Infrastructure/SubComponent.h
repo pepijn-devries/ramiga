@@ -45,15 +45,12 @@ public:
     class HdController &hd3con;
     class Host &host;
     class Keyboard &keyboard;
-    // class LogicAnalyzer &logicAnalyzer;
     class Memory &mem;
     class Monitor &monitor;
     class MsgQueue &msgQueue;
     class Paula &paula;
     class PixelEngine &pixelEngine;
     class RamExpansion &ramExpansion;
-    // class RemoteManager &remoteManager;
-    // class RetroShell &retroShell;
     class RTC &rtc;
     class SerialPort &serialPort;
     class UART &uart;

@@ -1,0 +1,12 @@
+--- "a"
++++ "b"
+@@ -144,9 +144,6 @@
+                 view.size(), totalBits, view.byteView().fnv32());
+     }
+ 
+-    // for (isize i = 0; i < 64; ++i) printf("%02X ", gcrbuffer[i]);
+-    // printf("\n");
+-    
+     return view;
+ }
+ 

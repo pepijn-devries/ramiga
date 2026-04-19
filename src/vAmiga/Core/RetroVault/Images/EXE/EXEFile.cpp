@@ -76,11 +76,8 @@ EXEFile::didInitialize()
 
     if constexpr (debug::FS_DEBUG) {
 
-        // Print some debug information about the volume
-        fs.dumpState();
-
         // Check file system integrity
-        fs.doctor.xray(true, std::cout, false);
+        fs.doctor.xray(true);
     }
 }
 

@@ -1,0 +1,11 @@
+--- "a"
++++ "b"
+@@ -82,7 +82,7 @@
+     if constexpr (debug::FS_DEBUG) {
+         
+         fs.flush();
+-        fs.doctor.xray(true, std::cout, false);
++        fs.doctor.xray(true);
+     }
+ }
+ 

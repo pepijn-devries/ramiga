@@ -204,7 +204,6 @@ GeometryDescriptor::unique() const
 void
 GeometryDescriptor::dump() const
 {
-    dump(std::cout);
 }
 
 void
@@ -293,7 +292,6 @@ PartitionDescriptor::translate(isize block) const noexcept
 void
 PartitionDescriptor::dump() const
 {
-    dump(std::cout);
 }
 
 void
@@ -351,7 +349,6 @@ void PartitionDescriptor::checkCompatibility(const GeometryDescriptor &geo) cons
 void
 DriverDescriptor::dump() const
 {
-    dump(std::cout);
 }
 
 void

@@ -82,10 +82,6 @@ struct RegChangeRecorder : public utl::SortedRingBuffer<RegChange, capacity>
     }
 
     void dump() {
-
-        apply([] (i64 k, RegChange &e) {
-            fprintf(stderr, "%lld: %s = %d\n", k, RegEnum::key(e.reg), e.value);
-        });
     }
 };
 
