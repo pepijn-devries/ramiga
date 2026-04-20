@@ -21,7 +21,19 @@
  
      // Setup the white-noise framebuffer (redirect the data source)
      whiteNoise.pixels.dealloc();
-@@ -181,7 +184,6 @@
+@@ -121,8 +124,9 @@
+         return result;
+     }
+     if (config.whiteNoise) {
+-
+-        whiteNoise.pixels.ptr = noise.ptr + (rand() % PIXELS);
++        GetRNGstate();
++        whiteNoise.pixels.ptr = noise.ptr + (uint_64)(unif_rand() * PIXELS);
++        PutRNGstate();
+         whiteNoise.nr++;
+         whiteNoise.prevlof = whiteNoise.lof;
+         whiteNoise.lof = !whiteNoise.lof;
+@@ -181,7 +185,6 @@
      while (x1 < x2 && emptyCol(x1)) { x1 += 1; }
      while (y2 > 0  && emptyRow(y2)) { y2 -= 1; }
      while (y1 < y2 && emptyRow(y1)) { y1 += 1; }
