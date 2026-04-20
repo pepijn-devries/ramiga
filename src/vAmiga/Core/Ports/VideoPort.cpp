@@ -125,7 +125,7 @@ VideoPort::getTexture(isize offset) const
     }
     if (config.whiteNoise) {
         GetRNGstate();
-        whiteNoise.pixels.ptr = noise.ptr + (uint_64)(unif_rand() * PIXELS);
+        whiteNoise.pixels.ptr = noise.ptr + (u64)(unif_rand() * PIXELS);
         PutRNGstate();
         whiteNoise.nr++;
         whiteNoise.prevlof = whiteNoise.lof;
