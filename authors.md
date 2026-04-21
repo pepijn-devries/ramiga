@@ -9,14 +9,17 @@
 
 ## Citation
 
+Source:
+[`DESCRIPTION`](https://github.com/pepijn-devries/ramiga/blob/main/DESCRIPTION)
+
 de Vries P, Hoffmann D (2026). *ramiga: Emulating the Amiga Using the
-vAmiga Engine*. R package version 0.0.0.9002,
+vAmiga Engine*. R package version 0.0.0.9003,
 <https://pepijn-devries.github.io/ramiga/>.
 
     @Manual{,
       title = {ramiga: Emulating the Amiga Using the vAmiga Engine},
       author = {Pepijn {de Vries} and Dirk Hoffmann},
       year = {2026},
-      note = {R package version 0.0.0.9002},
+      note = {R package version 0.0.0.9003},
       url = {https://pepijn-devries.github.io/ramiga/},
     }
