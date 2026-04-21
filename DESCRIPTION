@@ -1,6 +1,6 @@
 Package: ramiga
 Title: Emulating the Amiga Using the vAmiga Engine
-Version: 0.0.0.9001
+Version: 0.0.0.9002
 Authors@R:
     c(
       person("Pepijn", "de Vries", role = c("aut", "cre"),
@@ -24,3 +24,4 @@ Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.3.3
 LinkingTo: 
     cpp11 (>= 0.4.2)
+URL: https://pepijn-devries.github.io/ramiga/
