@@ -1,5 +1,5 @@
 
-# ramiga
+# ramiga <a href="https://pepijn-devries.github.io/ramiga/"><img src="man/figures/logo.svg" align="right" height="139" alt="ramiga website" /></a>
 
 <!-- badges: start -->
 
