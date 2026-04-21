@@ -55,5 +55,6 @@ emu$power_on()
   - Add CRAN comments to justify non-compliance to CRAN policies (e.g.,
     -Wa,-mbig-obj flags required on Windows). Or split Moira.cpp (the
     suspected issue) into multiple smaller pieces of code
+- Add zlib-support to platforms other than Windows
 - Implement features
 - Add decent documentation
