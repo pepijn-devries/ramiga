@@ -1,6 +1,6 @@
 Package: ramiga
 Title: Emulating the Amiga Using the vAmiga Engine
-Version: 0.0.0.9000
+Version: 0.0.0.9001
 Authors@R:
     c(
       person("Pepijn", "de Vries", role = c("aut", "cre"),
@@ -18,7 +18,7 @@ Depends:
     R (>= 4.4)
 Imports:
     R6
-SystemRequirements: C++20
+SystemRequirements: C++20, zlib
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.3.3
