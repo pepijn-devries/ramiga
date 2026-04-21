@@ -56,6 +56,9 @@ emu$power_on()
 ## Things to do
 
  * Extensive checking for CRAN compliance
+   * First I have to decide if CRAN submission is realistic. The reliance
+     on c++20 features will make it hard to comply with all of CRAN's
+     policies.
    * Make sure that all structs are named (either upstream or in this fork).
      CRAN allows only ISO compliant code. Anonymous structs are not ISO.
    * Remove any redundant/unused code. The size of the package will trigger

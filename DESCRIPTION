@@ -18,7 +18,7 @@ Depends:
     R (>= 4.4)
 Imports:
     R6
-SystemRequirements: C++20, zlib
+SystemRequirements: C++20 (GCC >= 11, Clang >= 15), zlib
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.3.3
