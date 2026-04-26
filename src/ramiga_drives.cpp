@@ -52,16 +52,34 @@ cpp11::external_pointer<DiskImage> disk_image_(std::string path) {
 }
 
 [[cpp11::register]]
+cpp11::list fdrive_info_(cpp11::external_pointer<VAmiga> amiga,
+                            int drive_number) {
+  check_amiga(amiga);
+  auto& drive = get_floppy_drive_(amiga, drive_number);
+  auto info = drive.cacheInfo();
+
+  return cpp11::writable::list({
+    "nr"_nm = cpp11::as_sexp(info.nr),
+      "head_position"_nm = cpp11::as_sexp((int)info.head.track()),
+      "is_donnected"_nm = cpp11::as_sexp(info.isConnected),
+      "has_disk"_nm = cpp11::as_sexp(info.hasDisk),
+      "has_modified_disk"_nm = cpp11::as_sexp(info.hasModifiedDisk),
+      "has_protected_disk"_nm = cpp11::as_sexp(info.hasProtectedDisk),
+      "has_unprotected_disk"_nm = cpp11::as_sexp(info.hasUnprotectedDisk),
+      "motor_active"_nm = cpp11::as_sexp(info.motor),
+      "is_writing"_nm = cpp11::as_sexp(info.writing)
+  });
+}
+
+[[cpp11::register]]
 cpp11::strings image_info_(cpp11::external_pointer<DiskImage> image) {
   check_disk(image);
   auto&& info = image->info();
   
-  cpp11::writable::strings result({
+  return cpp11::writable::strings({
     "type"_nm = ImageTypeEnum::_key(info.type),
       "format"_nm = ImageFormatEnum::_key(info.format)
   });
-  
-  return result;
 }
 
 [[cpp11::register]]
@@ -69,3 +87,4 @@ double image_size_(cpp11::external_pointer<DiskImage> image) {
   check_disk(image);
   return (double)image->size();
 }
+

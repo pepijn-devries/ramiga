@@ -2,33 +2,24 @@
 % Please edit documentation in R/emulator.R
 \name{RamigaEmulator}
 \alias{RamigaEmulator}
-\title{TODO}
-\value{
-TODO
-
-TODO
-
-TODO
-
-TODO
-
-TODO
-}
+\title{The RamigaEmulator R6 Class}
 \description{
-TODO
-
-TODO
+A class representing the emulator for emulating an Amiga.
 }
 \section{Methods}{
 \subsection{Public methods}{
 \itemize{
 \item \href{#method-RamigaEmulator-new}{\code{RamigaEmulator$new()}}
 \item \href{#method-RamigaEmulator-get_memory}{\code{RamigaEmulator$get_memory()}}
+\item \href{#method-RamigaEmulator-get_cpu}{\code{RamigaEmulator$get_cpu()}}
 \item \href{#method-RamigaEmulator-get_floppy_drive}{\code{RamigaEmulator$get_floppy_drive()}}
 \item \href{#method-RamigaEmulator-power_on}{\code{RamigaEmulator$power_on()}}
+\item \href{#method-RamigaEmulator-power_off}{\code{RamigaEmulator$power_off()}}
+\item \href{#method-RamigaEmulator-soft_reset}{\code{RamigaEmulator$soft_reset()}}
 \item \href{#method-RamigaEmulator-run}{\code{RamigaEmulator$run()}}
-\item \href{#method-RamigaEmulator-info}{\code{RamigaEmulator$info()}}
+\item \href{#method-RamigaEmulator-get_info}{\code{RamigaEmulator$get_info()}}
 \item \href{#method-RamigaEmulator-get_pointer}{\code{RamigaEmulator$get_pointer()}}
+\item \href{#method-RamigaEmulator-get_output}{\code{RamigaEmulator$get_output()}}
 \item \href{#method-RamigaEmulator-print}{\code{RamigaEmulator$print()}}
 \item \href{#method-RamigaEmulator-clone}{\code{RamigaEmulator$clone()}}
 }
@@ -37,7 +28,7 @@ TODO
 \if{html}{\out{<a id="method-RamigaEmulator-new"></a>}}
 \if{latex}{\out{\hypertarget{method-RamigaEmulator-new}{}}}
 \subsection{Method \code{new()}}{
-TODO
+Initialise a new Amiga emulator
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{RamigaEmulator$new()}\if{html}{\out{</div>}}
 }
@@ -47,71 +38,177 @@ TODO
 \if{html}{\out{<a id="method-RamigaEmulator-get_memory"></a>}}
 \if{latex}{\out{\hypertarget{method-RamigaEmulator-get_memory}{}}}
 \subsection{Method \code{get_memory()}}{
-TODO
+Get a representation of the machine's emulated memory
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{RamigaEmulator$get_memory()}\if{html}{\out{</div>}}
 }
 
+\subsection{Returns}{
+Returns a \link{RamigaMemory} class object
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-RamigaEmulator-get_cpu"></a>}}
+\if{latex}{\out{\hypertarget{method-RamigaEmulator-get_cpu}{}}}
+\subsection{Method \code{get_cpu()}}{
+Get a representation of the machine's Central Processing Unit
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{RamigaEmulator$get_cpu()}\if{html}{\out{</div>}}
+}
+
+\subsection{Returns}{
+Returns a \link{RamigaCPU} class object.
+}
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-RamigaEmulator-get_floppy_drive"></a>}}
 \if{latex}{\out{\hypertarget{method-RamigaEmulator-get_floppy_drive}{}}}
 \subsection{Method \code{get_floppy_drive()}}{
-TODO
+Get a specific floppy drive from the emulated machine
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{RamigaEmulator$get_floppy_drive(drive_number)}\if{html}{\out{</div>}}
 }
 
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{drive_number}}{The emulator has 4 floppy drives, numbered 0 to 3. Pick which drive you want to operate}
+}
+\if{html}{\out{</div>}}
+}
+\subsection{Returns}{
+Returns a \link{RamigaFloppyDrive} class object.
+}
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-RamigaEmulator-power_on"></a>}}
 \if{latex}{\out{\hypertarget{method-RamigaEmulator-power_on}{}}}
 \subsection{Method \code{power_on()}}{
-TODO
+When the emulator is initialised it is powered off.
+Call this to power on the virtual machine.
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{RamigaEmulator$power_on()}\if{html}{\out{</div>}}
 }
 
+\subsection{Returns}{
+Returns the emulator object
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-RamigaEmulator-power_off"></a>}}
+\if{latex}{\out{\hypertarget{method-RamigaEmulator-power_off}{}}}
+\subsection{Method \code{power_off()}}{
+Power off emulator. Advisable if you plan to make adjustments
+to the emulated hardware configuration.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{RamigaEmulator$power_off()}\if{html}{\out{</div>}}
+}
+
+\subsection{Returns}{
+Returns the emulator object
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-RamigaEmulator-soft_reset"></a>}}
+\if{latex}{\out{\hypertarget{method-RamigaEmulator-soft_reset}{}}}
+\subsection{Method \code{soft_reset()}}{
+A soft reset, just resets the CPU, causing the system to reboot.
+This is similar to simultaneously pressing \if{html}{\out{<Ctrl>}} and both
+\if{html}{\out{<Amiga>}} keys on an original machine.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{RamigaEmulator$soft_reset()}\if{html}{\out{</div>}}
+}
+
+\subsection{Returns}{
+Returns the emulator object
+}
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-RamigaEmulator-run"></a>}}
 \if{latex}{\out{\hypertarget{method-RamigaEmulator-run}{}}}
 \subsection{Method \code{run()}}{
-TODO
+When initialised, the emulator is paused. Call this to start
+running the virtual machine. It will hold up the R thread
+untill you interrupt (by pressing \if{html}{\out{<ESC>}}). After the interrupt
+the machine will be paused.
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{RamigaEmulator$run()}\if{html}{\out{</div>}}
 }
 
+\subsection{Returns}{
+Returns NULL invisibly.
+}
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-RamigaEmulator-info"></a>}}
-\if{latex}{\out{\hypertarget{method-RamigaEmulator-info}{}}}
-\subsection{Method \code{info()}}{
-TODO
+\if{html}{\out{<a id="method-RamigaEmulator-get_info"></a>}}
+\if{latex}{\out{\hypertarget{method-RamigaEmulator-get_info}{}}}
+\subsection{Method \code{get_info()}}{
+Get information about the emulator state.
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{RamigaEmulator$info()}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{RamigaEmulator$get_info()}\if{html}{\out{</div>}}
 }
 
+\subsection{Returns}{
+Returns a named list.
+}
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-RamigaEmulator-get_pointer"></a>}}
 \if{latex}{\out{\hypertarget{method-RamigaEmulator-get_pointer}{}}}
 \subsection{Method \code{get_pointer()}}{
-TODO
+Get the pointer to the emulator object in memory
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{RamigaEmulator$get_pointer(...)}\if{html}{\out{</div>}}
 }
 
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{...}}{Ignored}
+}
+\if{html}{\out{</div>}}
+}
+\subsection{Returns}{
+Returns the \code{externalptr} pointing to the C++ class
+instance in memory
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-RamigaEmulator-get_output"></a>}}
+\if{latex}{\out{\hypertarget{method-RamigaEmulator-get_output}{}}}
+\subsection{Method \code{get_output()}}{
+Get object to capture emulator output.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{RamigaEmulator$get_output(...)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{...}}{Ignored}
+}
+\if{html}{\out{</div>}}
+}
+\subsection{Returns}{
+Returns \link{RamigaOutput} class object
+}
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-RamigaEmulator-print"></a>}}
 \if{latex}{\out{\hypertarget{method-RamigaEmulator-print}{}}}
 \subsection{Method \code{print()}}{
-TODO
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{RamigaEmulator$print(...)}\if{html}{\out{</div>}}
 }
 
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{...}}{Ignored
+Prints basic information about the emulator.}
+}
+\if{html}{\out{</div>}}
+}
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-RamigaEmulator-clone"></a>}}

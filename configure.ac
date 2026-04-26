@@ -3,7 +3,7 @@ AC_INIT([ramiga], m4_esyscmd_s([awk '/^Version:/ {print $2}' DESCRIPTION]))
 # 1. Determine R_HOME and compiler settings
 : ${R_HOME=`R RHOME`}
 if test -z "${R_HOME}"; then
-  AC_MSG_ERROR([Could not determine R_HOME. Is R installed?])
+AC_MSG_ERROR([Could not determine R_HOME. Is R installed?])
 fi
 
 CC=`"${R_HOME}/bin/R" CMD config CC`
@@ -12,9 +12,9 @@ CPPFLAGS=`"${R_HOME}/bin/R" CMD config CPPFLAGS`
 
 # 2. macOS-specific type fixes (your original logic)
 if test `uname` = "Darwin"; then
-  AC_MSG_NOTICE([Applying macOS-specific type fixes to src/cpp11.cpp...])
-  sed -i '' 's/R_useDynamicSymbols(dll, FALSE)/R_useDynamicSymbols(dll, (Rboolean)0)/g' src/cpp11.cpp
-  sed -i '' 's/R_forceSymbols(dll, TRUE)/R_forceSymbols(dll, (Rboolean)1)/g' src/cpp11.cpp
+AC_MSG_NOTICE([Applying macOS-specific type fixes to src/cpp11.cpp...])
+sed -i '' 's/R_useDynamicSymbols(dll, FALSE)/R_useDynamicSymbols(dll, (Rboolean)0)/g' src/cpp11.cpp
+sed -i '' 's/R_forceSymbols(dll, TRUE)/R_forceSymbols(dll, (Rboolean)1)/g' src/cpp11.cpp
 fi
 
 # 3. Handle zlib dependency
@@ -22,21 +22,21 @@ PKG_PROG_PKG_CONFIG
 PKG_LIBS_EXTRA=""
 
 if test -n "$PKG_CONFIG"; then
-  AC_MSG_CHECKING([for zlib via pkg-config])
-  if $PKG_CONFIG --exists zlib; then
-    AC_MSG_RESULT([yes])
-    PKG_CPPFLAGS=`$PKG_CONFIG --cflags zlib`
-    PKG_LIBS_EXTRA=`$PKG_CONFIG --libs zlib`
-  else
-    AC_MSG_RESULT([no])
-  fi
+AC_MSG_CHECKING([for zlib via pkg-config])
+if $PKG_CONFIG --exists zlib; then
+AC_MSG_RESULT([yes])
+PKG_CPPFLAGS=`$PKG_CONFIG --cflags zlib`
+PKG_LIBS_EXTRA=`$PKG_CONFIG --libs zlib`
+else
+  AC_MSG_RESULT([no])
+fi
 fi
 
 # Fallback check if pkg-config fails
 if test -z "$PKG_LIBS_EXTRA"; then
-  AC_CHECK_LIB([z], [deflate], [PKG_LIBS_EXTRA="-lz"], [
-    AC_MSG_ERROR([zlib library not found. Please install zlib1g-dev (Ubuntu) or zlib (macOS).])
-  ])
+AC_CHECK_LIB([z], [deflate], [PKG_LIBS_EXTRA="-lz"], [
+  AC_MSG_ERROR([zlib library not found. Please install zlib1g-dev (Ubuntu) or zlib (macOS).])
+])
 fi
 
 # 4. Find source files and include paths (your original logic)

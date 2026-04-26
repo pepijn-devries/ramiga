@@ -2,16 +2,10 @@
 % Please edit documentation in R/memory.R
 \name{RamigaMemory}
 \alias{RamigaMemory}
-\title{TODO}
-\value{
-TODO
-
-TODO
-}
+\title{The RamigaMemory R6 Class}
 \description{
-TODO
-
-TODO
+The RamigaMemory class represents the memory of the emulated machine.
+Use this object to interact with the machines memory.
 }
 \section{Methods}{
 \subsection{Public methods}{
@@ -19,6 +13,8 @@ TODO
 \item \href{#method-RamigaEmulator-new}{\code{RamigaMemory$new()}}
 \item \href{#method-RamigaEmulator-load_rom}{\code{RamigaMemory$load_rom()}}
 \item \href{#method-RamigaEmulator-has_rom}{\code{RamigaMemory$has_rom()}}
+\item \href{#method-RamigaEmulator-get_rom_traits}{\code{RamigaMemory$get_rom_traits()}}
+\item \href{#method-RamigaEmulator-get_config}{\code{RamigaMemory$get_config()}}
 \item \href{#method-RamigaEmulator-print}{\code{RamigaMemory$print()}}
 \item \href{#method-RamigaEmulator-clone}{\code{RamigaMemory$clone()}}
 }
@@ -27,7 +23,8 @@ TODO
 \if{html}{\out{<a id="method-RamigaEmulator-new"></a>}}
 \if{latex}{\out{\hypertarget{method-RamigaEmulator-new}{}}}
 \subsection{Method \code{new()}}{
-TODO
+The memory needs to be associated with an emulated machine.
+Therefore you need the emulator to initiate a memory object.
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{RamigaMemory$new(emulator)}\if{html}{\out{</div>}}
 }
@@ -35,7 +32,7 @@ TODO
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
-\item{\code{emulator}}{TODO}
+\item{\code{emulator}}{An \code{RamigaEmulator} class object. The memory to be created needs to be associated with a virtual machine. The initiated object will represent the memory of the emulated machine.}
 }
 \if{html}{\out{</div>}}
 }
@@ -44,7 +41,8 @@ TODO
 \if{html}{\out{<a id="method-RamigaEmulator-load_rom"></a>}}
 \if{latex}{\out{\hypertarget{method-RamigaEmulator-load_rom}{}}}
 \subsection{Method \code{load_rom()}}{
-TODO
+Load an operating system to ROM. It can be an official Kickstart
+ROM image, or the rom provided for AROS Research Operating System.
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{RamigaMemory$load_rom(path)}\if{html}{\out{</div>}}
 }
@@ -52,29 +50,70 @@ TODO
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
-\item{\code{path}}{TODO}
+\item{\code{path}}{File path pointing to the location of the ROM file.}
 }
 \if{html}{\out{</div>}}
+}
+\subsection{Returns}{
+Returns the updated RamigaMemory object.
 }
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-RamigaEmulator-has_rom"></a>}}
 \if{latex}{\out{\hypertarget{method-RamigaEmulator-has_rom}{}}}
 \subsection{Method \code{has_rom()}}{
-TODO
+Check if a ROM image was successfully loaded
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{RamigaMemory$has_rom()}\if{html}{\out{</div>}}
 }
 
+\subsection{Returns}{
+Returns a \code{logical} value.
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-RamigaEmulator-get_rom_traits"></a>}}
+\if{latex}{\out{\hypertarget{method-RamigaEmulator-get_rom_traits}{}}}
+\subsection{Method \code{get_rom_traits()}}{
+Get ROM characteristics if known.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{RamigaMemory$get_rom_traits()}\if{html}{\out{</div>}}
+}
+
+\subsection{Returns}{
+Returns \code{NULL} if no ROM has been loaded. It will return
+A named list with ROM traits otherwise.
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-RamigaEmulator-get_config"></a>}}
+\if{latex}{\out{\hypertarget{method-RamigaEmulator-get_config}{}}}
+\subsection{Method \code{get_config()}}{
+Get details on the configuration of the emulated memory
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{RamigaMemory$get_config()}\if{html}{\out{</div>}}
+}
+
+\subsection{Returns}{
+Returns a named \code{list} with memory configurations.
+}
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-RamigaEmulator-print"></a>}}
 \if{latex}{\out{\hypertarget{method-RamigaEmulator-print}{}}}
 \subsection{Method \code{print()}}{
+Print some basic information about the emulated memory.
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{RamigaMemory$print(...)}\if{html}{\out{</div>}}
 }
 
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{...}}{Ignored.}
+}
+\if{html}{\out{</div>}}
+}
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-RamigaEmulator-clone"></a>}}

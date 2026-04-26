@@ -25,3 +25,14 @@ RoxygenNote: 7.3.3
 LinkingTo: 
     cpp11 (>= 0.4.2)
 URL: https://pepijn-devries.github.io/ramiga/, https://github.com/pepijn-devries/ramiga/
+Collate: 
+    'cpp11.R'
+    'documentation.R'
+    'cpu.R'
+    'emulator.R'
+    'filesystem.R'
+    'floppydrive.R'
+    'image.R'
+    'memory.R'
+    'output.R'
+    'ramiga-package.R'
