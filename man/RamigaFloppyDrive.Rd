@@ -2,11 +2,9 @@
 % Please edit documentation in R/floppydrive.R
 \name{RamigaFloppyDrive}
 \alias{RamigaFloppyDrive}
-\title{TODO}
+\title{The RamigaFlopyDrive R6 Class}
 \description{
-TODO
-
-TODO
+A class that represents the emulator's floppy drive.
 }
 \section{Methods}{
 \subsection{Public methods}{
@@ -14,6 +12,7 @@ TODO
 \item \href{#method-RamigaFloppyDrive-new}{\code{RamigaFloppyDrive$new()}}
 \item \href{#method-RamigaFloppyDrive-insert_disk}{\code{RamigaFloppyDrive$insert_disk()}}
 \item \href{#method-RamigaFloppyDrive-eject_disk}{\code{RamigaFloppyDrive$eject_disk()}}
+\item \href{#method-RamigaFloppyDrive-get_info}{\code{RamigaFloppyDrive$get_info()}}
 \item \href{#method-RamigaFloppyDrive-print}{\code{RamigaFloppyDrive$print()}}
 \item \href{#method-RamigaFloppyDrive-clone}{\code{RamigaFloppyDrive$clone()}}
 }
@@ -22,7 +21,6 @@ TODO
 \if{html}{\out{<a id="method-RamigaFloppyDrive-new"></a>}}
 \if{latex}{\out{\hypertarget{method-RamigaFloppyDrive-new}{}}}
 \subsection{Method \code{new()}}{
-TODO
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{RamigaFloppyDrive$new(emulator, drive_number = 0)}\if{html}{\out{</div>}}
 }
@@ -30,9 +28,9 @@ TODO
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
-\item{\code{emulator}}{TODO}
+\item{\code{emulator}}{An \code{RamigaEmulator} class object. The floppy drive to be created needs to be associated with a virtual machine. The initiated object will represent the floppy drive of the emulated machine.}
 
-\item{\code{drive_number}}{TODO}
+\item{\code{drive_number}}{The emulator has 4 floppy drives, numbered 0 to 3. Pick which drive you want to operate}
 }
 \if{html}{\out{</div>}}
 }
@@ -41,7 +39,7 @@ TODO
 \if{html}{\out{<a id="method-RamigaFloppyDrive-insert_disk"></a>}}
 \if{latex}{\out{\hypertarget{method-RamigaFloppyDrive-insert_disk}{}}}
 \subsection{Method \code{insert_disk()}}{
-TODO
+Insert a virtual floppy disk in the virtual floppy drive.
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{RamigaFloppyDrive$insert_disk(disk, write_protected = TRUE)}\if{html}{\out{</div>}}
 }
@@ -49,9 +47,11 @@ TODO
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
-\item{\code{disk}}{TODO}
+\item{\code{disk}}{A floppy disk represented by a \link{RamigaImage} class
+object.}
 
-\item{\code{write_protected}}{TODO}
+\item{\code{write_protected}}{\code{logical} value indicating whether the
+inserted disk needs to be write protected. Default is \code{TRUE}}
 }
 \if{html}{\out{</div>}}
 }
@@ -60,7 +60,7 @@ TODO
 \if{html}{\out{<a id="method-RamigaFloppyDrive-eject_disk"></a>}}
 \if{latex}{\out{\hypertarget{method-RamigaFloppyDrive-eject_disk}{}}}
 \subsection{Method \code{eject_disk()}}{
-TODO
+Eject a virtual floppy disk from the virtual drive
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{RamigaFloppyDrive$eject_disk(delay = 0)}\if{html}{\out{</div>}}
 }
@@ -68,15 +68,29 @@ TODO
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
-\item{\code{delay}}{TODO}
+\item{\code{delay}}{Delay for ejecting the disk counted in CPU cycles.}
 }
 \if{html}{\out{</div>}}
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-RamigaFloppyDrive-get_info"></a>}}
+\if{latex}{\out{\hypertarget{method-RamigaFloppyDrive-get_info}{}}}
+\subsection{Method \code{get_info()}}{
+Get information about the floppy drive
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{RamigaFloppyDrive$get_info()}\if{html}{\out{</div>}}
+}
+
+\subsection{Returns}{
+Returns a named list with information
 }
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-RamigaFloppyDrive-print"></a>}}
 \if{latex}{\out{\hypertarget{method-RamigaFloppyDrive-print}{}}}
 \subsection{Method \code{print()}}{
+Prints some basic information about the floppy drive
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{RamigaFloppyDrive$print(...)}\if{html}{\out{</div>}}
 }
@@ -84,7 +98,7 @@ TODO
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
-\item{\code{disk}}{TODO}
+\item{\code{...}}{Ignored}
 }
 \if{html}{\out{</div>}}
 }

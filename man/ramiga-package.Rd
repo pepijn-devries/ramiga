@@ -8,6 +8,14 @@
 \description{
 This is an Amiga emulator based on the vAmiga project \url{https://github.com/dirkwhoffmann/vAmiga}. It provides low level access to the emulator and allows users to interact with the emulated machine through the console or scripts.
 }
+\seealso{
+Useful links:
+\itemize{
+  \item \url{https://pepijn-devries.github.io/ramiga/}
+  \item \url{https://github.com/pepijn-devries/ramiga/}
+}
+
+}
 \author{
 \strong{Maintainer}: Pepijn de Vries \email{pepijn.devries@outlook.com} (\href{https://orcid.org/0000-0002-7961-6646}{ORCID})
 
