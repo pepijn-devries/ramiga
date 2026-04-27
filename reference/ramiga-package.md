@@ -5,6 +5,14 @@ This is an Amiga emulator based on the vAmiga project
 to the emulator and allows users to interact with the emulated machine
 through the console or scripts.
 
+## See also
+
+Useful links:
+
+- <https://pepijn-devries.github.io/ramiga/>
+
+- <https://github.com/pepijn-devries/ramiga/>
+
 ## Author
 
 **Maintainer**: Pepijn de Vries <pepijn.devries@outlook.com>

@@ -35,20 +35,37 @@ library(ramiga)
 emu <- RamigaEmulator$new()
 
 emu$power_on()
-#> TODO
+#> Amiga emulator powered on:
+#>   CPU: 68000
+#>   Memory: chip 0.5Mb; slow 0.5Mb; fast 0.0Mb; ROM: Not loaded
 ```
 
-## Things to do
+## Not on CRAN
 
-- Extensive checking for CRAN compliance
-  - Make sure that all structs are named (either upstream or in this
-    fork). CRAN allows only ISO compliant code. Anonymous structs are
-    not ISO.
-  - Remove any redundant/unused code. The size of the package will
-    trigger a warning as is. So, try to keep it as small as possible.
-  - Add CRAN comments to justify non-compliance to CRAN policies (e.g.,
-    -Wa,-mbig-obj flags required on Windows). Or split Moira.cpp (the
-    suspected issue) into multiple smaller pieces of code
-- Add zlib-support to platforms other than Windows
-- Implement features
-- Add decent documentation
+This package will not be appearing on CRAN any time soon. If this
+package were to be submitted to CRAN there are several hurdles to be
+taken:
+
+- All code should comply with ISO standards.
+  - With some effort this would be achievable
+- Package size should not exceed 5 MB, but should at best be below 10 MB
+  - This will be difficult, if we want to keep all features
+- We should avoid using non-standard compilation flags (like
+  -Wa,-mbig-obj)
+  - This could be fixed by splitting up large objects into multiple
+    smaller ones.
+- This package relies heavily on C++20 features. This will not fly on
+  all CRAN build and check machines (which is a requirement).
+  - This will take way too much effort to convert to CRAN acceptable
+    alternatives.
+
+I pay as much attention to quality as any of my other R packages, so you
+should be able to enjoy using this package. But for the reasons stated
+above, I will not submit to CRAN. You can install it from R-Universe as
+specified above.
+
+*Why not use libretro?* I did explore this avenue. It doesn’t need
+C++20, so in that respect it would be easier to get on CRAN. However,
+the library is much bulkier than vAmiga. It also doesn’t have a sleek
+and easy to implement API like vAmiga. So I’ll leave this challenge for
+someone else to confront.

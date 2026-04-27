@@ -1,8 +1,6 @@
-# TODO
+# The RamigaFlopyDrive R6 Class
 
-TODO
-
-TODO
+A class that represents the emulator's floppy drive.
 
 ## Methods
 
@@ -14,6 +12,8 @@ TODO
 
 - [`RamigaFloppyDrive$eject_disk()`](#method-RamigaFloppyDrive-eject_disk)
 
+- [`RamigaFloppyDrive$get_info()`](#method-RamigaFloppyDrive-get_info)
+
 - [`RamigaFloppyDrive$print()`](#method-RamigaFloppyDrive-print)
 
 - [`RamigaFloppyDrive$clone()`](#method-RamigaFloppyDrive-clone)
@@ -21,8 +21,6 @@ TODO
 ------------------------------------------------------------------------
 
 ### Method `new()`
-
-TODO
 
 #### Usage
 
@@ -32,17 +30,20 @@ TODO
 
 - `emulator`:
 
-  TODO
+  An `RamigaEmulator` class object. The floppy drive to be created needs
+  to be associated with a virtual machine. The initiated object will
+  represent the floppy drive of the emulated machine.
 
 - `drive_number`:
 
-  TODO
+  The emulator has 4 floppy drives, numbered 0 to 3. Pick which drive
+  you want to operate
 
 ------------------------------------------------------------------------
 
 ### Method `insert_disk()`
 
-TODO
+Insert a virtual floppy disk in the virtual floppy drive.
 
 #### Usage
 
@@ -52,17 +53,20 @@ TODO
 
 - `disk`:
 
-  TODO
+  A floppy disk represented by a
+  [RamigaImage](https://pepijn-devries.github.io/ramiga/reference/RamigaImage.md)
+  class object.
 
 - `write_protected`:
 
-  TODO
+  `logical` value indicating whether the inserted disk needs to be write
+  protected. Default is `TRUE`
 
 ------------------------------------------------------------------------
 
 ### Method `eject_disk()`
 
-TODO
+Eject a virtual floppy disk from the virtual drive
 
 #### Usage
 
@@ -72,11 +76,27 @@ TODO
 
 - `delay`:
 
-  TODO
+  Delay for ejecting the disk counted in CPU cycles.
+
+------------------------------------------------------------------------
+
+### Method `get_info()`
+
+Get information about the floppy drive
+
+#### Usage
+
+    RamigaFloppyDrive$get_info()
+
+#### Returns
+
+Returns a named list with information
 
 ------------------------------------------------------------------------
 
 ### Method [`print()`](https://rdrr.io/r/base/print.html)
+
+Prints some basic information about the floppy drive
 
 #### Usage
 
@@ -84,9 +104,9 @@ TODO
 
 #### Arguments
 
-- `disk`:
+- `...`:
 
-  TODO
+  Ignored
 
 ------------------------------------------------------------------------
 

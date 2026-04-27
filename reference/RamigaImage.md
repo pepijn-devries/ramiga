@@ -1,16 +1,6 @@
-# TODO
+# The RamigaImage R6 Class
 
-TODO
-
-TODO
-
-## Value
-
-TODO
-
-Returns the size of the image in bytes.
-
-TODO.
+A virtual device represented by an image.
 
 ## Methods
 
@@ -24,6 +14,10 @@ TODO.
 
 - [`RamigaImage$get_pointer()`](#method-RamigaImage-get_pointer)
 
+- [`RamigaImage$is_formatted()`](#method-RamigaImage-is_formatted)
+
+- [`RamigaImage$get_file_system()`](#method-RamigaImage-get_file_system)
+
 - [`RamigaImage$print()`](#method-RamigaImage-print)
 
 - [`RamigaImage$clone()`](#method-RamigaImage-clone)
@@ -32,7 +26,7 @@ TODO.
 
 ### Method `new()`
 
-TODO
+Initialise an image from a disk image file.
 
 #### Usage
 
@@ -42,45 +36,107 @@ TODO
 
 - `path`:
 
-  TODO
+  File pointing to disk image file.
 
 ------------------------------------------------------------------------
 
 ### Method `info()`
 
-TODO
+Get information about the image.
 
 #### Usage
 
     RamigaImage$info()
 
+#### Returns
+
+Returns a named `list` with information
+
 ------------------------------------------------------------------------
 
 ### Method `size()`
 
-TODO
+Get the size of the device represented by the image.
 
 #### Usage
 
     RamigaImage$size()
 
+#### Returns
+
+Returns the size of the image in bytes.
+
 ------------------------------------------------------------------------
 
 ### Method `get_pointer()`
 
-TODO
+Get the pointer to the image object in memory
 
 #### Usage
 
-    RamigaImage$get_pointer()
+    RamigaImage$get_pointer(...)
+
+#### Arguments
+
+- `...`:
+
+  Ignored.
+
+#### Returns
+
+Returns the `externalptr` pointing to the C++ class instance in memory.
+
+------------------------------------------------------------------------
+
+### Method `is_formatted()`
+
+Determines if there is a file system present.
+
+#### Usage
+
+    RamigaImage$is_formatted()
+
+#### Returns
+
+Returns `logical` indicating if disk contains a file system.
+
+------------------------------------------------------------------------
+
+### Method `get_file_system()`
+
+Get a file system from a virtual device if present
+
+#### Usage
+
+    RamigaImage$get_file_system(...)
+
+#### Arguments
+
+- `...`:
+
+  Ignored.
+
+#### Returns
+
+Returns a
+[RamigaFileSystem](https://pepijn-devries.github.io/ramiga/reference/RamigaFileSystem.md)
+class object
 
 ------------------------------------------------------------------------
 
 ### Method [`print()`](https://rdrr.io/r/base/print.html)
 
+Print some basic information about the device
+
 #### Usage
 
     RamigaImage$print(...)
+
+#### Arguments
+
+- `...`:
+
+  Ignored.
 
 ------------------------------------------------------------------------
 

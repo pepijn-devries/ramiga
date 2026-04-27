@@ -95,23 +95,38 @@
 <span><span class="va">emu</span> <span class="op">&lt;-</span> <span class="va"><a href="reference/RamigaEmulator.html">RamigaEmulator</a></span><span class="op">$</span><span class="fu">new</span><span class="op">(</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">emu</span><span class="op">$</span><span class="fu">power_on</span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="co">#&gt; TODO</span></span></code></pre></div>
+<span><span class="co">#&gt; Amiga emulator powered on:</span></span>
+<span><span class="co">#&gt;   CPU: 68000</span></span>
+<span><span class="co">#&gt;   Memory: chip 0.5Mb; slow 0.5Mb; fast 0.0Mb; ROM: Not loaded</span></span></code></pre></div>
 </div>
 <div class="section level2">
-<h2 id="things-to-do">Things to do<a class="anchor" aria-label="anchor" href="#things-to-do"></a>
+<h2 id="not-on-cran">Not on CRAN<a class="anchor" aria-label="anchor" href="#not-on-cran"></a>
 </h2>
+<p>This package will not be appearing on CRAN any time soon. If this package were to be submitted to CRAN there are several hurdles to be taken:</p>
 <ul>
-<li>Extensive checking for CRAN compliance
+<li>All code should comply with ISO standards.
 <ul>
-<li>Make sure that all structs are named (either upstream or in this fork). CRAN allows only ISO compliant code. Anonymous structs are not ISO.</li>
-<li>Remove any redundant/unused code. The size of the package will trigger a warning as is. So, try to keep it as small as possible.</li>
-<li>Add CRAN comments to justify non-compliance to CRAN policies (e.g., -Wa,-mbig-obj flags required on Windows). Or split Moira.cpp (the suspected issue) into multiple smaller pieces of code</li>
+<li>With some effort this would be achievable</li>
 </ul>
 </li>
-<li>Add zlib-support to platforms other than Windows</li>
-<li>Implement features</li>
-<li>Add decent documentation</li>
+<li>Package size should not exceed 5 MB, but should at best be below 10 MB
+<ul>
+<li>This will be difficult, if we want to keep all features</li>
 </ul>
+</li>
+<li>We should avoid using non-standard compilation flags (like -Wa,-mbig-obj)
+<ul>
+<li>This could be fixed by splitting up large objects into multiple smaller ones.</li>
+</ul>
+</li>
+<li>This package relies heavily on C++20 features. This will not fly on all CRAN build and check machines (which is a requirement).
+<ul>
+<li>This will take way too much effort to convert to CRAN acceptable alternatives.</li>
+</ul>
+</li>
+</ul>
+<p>I pay as much attention to quality as any of my other R packages, so you should be able to enjoy using this package. But for the reasons stated above, I will not submit to CRAN. You can install it from R-Universe as specified above.</p>
+<p><em>Why not use libretro?</em> I did explore this avenue. It doesn’t need C++20, so in that respect it would be easier to get on CRAN. However, the library is much bulkier than vAmiga. It also doesn’t have a sleek and easy to implement API like vAmiga. So I’ll leave this challenge for someone else to confront.</p>
 </div>
 </div>
   </main><aside class="col-md-3"><div class="links">
