@@ -37,7 +37,7 @@ cpp11::list get_rom_traits_(cpp11::external_pointer<VAmiga> amiga) {
 [[cpp11::register]]
 cpp11::list get_mem_config_(cpp11::external_pointer<VAmiga> amiga) {
   // return get_memory_(amiga).mem->hasRom();
-  auto & conf = get_memory_(amiga).getConfig();
+  const auto conf = get_memory_(amiga).getConfig();
   return cpp11::writable::list({
     "chip_size"_nm = cpp11::as_sexp({(double)conf.chipSize}),
       "slow_size"_nm = cpp11::as_sexp({(double)conf.slowSize}),
@@ -53,7 +53,7 @@ cpp11::list get_mem_config_(cpp11::external_pointer<VAmiga> amiga) {
         BankMapEnum::_key(conf.bankMap)}),
       "ram_init_pattern"_nm = cpp11::writable::strings({
         RamInitPatternEnum::_key(conf.ramInitPattern)}),
-      "ram_init_pattern"_nm = cpp11::writable::strings({
+      "unmapping_type"_nm = cpp11::writable::strings({
         UnmappedMemoryEnum::_key(conf.unmappingType)})
   });
 }

@@ -6,6 +6,9 @@
 \description{
 A class that represents the emulator's floppy drive.
 }
+\section{Super class}{
+\code{\link[ramiga:RamigaComponent]{ramiga::RamigaComponent}} -> \code{RamigaFloppyDrive}
+}
 \section{Methods}{
 \subsection{Public methods}{
 \itemize{
@@ -17,6 +20,15 @@ A class that represents the emulator's floppy drive.
 \item \href{#method-RamigaFloppyDrive-clone}{\code{RamigaFloppyDrive$clone()}}
 }
 }
+\if{html}{\out{
+<details open><summary>Inherited methods</summary>
+<ul>
+<li><span class="pkg-link" data-pkg="ramiga" data-topic="RamigaComponent" data-id="get_emulator"><a href='../../ramiga/html/RamigaComponent.html#method-RamigaComponent-get_emulator'><code>ramiga::RamigaComponent$get_emulator()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="ramiga" data-topic="RamigaComponent" data-id="get_pointer"><a href='../../ramiga/html/RamigaComponent.html#method-RamigaComponent-get_pointer'><code>ramiga::RamigaComponent$get_pointer()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="ramiga" data-topic="RamigaComponent" data-id="list_options"><a href='../../ramiga/html/RamigaComponent.html#method-RamigaComponent-list_options'><code>ramiga::RamigaComponent$list_options()</code></a></span></li>
+</ul>
+</details>
+}}
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-RamigaFloppyDrive-new"></a>}}
 \if{latex}{\out{\hypertarget{method-RamigaFloppyDrive-new}{}}}

@@ -7,10 +7,12 @@
 The RamigaMemory class represents the memory of the emulated machine.
 Use this object to interact with the machines memory.
 }
+\section{Super class}{
+\code{\link[ramiga:RamigaComponent]{ramiga::RamigaComponent}} -> \code{RamigaEmulator}
+}
 \section{Methods}{
 \subsection{Public methods}{
 \itemize{
-\item \href{#method-RamigaEmulator-new}{\code{RamigaMemory$new()}}
 \item \href{#method-RamigaEmulator-load_rom}{\code{RamigaMemory$load_rom()}}
 \item \href{#method-RamigaEmulator-has_rom}{\code{RamigaMemory$has_rom()}}
 \item \href{#method-RamigaEmulator-get_rom_traits}{\code{RamigaMemory$get_rom_traits()}}
@@ -19,24 +21,16 @@ Use this object to interact with the machines memory.
 \item \href{#method-RamigaEmulator-clone}{\code{RamigaMemory$clone()}}
 }
 }
-\if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-RamigaEmulator-new"></a>}}
-\if{latex}{\out{\hypertarget{method-RamigaEmulator-new}{}}}
-\subsection{Method \code{new()}}{
-The memory needs to be associated with an emulated machine.
-Therefore you need the emulator to initiate a memory object.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{RamigaMemory$new(emulator)}\if{html}{\out{</div>}}
-}
-
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{emulator}}{An \code{RamigaEmulator} class object. The memory to be created needs to be associated with a virtual machine. The initiated object will represent the memory of the emulated machine.}
-}
-\if{html}{\out{</div>}}
-}
-}
+\if{html}{\out{
+<details open><summary>Inherited methods</summary>
+<ul>
+<li><span class="pkg-link" data-pkg="ramiga" data-topic="RamigaComponent" data-id="get_emulator"><a href='../../ramiga/html/RamigaComponent.html#method-RamigaComponent-get_emulator'><code>ramiga::RamigaComponent$get_emulator()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="ramiga" data-topic="RamigaComponent" data-id="get_pointer"><a href='../../ramiga/html/RamigaComponent.html#method-RamigaComponent-get_pointer'><code>ramiga::RamigaComponent$get_pointer()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="ramiga" data-topic="RamigaComponent" data-id="initialize"><a href='../../ramiga/html/RamigaComponent.html#method-RamigaComponent-initialize'><code>ramiga::RamigaComponent$initialize()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="ramiga" data-topic="RamigaComponent" data-id="list_options"><a href='../../ramiga/html/RamigaComponent.html#method-RamigaComponent-list_options'><code>ramiga::RamigaComponent$list_options()</code></a></span></li>
+</ul>
+</details>
+}}
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-RamigaEmulator-load_rom"></a>}}
 \if{latex}{\out{\hypertarget{method-RamigaEmulator-load_rom}{}}}

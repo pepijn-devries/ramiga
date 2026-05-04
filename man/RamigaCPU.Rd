@@ -6,10 +6,12 @@
 \description{
 A class that represents the emulator's Central Processing Unit (CPU).
 }
+\section{Super class}{
+\code{\link[ramiga:RamigaComponent]{ramiga::RamigaComponent}} -> \code{RamigaCPU}
+}
 \section{Methods}{
 \subsection{Public methods}{
 \itemize{
-\item \href{#method-RamigaCPU-new}{\code{RamigaCPU$new()}}
 \item \href{#method-RamigaCPU-get_cycles}{\code{RamigaCPU$get_cycles()}}
 \item \href{#method-RamigaCPU-get_program_counter}{\code{RamigaCPU$get_program_counter()}}
 \item \href{#method-RamigaCPU-get_config}{\code{RamigaCPU$get_config()}}
@@ -17,23 +19,16 @@ A class that represents the emulator's Central Processing Unit (CPU).
 \item \href{#method-RamigaCPU-clone}{\code{RamigaCPU$clone()}}
 }
 }
-\if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-RamigaCPU-new"></a>}}
-\if{latex}{\out{\hypertarget{method-RamigaCPU-new}{}}}
-\subsection{Method \code{new()}}{
-Initialise a RamigaCPU class object.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{RamigaCPU$new(emulator)}\if{html}{\out{</div>}}
-}
-
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{emulator}}{An \code{RamigaEmulator} class object. The CPU to be created needs to be associated with a virtual machine. The initiated object will represent the CPU of the emulated machine.}
-}
-\if{html}{\out{</div>}}
-}
-}
+\if{html}{\out{
+<details open><summary>Inherited methods</summary>
+<ul>
+<li><span class="pkg-link" data-pkg="ramiga" data-topic="RamigaComponent" data-id="get_emulator"><a href='../../ramiga/html/RamigaComponent.html#method-RamigaComponent-get_emulator'><code>ramiga::RamigaComponent$get_emulator()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="ramiga" data-topic="RamigaComponent" data-id="get_pointer"><a href='../../ramiga/html/RamigaComponent.html#method-RamigaComponent-get_pointer'><code>ramiga::RamigaComponent$get_pointer()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="ramiga" data-topic="RamigaComponent" data-id="initialize"><a href='../../ramiga/html/RamigaComponent.html#method-RamigaComponent-initialize'><code>ramiga::RamigaComponent$initialize()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="ramiga" data-topic="RamigaComponent" data-id="list_options"><a href='../../ramiga/html/RamigaComponent.html#method-RamigaComponent-list_options'><code>ramiga::RamigaComponent$list_options()</code></a></span></li>
+</ul>
+</details>
+}}
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-RamigaCPU-get_cycles"></a>}}
 \if{latex}{\out{\hypertarget{method-RamigaCPU-get_cycles}{}}}

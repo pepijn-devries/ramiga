@@ -6,24 +6,53 @@
 \description{
 A class representing the emulator for emulating an Amiga.
 }
+\section{Super class}{
+\code{\link[ramiga:RamigaComponent]{ramiga::RamigaComponent}} -> \code{RamigaEmulator}
+}
+\section{Active bindings}{
+\if{html}{\out{<div class="r6-active-bindings">}}
+\describe{
+\item{\code{memory}}{The emulated memory, represented by \link{RamigaMemory}}
+
+\item{\code{cpu}}{The emulated CPU, represented by \link{RamigaCPU}}
+
+\item{\code{floppy_drives}}{The emulated floppy drives, represented by
+a named \code{list} of \link{RamigaFloppyDrive} objects.}
+
+\item{\code{control_ports}}{Control ports to which a virtual mouse or
+joystick can be connected. It is represented by the
+\link{RamigaControlPort} class.}
+
+\item{\code{output}}{Get object to capture emulator output. Handled
+by \link{RamigaOutput}.}
+}
+\if{html}{\out{</div>}}
+}
 \section{Methods}{
 \subsection{Public methods}{
 \itemize{
 \item \href{#method-RamigaEmulator-new}{\code{RamigaEmulator$new()}}
-\item \href{#method-RamigaEmulator-get_memory}{\code{RamigaEmulator$get_memory()}}
-\item \href{#method-RamigaEmulator-get_cpu}{\code{RamigaEmulator$get_cpu()}}
-\item \href{#method-RamigaEmulator-get_floppy_drive}{\code{RamigaEmulator$get_floppy_drive()}}
 \item \href{#method-RamigaEmulator-power_on}{\code{RamigaEmulator$power_on()}}
 \item \href{#method-RamigaEmulator-power_off}{\code{RamigaEmulator$power_off()}}
 \item \href{#method-RamigaEmulator-soft_reset}{\code{RamigaEmulator$soft_reset()}}
 \item \href{#method-RamigaEmulator-run}{\code{RamigaEmulator$run()}}
 \item \href{#method-RamigaEmulator-get_info}{\code{RamigaEmulator$get_info()}}
-\item \href{#method-RamigaEmulator-get_pointer}{\code{RamigaEmulator$get_pointer()}}
-\item \href{#method-RamigaEmulator-get_output}{\code{RamigaEmulator$get_output()}}
+\item \href{#method-RamigaEmulator-get_config}{\code{RamigaEmulator$get_config()}}
+\item \href{#method-RamigaEmulator-set_config}{\code{RamigaEmulator$set_config()}}
+\item \href{#method-RamigaEmulator-get_version}{\code{RamigaEmulator$get_version()}}
 \item \href{#method-RamigaEmulator-print}{\code{RamigaEmulator$print()}}
 \item \href{#method-RamigaEmulator-clone}{\code{RamigaEmulator$clone()}}
 }
 }
+\if{html}{\out{
+<details open><summary>Inherited methods</summary>
+<ul>
+<li><span class="pkg-link" data-pkg="ramiga" data-topic="RamigaComponent" data-id="get_emulator"><a href='../../ramiga/html/RamigaComponent.html#method-RamigaComponent-get_emulator'><code>ramiga::RamigaComponent$get_emulator()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="ramiga" data-topic="RamigaComponent" data-id="get_pointer"><a href='../../ramiga/html/RamigaComponent.html#method-RamigaComponent-get_pointer'><code>ramiga::RamigaComponent$get_pointer()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="ramiga" data-topic="RamigaComponent" data-id="list_options"><a href='../../ramiga/html/RamigaComponent.html#method-RamigaComponent-list_options'><code>ramiga::RamigaComponent$list_options()</code></a></span></li>
+</ul>
+</details>
+}}
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-RamigaEmulator-new"></a>}}
 \if{latex}{\out{\hypertarget{method-RamigaEmulator-new}{}}}
@@ -33,52 +62,6 @@ Initialise a new Amiga emulator
 \if{html}{\out{<div class="r">}}\preformatted{RamigaEmulator$new()}\if{html}{\out{</div>}}
 }
 
-}
-\if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-RamigaEmulator-get_memory"></a>}}
-\if{latex}{\out{\hypertarget{method-RamigaEmulator-get_memory}{}}}
-\subsection{Method \code{get_memory()}}{
-Get a representation of the machine's emulated memory
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{RamigaEmulator$get_memory()}\if{html}{\out{</div>}}
-}
-
-\subsection{Returns}{
-Returns a \link{RamigaMemory} class object
-}
-}
-\if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-RamigaEmulator-get_cpu"></a>}}
-\if{latex}{\out{\hypertarget{method-RamigaEmulator-get_cpu}{}}}
-\subsection{Method \code{get_cpu()}}{
-Get a representation of the machine's Central Processing Unit
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{RamigaEmulator$get_cpu()}\if{html}{\out{</div>}}
-}
-
-\subsection{Returns}{
-Returns a \link{RamigaCPU} class object.
-}
-}
-\if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-RamigaEmulator-get_floppy_drive"></a>}}
-\if{latex}{\out{\hypertarget{method-RamigaEmulator-get_floppy_drive}{}}}
-\subsection{Method \code{get_floppy_drive()}}{
-Get a specific floppy drive from the emulated machine
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{RamigaEmulator$get_floppy_drive(drive_number)}\if{html}{\out{</div>}}
-}
-
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{drive_number}}{The emulator has 4 floppy drives, numbered 0 to 3. Pick which drive you want to operate}
-}
-\if{html}{\out{</div>}}
-}
-\subsection{Returns}{
-Returns a \link{RamigaFloppyDrive} class object.
-}
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-RamigaEmulator-power_on"></a>}}
@@ -113,8 +96,8 @@ Returns the emulator object
 \if{latex}{\out{\hypertarget{method-RamigaEmulator-soft_reset}{}}}
 \subsection{Method \code{soft_reset()}}{
 A soft reset, just resets the CPU, causing the system to reboot.
-This is similar to simultaneously pressing \if{html}{\out{<Ctrl>}} and both
-\if{html}{\out{<Amiga>}} keys on an original machine.
+This is similar to simultaneously pressing \out{<Ctrl>} and both
+\out{<Amiga>} keys on an original machine.
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{RamigaEmulator$soft_reset()}\if{html}{\out{</div>}}
 }
@@ -153,33 +136,50 @@ Returns a named list.
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-RamigaEmulator-get_pointer"></a>}}
-\if{latex}{\out{\hypertarget{method-RamigaEmulator-get_pointer}{}}}
-\subsection{Method \code{get_pointer()}}{
-Get the pointer to the emulator object in memory
+\if{html}{\out{<a id="method-RamigaEmulator-get_config"></a>}}
+\if{latex}{\out{\hypertarget{method-RamigaEmulator-get_config}{}}}
+\subsection{Method \code{get_config()}}{
+Get information about the emulator configuration.
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{RamigaEmulator$get_pointer(...)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{RamigaEmulator$get_config()}\if{html}{\out{</div>}}
 }
 
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{...}}{Ignored}
-}
-\if{html}{\out{</div>}}
-}
 \subsection{Returns}{
-Returns the \code{externalptr} pointing to the C++ class
-instance in memory
+Returns a named list.
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-RamigaEmulator-get_output"></a>}}
-\if{latex}{\out{\hypertarget{method-RamigaEmulator-get_output}{}}}
-\subsection{Method \code{get_output()}}{
-Get object to capture emulator output.
+\if{html}{\out{<a id="method-RamigaEmulator-set_config"></a>}}
+\if{latex}{\out{\hypertarget{method-RamigaEmulator-set_config}{}}}
+\subsection{Method \code{set_config()}}{
+Quickly set the emulator configuration to one of the pre-specified
+schemes.
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{RamigaEmulator$get_output(...)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{RamigaEmulator$set_config(scheme = "A500_OCS_1MB", ...)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{scheme}}{Should be one of the following strings:
+\code{"A1000_OCS_1MB"}, \code{"A500_OCS_1MB"} (default), \code{"A500_ECS_1MB"},
+or \code{"A500_PLUS_1MB"}.}
+
+\item{\code{...}}{Ignored}
+}
+\if{html}{\out{</div>}}
+}
+\subsection{Returns}{
+Returns a string
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-RamigaEmulator-get_version"></a>}}
+\if{latex}{\out{\hypertarget{method-RamigaEmulator-get_version}{}}}
+\subsection{Method \code{get_version()}}{
+Get the version number of the vAmiga core used by this package
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{RamigaEmulator$get_version(...)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
@@ -190,13 +190,14 @@ Get object to capture emulator output.
 \if{html}{\out{</div>}}
 }
 \subsection{Returns}{
-Returns \link{RamigaOutput} class object
+Returns a string
 }
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-RamigaEmulator-print"></a>}}
 \if{latex}{\out{\hypertarget{method-RamigaEmulator-print}{}}}
 \subsection{Method \code{print()}}{
+Prints basic information about the emulator.
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{RamigaEmulator$print(...)}\if{html}{\out{</div>}}
 }
@@ -204,8 +205,7 @@ Returns \link{RamigaOutput} class object
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
-\item{\code{...}}{Ignored
-Prints basic information about the emulator.}
+\item{\code{...}}{Ignored}
 }
 \if{html}{\out{</div>}}
 }
