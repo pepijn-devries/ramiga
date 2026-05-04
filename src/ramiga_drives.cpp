@@ -45,7 +45,7 @@ cpp11::external_pointer<DiskImage> disk_image_(std::string path) {
   auto disk = DiskImage::tryMake(p);
   
   if (!disk) {
-    cpp11::stop("Failed to load disk image: %s", path.c_str());
+    cpp11::stop("Failed to load disk image" + path);
   }
   
   return cpp11::external_pointer<DiskImage>(disk.release());

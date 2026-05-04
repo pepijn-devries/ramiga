@@ -6,23 +6,74 @@
 \description{
 A class to capture output from the Amiga emulator (\link{RamigaEmulator} class).
 }
+\section{Super class}{
+\code{\link[ramiga:RamigaComponent]{ramiga::RamigaComponent}} -> \code{RamigaOutput}
+}
 \section{Methods}{
 \subsection{Public methods}{
 \itemize{
-\item \href{#method-RamigaOutput-new}{\code{RamigaOutput$new()}}
+\item \href{#method-RamigaOutput-capture_frame}{\code{RamigaOutput$capture_frame()}}
+\item \href{#method-RamigaOutput-capture_audio_buffer}{\code{RamigaOutput$capture_audio_buffer()}}
 \item \href{#method-RamigaOutput-print}{\code{RamigaOutput$print()}}
 \item \href{#method-RamigaOutput-clone}{\code{RamigaOutput$clone()}}
 }
 }
+\if{html}{\out{
+<details open><summary>Inherited methods</summary>
+<ul>
+<li><span class="pkg-link" data-pkg="ramiga" data-topic="RamigaComponent" data-id="get_emulator"><a href='../../ramiga/html/RamigaComponent.html#method-RamigaComponent-get_emulator'><code>ramiga::RamigaComponent$get_emulator()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="ramiga" data-topic="RamigaComponent" data-id="get_pointer"><a href='../../ramiga/html/RamigaComponent.html#method-RamigaComponent-get_pointer'><code>ramiga::RamigaComponent$get_pointer()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="ramiga" data-topic="RamigaComponent" data-id="initialize"><a href='../../ramiga/html/RamigaComponent.html#method-RamigaComponent-initialize'><code>ramiga::RamigaComponent$initialize()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="ramiga" data-topic="RamigaComponent" data-id="list_options"><a href='../../ramiga/html/RamigaComponent.html#method-RamigaComponent-list_options'><code>ramiga::RamigaComponent$list_options()</code></a></span></li>
+</ul>
+</details>
+}}
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-RamigaOutput-new"></a>}}
-\if{latex}{\out{\hypertarget{method-RamigaOutput-new}{}}}
-\subsection{Method \code{new()}}{
-Initialise a new Amiga emulator output object
+\if{html}{\out{<a id="method-RamigaOutput-capture_frame"></a>}}
+\if{latex}{\out{\hypertarget{method-RamigaOutput-capture_frame}{}}}
+\subsection{Method \code{capture_frame()}}{
+Captures the current pixel information as sent to the monitor of
+the virtual device.
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{RamigaOutput$new(emulator)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{RamigaOutput$capture_frame(file, ...)}\if{html}{\out{</div>}}
 }
 
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{file}}{A path to a png file where to store the captured frame.}
+
+\item{\code{...}}{Ignored}
+}
+\if{html}{\out{</div>}}
+}
+\subsection{Returns}{
+If file is missing it returns a \code{\link[grDevice:as.raster]{grDevice::as.raster()}} object.
+Otherwise, it will save it as png file to the specified path and returns
+nothing.
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-RamigaOutput-capture_audio_buffer"></a>}}
+\if{latex}{\out{\hypertarget{method-RamigaOutput-capture_audio_buffer}{}}}
+\subsection{Method \code{capture_audio_buffer()}}{
+TODO
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{RamigaOutput$capture_audio_buffer(file, ...)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{file}}{TODO}
+
+\item{\code{...}}{TODO}
+}
+\if{html}{\out{</div>}}
+}
+\subsection{Returns}{
+TODO
+}
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-RamigaOutput-print"></a>}}

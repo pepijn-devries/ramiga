@@ -18,7 +18,7 @@ uint32_t get_cpu_pc_(cpp11::external_pointer<vamiga::VAmiga> amiga) {
 
 [[cpp11::register]]
 cpp11::list get_cpu_config_(cpp11::external_pointer<vamiga::VAmiga> amiga) {
-  const CPUConfig & conf = get_cpu_(amiga).getConfig();
+  const CPUConfig conf = get_cpu_(amiga).getConfig();
   return cpp11::writable::list({
     "revision"_nm =
       cpp11::writable::strings({ CPURevEnum::_key(conf.revision) }),

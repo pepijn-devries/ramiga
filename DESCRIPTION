@@ -1,6 +1,6 @@
 Package: ramiga
 Title: Emulating the Amiga Using the vAmiga Engine
-Version: 0.0.0.9003
+Version: 0.0.0.9004
 Authors@R:
     c(
       person("Pepijn", "de Vries", role = c("aut", "cre"),
@@ -26,8 +26,11 @@ LinkingTo:
     cpp11 (>= 0.4.2)
 URL: https://pepijn-devries.github.io/ramiga/, https://github.com/pepijn-devries/ramiga/
 Collate: 
-    'cpp11.R'
+    'component.R'
     'documentation.R'
+    'controldevice.R'
+    'controlport.R'
+    'cpp11.R'
     'cpu.R'
     'emulator.R'
     'filesystem.R'

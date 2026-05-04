@@ -3,6 +3,8 @@
 
 <!-- badges: start -->
 
+![Status:
+Experimental](https://img.shields.io/badge/status-experimental-orange)
 [![R-CMD-check](https://github.com/pepijn-devries/ramiga/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/pepijn-devries/ramiga/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->
 
@@ -41,7 +43,7 @@ library(ramiga)
 emu <- RamigaEmulator$new()
 
 emu$power_on()
-#> Amiga emulator powered on:
+#> Amiga emulator (PAL) powered on:
 #>   CPU: 68000
 #>   Memory: chip 0.5Mb; slow 0.5Mb; fast 0.0Mb; ROM: Not loaded
 ```
