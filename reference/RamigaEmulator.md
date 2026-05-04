@@ -2,17 +2,46 @@
 
 A class representing the emulator for emulating an Amiga.
 
+## Super class
+
+[`ramiga::RamigaComponent`](https://pepijn-devries.github.io/ramiga/reference/RamigaComponent.md)
+-\> `RamigaEmulator`
+
+## Active bindings
+
+- `memory`:
+
+  The emulated memory, represented by
+  [RamigaMemory](https://pepijn-devries.github.io/ramiga/reference/RamigaMemory.md)
+
+- `cpu`:
+
+  The emulated CPU, represented by
+  [RamigaCPU](https://pepijn-devries.github.io/ramiga/reference/RamigaCPU.md)
+
+- `floppy_drives`:
+
+  The emulated floppy drives, represented by a named `list` of
+  [RamigaFloppyDrive](https://pepijn-devries.github.io/ramiga/reference/RamigaFloppyDrive.md)
+  objects.
+
+- `control_ports`:
+
+  Control ports to which a virtual mouse or joystick can be connected.
+  It is represented by the
+  [RamigaControlPort](https://pepijn-devries.github.io/ramiga/reference/RamigaControlPort.md)
+  class.
+
+- `output`:
+
+  Get object to capture emulator output. Handled by
+  [RamigaOutput](https://pepijn-devries.github.io/ramiga/reference/RamigaOutput.md).
+
 ## Methods
 
 ### Public methods
 
 - [`RamigaEmulator$new()`](#method-RamigaEmulator-new)
-
-- [`RamigaEmulator$get_memory()`](#method-RamigaEmulator-get_memory)
-
-- [`RamigaEmulator$get_cpu()`](#method-RamigaEmulator-get_cpu)
-
-- [`RamigaEmulator$get_floppy_drive()`](#method-RamigaEmulator-get_floppy_drive)
 
 - [`RamigaEmulator$power_on()`](#method-RamigaEmulator-power_on)
 
@@ -24,13 +53,21 @@ A class representing the emulator for emulating an Amiga.
 
 - [`RamigaEmulator$get_info()`](#method-RamigaEmulator-get_info)
 
-- [`RamigaEmulator$get_pointer()`](#method-RamigaEmulator-get_pointer)
+- [`RamigaEmulator$get_config()`](#method-RamigaEmulator-get_config)
 
-- [`RamigaEmulator$get_output()`](#method-RamigaEmulator-get_output)
+- [`RamigaEmulator$set_config()`](#method-RamigaEmulator-set_config)
+
+- [`RamigaEmulator$get_version()`](#method-RamigaEmulator-get_version)
 
 - [`RamigaEmulator$print()`](#method-RamigaEmulator-print)
 
 - [`RamigaEmulator$clone()`](#method-RamigaEmulator-clone)
+
+Inherited methods
+
+- [`ramiga::RamigaComponent$get_emulator()`](https://pepijn-devries.github.io/ramiga/reference/RamigaComponent.html#method-get_emulator)
+- [`ramiga::RamigaComponent$get_pointer()`](https://pepijn-devries.github.io/ramiga/reference/RamigaComponent.html#method-get_pointer)
+- [`ramiga::RamigaComponent$list_options()`](https://pepijn-devries.github.io/ramiga/reference/RamigaComponent.html#method-list_options)
 
 ------------------------------------------------------------------------
 
@@ -41,61 +78,6 @@ Initialise a new Amiga emulator
 #### Usage
 
     RamigaEmulator$new()
-
-------------------------------------------------------------------------
-
-### Method `get_memory()`
-
-Get a representation of the machine's emulated memory
-
-#### Usage
-
-    RamigaEmulator$get_memory()
-
-#### Returns
-
-Returns a
-[RamigaMemory](https://pepijn-devries.github.io/ramiga/reference/RamigaMemory.md)
-class object
-
-------------------------------------------------------------------------
-
-### Method `get_cpu()`
-
-Get a representation of the machine's Central Processing Unit
-
-#### Usage
-
-    RamigaEmulator$get_cpu()
-
-#### Returns
-
-Returns a
-[RamigaCPU](https://pepijn-devries.github.io/ramiga/reference/RamigaCPU.md)
-class object.
-
-------------------------------------------------------------------------
-
-### Method `get_floppy_drive()`
-
-Get a specific floppy drive from the emulated machine
-
-#### Usage
-
-    RamigaEmulator$get_floppy_drive(drive_number)
-
-#### Arguments
-
-- `drive_number`:
-
-  The emulator has 4 floppy drives, numbered 0 to 3. Pick which drive
-  you want to operate
-
-#### Returns
-
-Returns a
-[RamigaFloppyDrive](https://pepijn-devries.github.io/ramiga/reference/RamigaFloppyDrive.md)
-class object.
 
 ------------------------------------------------------------------------
 
@@ -174,33 +156,53 @@ Returns a named list.
 
 ------------------------------------------------------------------------
 
-### Method `get_pointer()`
+### Method `get_config()`
 
-Get the pointer to the emulator object in memory
+Get information about the emulator configuration.
 
 #### Usage
 
-    RamigaEmulator$get_pointer(...)
-
-#### Arguments
-
-- `...`:
-
-  Ignored
+    RamigaEmulator$get_config()
 
 #### Returns
 
-Returns the `externalptr` pointing to the C++ class instance in memory
+Returns a named list.
 
 ------------------------------------------------------------------------
 
-### Method `get_output()`
+### Method `set_config()`
 
-Get object to capture emulator output.
+Quickly set the emulator configuration to one of the pre-specified
+schemes.
 
 #### Usage
 
-    RamigaEmulator$get_output(...)
+    RamigaEmulator$set_config(scheme = "A500_OCS_1MB", ...)
+
+#### Arguments
+
+- `scheme`:
+
+  Should be one of the following strings: `"A1000_OCS_1MB"`,
+  `"A500_OCS_1MB"` (default), `"A500_ECS_1MB"`, or `"A500_PLUS_1MB"`.
+
+- `...`:
+
+  Ignored
+
+#### Returns
+
+Returns a string
+
+------------------------------------------------------------------------
+
+### Method `get_version()`
+
+Get the version number of the vAmiga core used by this package
+
+#### Usage
+
+    RamigaEmulator$get_version(...)
 
 #### Arguments
 
@@ -210,13 +212,13 @@ Get object to capture emulator output.
 
 #### Returns
 
-Returns
-[RamigaOutput](https://pepijn-devries.github.io/ramiga/reference/RamigaOutput.md)
-class object
+Returns a string
 
 ------------------------------------------------------------------------
 
 ### Method [`print()`](https://rdrr.io/r/base/print.html)
+
+Prints basic information about the emulator.
 
 #### Usage
 
@@ -226,7 +228,7 @@ class object
 
 - `...`:
 
-  Ignored Prints basic information about the emulator.
+  Ignored
 
 ------------------------------------------------------------------------
 

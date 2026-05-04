@@ -3,11 +3,14 @@
 The RamigaMemory class represents the memory of the emulated machine.
 Use this object to interact with the machines memory.
 
+## Super class
+
+[`ramiga::RamigaComponent`](https://pepijn-devries.github.io/ramiga/reference/RamigaComponent.md)
+-\> `RamigaEmulator`
+
 ## Methods
 
 ### Public methods
-
-- [`RamigaMemory$new()`](#method-RamigaEmulator-new)
 
 - [`RamigaMemory$load_rom()`](#method-RamigaEmulator-load_rom)
 
@@ -21,24 +24,12 @@ Use this object to interact with the machines memory.
 
 - [`RamigaMemory$clone()`](#method-RamigaEmulator-clone)
 
-------------------------------------------------------------------------
+Inherited methods
 
-### Method `new()`
-
-The memory needs to be associated with an emulated machine. Therefore
-you need the emulator to initiate a memory object.
-
-#### Usage
-
-    RamigaMemory$new(emulator)
-
-#### Arguments
-
-- `emulator`:
-
-  An `RamigaEmulator` class object. The memory to be created needs to be
-  associated with a virtual machine. The initiated object will represent
-  the memory of the emulated machine.
+- [`ramiga::RamigaComponent$get_emulator()`](https://pepijn-devries.github.io/ramiga/reference/RamigaComponent.html#method-get_emulator)
+- [`ramiga::RamigaComponent$get_pointer()`](https://pepijn-devries.github.io/ramiga/reference/RamigaComponent.html#method-get_pointer)
+- [`ramiga::RamigaComponent$initialize()`](https://pepijn-devries.github.io/ramiga/reference/RamigaComponent.html#method-initialize)
+- [`ramiga::RamigaComponent$list_options()`](https://pepijn-devries.github.io/ramiga/reference/RamigaComponent.html#method-list_options)
 
 ------------------------------------------------------------------------
 

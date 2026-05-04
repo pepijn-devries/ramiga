@@ -2,6 +2,11 @@
 
 A class that represents the emulator's floppy drive.
 
+## Super class
+
+[`ramiga::RamigaComponent`](https://pepijn-devries.github.io/ramiga/reference/RamigaComponent.md)
+-\> `RamigaFloppyDrive`
+
 ## Methods
 
 ### Public methods
@@ -17,6 +22,12 @@ A class that represents the emulator's floppy drive.
 - [`RamigaFloppyDrive$print()`](#method-RamigaFloppyDrive-print)
 
 - [`RamigaFloppyDrive$clone()`](#method-RamigaFloppyDrive-clone)
+
+Inherited methods
+
+- [`ramiga::RamigaComponent$get_emulator()`](https://pepijn-devries.github.io/ramiga/reference/RamigaComponent.html#method-get_emulator)
+- [`ramiga::RamigaComponent$get_pointer()`](https://pepijn-devries.github.io/ramiga/reference/RamigaComponent.html#method-get_pointer)
+- [`ramiga::RamigaComponent$list_options()`](https://pepijn-devries.github.io/ramiga/reference/RamigaComponent.html#method-list_options)
 
 ------------------------------------------------------------------------
 

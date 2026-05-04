@@ -2,11 +2,14 @@
 
 A class that represents the emulator's Central Processing Unit (CPU).
 
+## Super class
+
+[`ramiga::RamigaComponent`](https://pepijn-devries.github.io/ramiga/reference/RamigaComponent.md)
+-\> `RamigaCPU`
+
 ## Methods
 
 ### Public methods
-
-- [`RamigaCPU$new()`](#method-RamigaCPU-new)
 
 - [`RamigaCPU$get_cycles()`](#method-RamigaCPU-get_cycles)
 
@@ -18,23 +21,12 @@ A class that represents the emulator's Central Processing Unit (CPU).
 
 - [`RamigaCPU$clone()`](#method-RamigaCPU-clone)
 
-------------------------------------------------------------------------
+Inherited methods
 
-### Method `new()`
-
-Initialise a RamigaCPU class object.
-
-#### Usage
-
-    RamigaCPU$new(emulator)
-
-#### Arguments
-
-- `emulator`:
-
-  An `RamigaEmulator` class object. The CPU to be created needs to be
-  associated with a virtual machine. The initiated object will represent
-  the CPU of the emulated machine.
+- [`ramiga::RamigaComponent$get_emulator()`](https://pepijn-devries.github.io/ramiga/reference/RamigaComponent.html#method-get_emulator)
+- [`ramiga::RamigaComponent$get_pointer()`](https://pepijn-devries.github.io/ramiga/reference/RamigaComponent.html#method-get_pointer)
+- [`ramiga::RamigaComponent$initialize()`](https://pepijn-devries.github.io/ramiga/reference/RamigaComponent.html#method-initialize)
+- [`ramiga::RamigaComponent$list_options()`](https://pepijn-devries.github.io/ramiga/reference/RamigaComponent.html#method-list_options)
 
 ------------------------------------------------------------------------
 

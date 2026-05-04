@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">ramiga</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.0.9003</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.0.9004</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -38,25 +38,58 @@
 
 
     <div class="section level2">
+    <h2 id="super-class">Super class<a class="anchor" aria-label="anchor" href="#super-class"></a></h2>
+    <p><code><a href="RamigaComponent.html">ramiga::RamigaComponent</a></code> -&gt; <code>RamigaEmulator</code></p>
+    </div>
+    <div class="section level2">
+    <h2 id="active-bindings">Active bindings<a class="anchor" aria-label="anchor" href="#active-bindings"></a></h2>
+    <p></p><div class="r6-active-bindings"><dl><dt><code>memory</code></dt>
+<dd><p>The emulated memory, represented by <a href="RamigaMemory.html">RamigaMemory</a></p></dd>
+
+
+<dt><code>cpu</code></dt>
+<dd><p>The emulated CPU, represented by <a href="RamigaCPU.html">RamigaCPU</a></p></dd>
+
+
+<dt><code>floppy_drives</code></dt>
+<dd><p>The emulated floppy drives, represented by
+a named <code>list</code> of <a href="RamigaFloppyDrive.html">RamigaFloppyDrive</a> objects.</p></dd>
+
+
+<dt><code>control_ports</code></dt>
+<dd><p>Control ports to which a virtual mouse or
+joystick can be connected. It is represented by the
+<a href="RamigaControlPort.html">RamigaControlPort</a> class.</p></dd>
+
+
+<dt><code>output</code></dt>
+<dd><p>Get object to capture emulator output. Handled
+by <a href="RamigaOutput.html">RamigaOutput</a>.</p></dd>
+
+
+</dl><p></p></div>
+    </div>
+    <div class="section level2">
     <h2 id="methods">Methods<a class="anchor" aria-label="anchor" href="#methods"></a></h2>
 
 <div class="section">
 <h3 id="public-methods">Public methods<a class="anchor" aria-label="anchor" href="#public-methods"></a></h3>
 
 <ul><li><p><a href="#method-RamigaEmulator-new"><code>RamigaEmulator$new()</code></a></p></li>
-<li><p><a href="#method-RamigaEmulator-get_memory"><code>RamigaEmulator$get_memory()</code></a></p></li>
-<li><p><a href="#method-RamigaEmulator-get_cpu"><code>RamigaEmulator$get_cpu()</code></a></p></li>
-<li><p><a href="#method-RamigaEmulator-get_floppy_drive"><code>RamigaEmulator$get_floppy_drive()</code></a></p></li>
 <li><p><a href="#method-RamigaEmulator-power_on"><code>RamigaEmulator$power_on()</code></a></p></li>
 <li><p><a href="#method-RamigaEmulator-power_off"><code>RamigaEmulator$power_off()</code></a></p></li>
 <li><p><a href="#method-RamigaEmulator-soft_reset"><code>RamigaEmulator$soft_reset()</code></a></p></li>
 <li><p><a href="#method-RamigaEmulator-run"><code>RamigaEmulator$run()</code></a></p></li>
 <li><p><a href="#method-RamigaEmulator-get_info"><code>RamigaEmulator$get_info()</code></a></p></li>
-<li><p><a href="#method-RamigaEmulator-get_pointer"><code>RamigaEmulator$get_pointer()</code></a></p></li>
-<li><p><a href="#method-RamigaEmulator-get_output"><code>RamigaEmulator$get_output()</code></a></p></li>
+<li><p><a href="#method-RamigaEmulator-get_config"><code>RamigaEmulator$get_config()</code></a></p></li>
+<li><p><a href="#method-RamigaEmulator-set_config"><code>RamigaEmulator$set_config()</code></a></p></li>
+<li><p><a href="#method-RamigaEmulator-get_version"><code>RamigaEmulator$get_version()</code></a></p></li>
 <li><p><a href="#method-RamigaEmulator-print"><code>RamigaEmulator$print()</code></a></p></li>
 <li><p><a href="#method-RamigaEmulator-clone"><code>RamigaEmulator$clone()</code></a></p></li>
-</ul></div><p></p><hr><a id="method-RamigaEmulator-new"></a><div class="section">
+</ul></div><p><details open><summary>Inherited methods</summary><ul><li><span class="pkg-link" data-pkg="ramiga" data-topic="RamigaComponent" data-id="get_emulator"><a href="RamigaComponent.html#method-get_emulator"><code>ramiga::RamigaComponent$get_emulator()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="ramiga" data-topic="RamigaComponent" data-id="get_pointer"><a href="RamigaComponent.html#method-get_pointer"><code>ramiga::RamigaComponent$get_pointer()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="ramiga" data-topic="RamigaComponent" data-id="list_options"><a href="RamigaComponent.html#method-list_options"><code>ramiga::RamigaComponent$list_options()</code></a></span></li>
+</ul></details></p><hr><a id="method-RamigaEmulator-new"></a><div class="section">
 <h3 id="method-new-">Method <code>new()</code><a class="anchor" aria-label="anchor" href="#method-new-"></a></h3>
 <p>Initialise a new Amiga emulator</p><div class="section">
 <h4 id="usage">Usage<a class="anchor" aria-label="anchor" href="#usage"></a></h4>
@@ -64,60 +97,16 @@
 </div>
 
 
-</div><p></p><hr><a id="method-RamigaEmulator-get_memory"></a><div class="section">
-<h3 id="method-get-memory-">Method <code>get_memory()</code><a class="anchor" aria-label="anchor" href="#method-get-memory-"></a></h3>
-<p>Get a representation of the machine's emulated memory</p><div class="section">
-<h4 id="usage-1">Usage<a class="anchor" aria-label="anchor" href="#usage-1"></a></h4>
-<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">RamigaEmulator</span><span class="op">$</span><span class="fu">get_memory</span><span class="op">(</span><span class="op">)</span></span></code></pre></div><p></p></div>
-</div>
-
-<div class="section">
-<h4 id="returns">Returns<a class="anchor" aria-label="anchor" href="#returns"></a></h4>
-<p>Returns a <a href="RamigaMemory.html">RamigaMemory</a> class object</p>
-</div>
-
-</div><p></p><hr><a id="method-RamigaEmulator-get_cpu"></a><div class="section">
-<h3 id="method-get-cpu-">Method <code>get_cpu()</code><a class="anchor" aria-label="anchor" href="#method-get-cpu-"></a></h3>
-<p>Get a representation of the machine's Central Processing Unit</p><div class="section">
-<h4 id="usage-2">Usage<a class="anchor" aria-label="anchor" href="#usage-2"></a></h4>
-<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">RamigaEmulator</span><span class="op">$</span><span class="fu">get_cpu</span><span class="op">(</span><span class="op">)</span></span></code></pre></div><p></p></div>
-</div>
-
-<div class="section">
-<h4 id="returns-1">Returns<a class="anchor" aria-label="anchor" href="#returns-1"></a></h4>
-<p>Returns a <a href="RamigaCPU.html">RamigaCPU</a> class object.</p>
-</div>
-
-</div><p></p><hr><a id="method-RamigaEmulator-get_floppy_drive"></a><div class="section">
-<h3 id="method-get-floppy-drive-">Method <code>get_floppy_drive()</code><a class="anchor" aria-label="anchor" href="#method-get-floppy-drive-"></a></h3>
-<p>Get a specific floppy drive from the emulated machine</p><div class="section">
-<h4 id="usage-3">Usage<a class="anchor" aria-label="anchor" href="#usage-3"></a></h4>
-<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">RamigaEmulator</span><span class="op">$</span><span class="fu">get_floppy_drive</span><span class="op">(</span><span class="va">drive_number</span><span class="op">)</span></span></code></pre></div><p></p></div>
-</div>
-
-<div class="section">
-<h4 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h4>
-<p></p><div class="arguments"><dl><dt><code>drive_number</code></dt>
-<dd><p>The emulator has 4 floppy drives, numbered 0 to 3. Pick which drive you want to operate</p></dd>
-
-
-</dl><p></p></div>
-</div>
-<div class="section">
-<h4 id="returns-2">Returns<a class="anchor" aria-label="anchor" href="#returns-2"></a></h4>
-<p>Returns a <a href="RamigaFloppyDrive.html">RamigaFloppyDrive</a> class object.</p>
-</div>
-
 </div><p></p><hr><a id="method-RamigaEmulator-power_on"></a><div class="section">
 <h3 id="method-power-on-">Method <code>power_on()</code><a class="anchor" aria-label="anchor" href="#method-power-on-"></a></h3>
 <p>When the emulator is initialised it is powered off.
 Call this to power on the virtual machine.</p><div class="section">
-<h4 id="usage-4">Usage<a class="anchor" aria-label="anchor" href="#usage-4"></a></h4>
+<h4 id="usage-1">Usage<a class="anchor" aria-label="anchor" href="#usage-1"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">RamigaEmulator</span><span class="op">$</span><span class="fu">power_on</span><span class="op">(</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
 <div class="section">
-<h4 id="returns-3">Returns<a class="anchor" aria-label="anchor" href="#returns-3"></a></h4>
+<h4 id="returns">Returns<a class="anchor" aria-label="anchor" href="#returns"></a></h4>
 <p>Returns the emulator object</p>
 </div>
 
@@ -125,12 +114,12 @@ Call this to power on the virtual machine.</p><div class="section">
 <h3 id="method-power-off-">Method <code>power_off()</code><a class="anchor" aria-label="anchor" href="#method-power-off-"></a></h3>
 <p>Power off emulator. Advisable if you plan to make adjustments
 to the emulated hardware configuration.</p><div class="section">
-<h4 id="usage-5">Usage<a class="anchor" aria-label="anchor" href="#usage-5"></a></h4>
+<h4 id="usage-2">Usage<a class="anchor" aria-label="anchor" href="#usage-2"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">RamigaEmulator</span><span class="op">$</span><span class="fu">power_off</span><span class="op">(</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
 <div class="section">
-<h4 id="returns-4">Returns<a class="anchor" aria-label="anchor" href="#returns-4"></a></h4>
+<h4 id="returns-1">Returns<a class="anchor" aria-label="anchor" href="#returns-1"></a></h4>
 <p>Returns the emulator object</p>
 </div>
 
@@ -139,12 +128,12 @@ to the emulated hardware configuration.</p><div class="section">
 <p>A soft reset, just resets the CPU, causing the system to reboot.
 This is similar to simultaneously pressing <ctrl> and both
 <amiga> keys on an original machine.</amiga></ctrl></p><div class="section">
-<h4 id="usage-6">Usage<a class="anchor" aria-label="anchor" href="#usage-6"></a></h4>
+<h4 id="usage-3">Usage<a class="anchor" aria-label="anchor" href="#usage-3"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">RamigaEmulator</span><span class="op">$</span><span class="fu">soft_reset</span><span class="op">(</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
 <div class="section">
-<h4 id="returns-5">Returns<a class="anchor" aria-label="anchor" href="#returns-5"></a></h4>
+<h4 id="returns-2">Returns<a class="anchor" aria-label="anchor" href="#returns-2"></a></h4>
 <p>Returns the emulator object</p>
 </div>
 
@@ -154,32 +143,71 @@ This is similar to simultaneously pressing <ctrl> and both
 running the virtual machine. It will hold up the R thread
 untill you interrupt (by pressing <esc>). After the interrupt
 the machine will be paused.</esc></p><div class="section">
-<h4 id="usage-7">Usage<a class="anchor" aria-label="anchor" href="#usage-7"></a></h4>
+<h4 id="usage-4">Usage<a class="anchor" aria-label="anchor" href="#usage-4"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">RamigaEmulator</span><span class="op">$</span><span class="fu">run</span><span class="op">(</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
 <div class="section">
-<h4 id="returns-6">Returns<a class="anchor" aria-label="anchor" href="#returns-6"></a></h4>
+<h4 id="returns-3">Returns<a class="anchor" aria-label="anchor" href="#returns-3"></a></h4>
 <p>Returns NULL invisibly.</p>
 </div>
 
 </div><p></p><hr><a id="method-RamigaEmulator-get_info"></a><div class="section">
 <h3 id="method-get-info-">Method <code>get_info()</code><a class="anchor" aria-label="anchor" href="#method-get-info-"></a></h3>
 <p>Get information about the emulator state.</p><div class="section">
-<h4 id="usage-8">Usage<a class="anchor" aria-label="anchor" href="#usage-8"></a></h4>
+<h4 id="usage-5">Usage<a class="anchor" aria-label="anchor" href="#usage-5"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">RamigaEmulator</span><span class="op">$</span><span class="fu">get_info</span><span class="op">(</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
 <div class="section">
-<h4 id="returns-7">Returns<a class="anchor" aria-label="anchor" href="#returns-7"></a></h4>
+<h4 id="returns-4">Returns<a class="anchor" aria-label="anchor" href="#returns-4"></a></h4>
 <p>Returns a named list.</p>
 </div>
 
-</div><p></p><hr><a id="method-RamigaEmulator-get_pointer"></a><div class="section">
-<h3 id="method-get-pointer-">Method <code>get_pointer()</code><a class="anchor" aria-label="anchor" href="#method-get-pointer-"></a></h3>
-<p>Get the pointer to the emulator object in memory</p><div class="section">
-<h4 id="usage-9">Usage<a class="anchor" aria-label="anchor" href="#usage-9"></a></h4>
-<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">RamigaEmulator</span><span class="op">$</span><span class="fu">get_pointer</span><span class="op">(</span><span class="va">...</span><span class="op">)</span></span></code></pre></div><p></p></div>
+</div><p></p><hr><a id="method-RamigaEmulator-get_config"></a><div class="section">
+<h3 id="method-get-config-">Method <code>get_config()</code><a class="anchor" aria-label="anchor" href="#method-get-config-"></a></h3>
+<p>Get information about the emulator configuration.</p><div class="section">
+<h4 id="usage-6">Usage<a class="anchor" aria-label="anchor" href="#usage-6"></a></h4>
+<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">RamigaEmulator</span><span class="op">$</span><span class="fu">get_config</span><span class="op">(</span><span class="op">)</span></span></code></pre></div><p></p></div>
+</div>
+
+<div class="section">
+<h4 id="returns-5">Returns<a class="anchor" aria-label="anchor" href="#returns-5"></a></h4>
+<p>Returns a named list.</p>
+</div>
+
+</div><p></p><hr><a id="method-RamigaEmulator-set_config"></a><div class="section">
+<h3 id="method-set-config-">Method <code>set_config()</code><a class="anchor" aria-label="anchor" href="#method-set-config-"></a></h3>
+<p>Quickly set the emulator configuration to one of the pre-specified
+schemes.</p><div class="section">
+<h4 id="usage-7">Usage<a class="anchor" aria-label="anchor" href="#usage-7"></a></h4>
+<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">RamigaEmulator</span><span class="op">$</span><span class="fu">set_config</span><span class="op">(</span>scheme <span class="op">=</span> <span class="st">"A500_OCS_1MB"</span>, <span class="va">...</span><span class="op">)</span></span></code></pre></div><p></p></div>
+</div>
+
+<div class="section">
+<h4 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h4>
+<p></p><div class="arguments"><dl><dt><code>scheme</code></dt>
+<dd><p>Should be one of the following strings:
+<code>"A1000_OCS_1MB"</code>, <code>"A500_OCS_1MB"</code> (default), <code>"A500_ECS_1MB"</code>,
+or <code>"A500_PLUS_1MB"</code>.</p></dd>
+
+
+<dt><code>...</code></dt>
+<dd><p>Ignored</p></dd>
+
+
+</dl><p></p></div>
+</div>
+<div class="section">
+<h4 id="returns-6">Returns<a class="anchor" aria-label="anchor" href="#returns-6"></a></h4>
+<p>Returns a string</p>
+</div>
+
+</div><p></p><hr><a id="method-RamigaEmulator-get_version"></a><div class="section">
+<h3 id="method-get-version-">Method <code>get_version()</code><a class="anchor" aria-label="anchor" href="#method-get-version-"></a></h3>
+<p>Get the version number of the vAmiga core used by this package</p><div class="section">
+<h4 id="usage-8">Usage<a class="anchor" aria-label="anchor" href="#usage-8"></a></h4>
+<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">RamigaEmulator</span><span class="op">$</span><span class="fu">get_version</span><span class="op">(</span><span class="va">...</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
 <div class="section">
@@ -191,16 +219,15 @@ the machine will be paused.</esc></p><div class="section">
 </dl><p></p></div>
 </div>
 <div class="section">
-<h4 id="returns-8">Returns<a class="anchor" aria-label="anchor" href="#returns-8"></a></h4>
-<p>Returns the <code>externalptr</code> pointing to the C++ class
-instance in memory</p>
+<h4 id="returns-7">Returns<a class="anchor" aria-label="anchor" href="#returns-7"></a></h4>
+<p>Returns a string</p>
 </div>
 
-</div><p></p><hr><a id="method-RamigaEmulator-get_output"></a><div class="section">
-<h3 id="method-get-output-">Method <code>get_output()</code><a class="anchor" aria-label="anchor" href="#method-get-output-"></a></h3>
-<p>Get object to capture emulator output.</p><div class="section">
-<h4 id="usage-10">Usage<a class="anchor" aria-label="anchor" href="#usage-10"></a></h4>
-<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">RamigaEmulator</span><span class="op">$</span><span class="fu">get_output</span><span class="op">(</span><span class="va">...</span><span class="op">)</span></span></code></pre></div><p></p></div>
+</div><p></p><hr><a id="method-RamigaEmulator-print"></a><div class="section">
+<h3 id="method-print-">Method <code><a href="https://rdrr.io/r/base/print.html" class="external-link">print()</a></code><a class="anchor" aria-label="anchor" href="#method-print-"></a></h3>
+<p>Prints basic information about the emulator.</p><div class="section">
+<h4 id="usage-9">Usage<a class="anchor" aria-label="anchor" href="#usage-9"></a></h4>
+<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">RamigaEmulator</span><span class="op">$</span><span class="fu">print</span><span class="op">(</span><span class="va">...</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
 <div class="section">
@@ -211,38 +238,16 @@ instance in memory</p>
 
 </dl><p></p></div>
 </div>
-<div class="section">
-<h4 id="returns-9">Returns<a class="anchor" aria-label="anchor" href="#returns-9"></a></h4>
-<p>Returns <a href="RamigaOutput.html">RamigaOutput</a> class object</p>
-</div>
-
-</div><p></p><hr><a id="method-RamigaEmulator-print"></a><div class="section">
-<h3 id="method-print-">Method <code><a href="https://rdrr.io/r/base/print.html" class="external-link">print()</a></code><a class="anchor" aria-label="anchor" href="#method-print-"></a></h3>
-
-<div class="section">
-<h4 id="usage-11">Usage<a class="anchor" aria-label="anchor" href="#usage-11"></a></h4>
-<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">RamigaEmulator</span><span class="op">$</span><span class="fu">print</span><span class="op">(</span><span class="va">...</span><span class="op">)</span></span></code></pre></div><p></p></div>
-</div>
-
-<div class="section">
-<h4 id="arguments-3">Arguments<a class="anchor" aria-label="anchor" href="#arguments-3"></a></h4>
-<p></p><div class="arguments"><dl><dt><code>...</code></dt>
-<dd><p>Ignored
-Prints basic information about the emulator.</p></dd>
-
-
-</dl><p></p></div>
-</div>
 
 </div><p></p><hr><a id="method-RamigaEmulator-clone"></a><div class="section">
 <h3 id="method-clone-">Method <code>clone()</code><a class="anchor" aria-label="anchor" href="#method-clone-"></a></h3>
 <p>The objects of this class are cloneable with this method.</p><div class="section">
-<h4 id="usage-12">Usage<a class="anchor" aria-label="anchor" href="#usage-12"></a></h4>
+<h4 id="usage-10">Usage<a class="anchor" aria-label="anchor" href="#usage-10"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">RamigaEmulator</span><span class="op">$</span><span class="fu">clone</span><span class="op">(</span>deep <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
 <div class="section">
-<h4 id="arguments-4">Arguments<a class="anchor" aria-label="anchor" href="#arguments-4"></a></h4>
+<h4 id="arguments-3">Arguments<a class="anchor" aria-label="anchor" href="#arguments-3"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>deep</code></dt>
 <dd><p>Whether to make a deep clone.</p></dd>
 

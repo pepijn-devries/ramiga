@@ -25,17 +25,19 @@ It will **not**:
 You can install the development version of ramiga like so:
 
 ``` r
+
 remotes::install_github("pepijn-devries/ramiga")
 ```
 
 ## Example
 
 ``` r
+
 library(ramiga)
 emu <- RamigaEmulator$new()
 
 emu$power_on()
-#> Amiga emulator powered on:
+#> Amiga emulator (PAL) powered on:
 #>   CPU: 68000
 #>   Memory: chip 0.5Mb; slow 0.5Mb; fast 0.0Mb; ROM: Not loaded
 ```
@@ -76,6 +78,12 @@ someone else to confront.
 
 - [`RamigaCPU`](https://pepijn-devries.github.io/ramiga/reference/RamigaCPU.md)
   : The RamigaCPU R6 Class
+- [`RamigaComponent`](https://pepijn-devries.github.io/ramiga/reference/RamigaComponent.md)
+  : The RamigaComponent R6 Class
+- [`RamigaControlDevice`](https://pepijn-devries.github.io/ramiga/reference/RamigaControlDevice.md)
+  : The RamigaControlDevice R6 Class
+- [`RamigaControlPort`](https://pepijn-devries.github.io/ramiga/reference/RamigaControlPort.md)
+  : The RamigaControlPort R6 Class
 - [`RamigaEmulator`](https://pepijn-devries.github.io/ramiga/reference/RamigaEmulator.md)
   : The RamigaEmulator R6 Class
 - [`RamigaFileSystem`](https://pepijn-devries.github.io/ramiga/reference/RamigaFileSystem.md)

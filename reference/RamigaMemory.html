@@ -9,7 +9,7 @@ Use this object to interact with the machines memory."><meta property="og:image"
 
     <a class="navbar-brand me-2" href="../index.html">ramiga</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.0.9003</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.0.9004</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -41,45 +41,35 @@ Use this object to interact with the machines memory.</p>
 
 
     <div class="section level2">
+    <h2 id="super-class">Super class<a class="anchor" aria-label="anchor" href="#super-class"></a></h2>
+    <p><code><a href="RamigaComponent.html">ramiga::RamigaComponent</a></code> -&gt; <code>RamigaEmulator</code></p>
+    </div>
+    <div class="section level2">
     <h2 id="methods">Methods<a class="anchor" aria-label="anchor" href="#methods"></a></h2>
 
 <div class="section">
 <h3 id="public-methods">Public methods<a class="anchor" aria-label="anchor" href="#public-methods"></a></h3>
 
-<ul><li><p><a href="#method-RamigaEmulator-new"><code>RamigaMemory$new()</code></a></p></li>
-<li><p><a href="#method-RamigaEmulator-load_rom"><code>RamigaMemory$load_rom()</code></a></p></li>
+<ul><li><p><a href="#method-RamigaEmulator-load_rom"><code>RamigaMemory$load_rom()</code></a></p></li>
 <li><p><a href="#method-RamigaEmulator-has_rom"><code>RamigaMemory$has_rom()</code></a></p></li>
 <li><p><a href="#method-RamigaEmulator-get_rom_traits"><code>RamigaMemory$get_rom_traits()</code></a></p></li>
 <li><p><a href="#method-RamigaEmulator-get_config"><code>RamigaMemory$get_config()</code></a></p></li>
 <li><p><a href="#method-RamigaEmulator-print"><code>RamigaMemory$print()</code></a></p></li>
 <li><p><a href="#method-RamigaEmulator-clone"><code>RamigaMemory$clone()</code></a></p></li>
-</ul></div><p></p><hr><a id="method-RamigaEmulator-new"></a><div class="section">
-<h3 id="method-new-">Method <code>new()</code><a class="anchor" aria-label="anchor" href="#method-new-"></a></h3>
-<p>The memory needs to be associated with an emulated machine.
-Therefore you need the emulator to initiate a memory object.</p><div class="section">
-<h4 id="usage">Usage<a class="anchor" aria-label="anchor" href="#usage"></a></h4>
-<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va"><a href="../reference/RamigaMemory.html">RamigaMemory</a></span><span class="op">$</span><span class="fu">new</span><span class="op">(</span><span class="va">emulator</span><span class="op">)</span></span></code></pre></div><p></p></div>
-</div>
-
-<div class="section">
-<h4 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h4>
-<p></p><div class="arguments"><dl><dt><code>emulator</code></dt>
-<dd><p>An <code>RamigaEmulator</code> class object. The memory to be created needs to be associated with a virtual machine. The initiated object will represent the memory of the emulated machine.</p></dd>
-
-
-</dl><p></p></div>
-</div>
-
-</div><p></p><hr><a id="method-RamigaEmulator-load_rom"></a><div class="section">
+</ul></div><p><details open><summary>Inherited methods</summary><ul><li><span class="pkg-link" data-pkg="ramiga" data-topic="RamigaComponent" data-id="get_emulator"><a href="RamigaComponent.html#method-get_emulator"><code>ramiga::RamigaComponent$get_emulator()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="ramiga" data-topic="RamigaComponent" data-id="get_pointer"><a href="RamigaComponent.html#method-get_pointer"><code>ramiga::RamigaComponent$get_pointer()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="ramiga" data-topic="RamigaComponent" data-id="initialize"><a href="RamigaComponent.html#method-initialize"><code>ramiga::RamigaComponent$initialize()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="ramiga" data-topic="RamigaComponent" data-id="list_options"><a href="RamigaComponent.html#method-list_options"><code>ramiga::RamigaComponent$list_options()</code></a></span></li>
+</ul></details></p><hr><a id="method-RamigaEmulator-load_rom"></a><div class="section">
 <h3 id="method-load-rom-">Method <code>load_rom()</code><a class="anchor" aria-label="anchor" href="#method-load-rom-"></a></h3>
 <p>Load an operating system to ROM. It can be an official Kickstart
 ROM image, or the rom provided for AROS Research Operating System.</p><div class="section">
-<h4 id="usage-1">Usage<a class="anchor" aria-label="anchor" href="#usage-1"></a></h4>
+<h4 id="usage">Usage<a class="anchor" aria-label="anchor" href="#usage"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">RamigaMemory</span><span class="op">$</span><span class="fu">load_rom</span><span class="op">(</span><span class="va">path</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
 <div class="section">
-<h4 id="arguments-1">Arguments<a class="anchor" aria-label="anchor" href="#arguments-1"></a></h4>
+<h4 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>path</code></dt>
 <dd><p>File path pointing to the location of the ROM file.</p></dd>
 
@@ -94,7 +84,7 @@ ROM image, or the rom provided for AROS Research Operating System.</p><div class
 </div><p></p><hr><a id="method-RamigaEmulator-has_rom"></a><div class="section">
 <h3 id="method-has-rom-">Method <code>has_rom()</code><a class="anchor" aria-label="anchor" href="#method-has-rom-"></a></h3>
 <p>Check if a ROM image was successfully loaded</p><div class="section">
-<h4 id="usage-2">Usage<a class="anchor" aria-label="anchor" href="#usage-2"></a></h4>
+<h4 id="usage-1">Usage<a class="anchor" aria-label="anchor" href="#usage-1"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">RamigaMemory</span><span class="op">$</span><span class="fu">has_rom</span><span class="op">(</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
@@ -106,7 +96,7 @@ ROM image, or the rom provided for AROS Research Operating System.</p><div class
 </div><p></p><hr><a id="method-RamigaEmulator-get_rom_traits"></a><div class="section">
 <h3 id="method-get-rom-traits-">Method <code>get_rom_traits()</code><a class="anchor" aria-label="anchor" href="#method-get-rom-traits-"></a></h3>
 <p>Get ROM characteristics if known.</p><div class="section">
-<h4 id="usage-3">Usage<a class="anchor" aria-label="anchor" href="#usage-3"></a></h4>
+<h4 id="usage-2">Usage<a class="anchor" aria-label="anchor" href="#usage-2"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">RamigaMemory</span><span class="op">$</span><span class="fu">get_rom_traits</span><span class="op">(</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
@@ -119,7 +109,7 @@ A named list with ROM traits otherwise.</p>
 </div><p></p><hr><a id="method-RamigaEmulator-get_config"></a><div class="section">
 <h3 id="method-get-config-">Method <code>get_config()</code><a class="anchor" aria-label="anchor" href="#method-get-config-"></a></h3>
 <p>Get details on the configuration of the emulated memory</p><div class="section">
-<h4 id="usage-4">Usage<a class="anchor" aria-label="anchor" href="#usage-4"></a></h4>
+<h4 id="usage-3">Usage<a class="anchor" aria-label="anchor" href="#usage-3"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">RamigaMemory</span><span class="op">$</span><span class="fu">get_config</span><span class="op">(</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
@@ -131,12 +121,12 @@ A named list with ROM traits otherwise.</p>
 </div><p></p><hr><a id="method-RamigaEmulator-print"></a><div class="section">
 <h3 id="method-print-">Method <code><a href="https://rdrr.io/r/base/print.html" class="external-link">print()</a></code><a class="anchor" aria-label="anchor" href="#method-print-"></a></h3>
 <p>Print some basic information about the emulated memory.</p><div class="section">
-<h4 id="usage-5">Usage<a class="anchor" aria-label="anchor" href="#usage-5"></a></h4>
+<h4 id="usage-4">Usage<a class="anchor" aria-label="anchor" href="#usage-4"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">RamigaMemory</span><span class="op">$</span><span class="fu">print</span><span class="op">(</span><span class="va">...</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
 <div class="section">
-<h4 id="arguments-2">Arguments<a class="anchor" aria-label="anchor" href="#arguments-2"></a></h4>
+<h4 id="arguments-1">Arguments<a class="anchor" aria-label="anchor" href="#arguments-1"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>...</code></dt>
 <dd><p>Ignored.</p></dd>
 
@@ -147,12 +137,12 @@ A named list with ROM traits otherwise.</p>
 </div><p></p><hr><a id="method-RamigaEmulator-clone"></a><div class="section">
 <h3 id="method-clone-">Method <code>clone()</code><a class="anchor" aria-label="anchor" href="#method-clone-"></a></h3>
 <p>The objects of this class are cloneable with this method.</p><div class="section">
-<h4 id="usage-6">Usage<a class="anchor" aria-label="anchor" href="#usage-6"></a></h4>
+<h4 id="usage-5">Usage<a class="anchor" aria-label="anchor" href="#usage-5"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">RamigaMemory</span><span class="op">$</span><span class="fu">clone</span><span class="op">(</span>deep <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
 <div class="section">
-<h4 id="arguments-3">Arguments<a class="anchor" aria-label="anchor" href="#arguments-3"></a></h4>
+<h4 id="arguments-2">Arguments<a class="anchor" aria-label="anchor" href="#arguments-2"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>deep</code></dt>
 <dd><p>Whether to make a deep clone.</p></dd>
 

@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">ramiga</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.0.9003</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.0.9004</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -38,37 +38,28 @@
 
 
     <div class="section level2">
+    <h2 id="super-class">Super class<a class="anchor" aria-label="anchor" href="#super-class"></a></h2>
+    <p><code><a href="RamigaComponent.html">ramiga::RamigaComponent</a></code> -&gt; <code>RamigaCPU</code></p>
+    </div>
+    <div class="section level2">
     <h2 id="methods">Methods<a class="anchor" aria-label="anchor" href="#methods"></a></h2>
 
 <div class="section">
 <h3 id="public-methods">Public methods<a class="anchor" aria-label="anchor" href="#public-methods"></a></h3>
 
-<ul><li><p><a href="#method-RamigaCPU-new"><code>RamigaCPU$new()</code></a></p></li>
-<li><p><a href="#method-RamigaCPU-get_cycles"><code>RamigaCPU$get_cycles()</code></a></p></li>
+<ul><li><p><a href="#method-RamigaCPU-get_cycles"><code>RamigaCPU$get_cycles()</code></a></p></li>
 <li><p><a href="#method-RamigaCPU-get_program_counter"><code>RamigaCPU$get_program_counter()</code></a></p></li>
 <li><p><a href="#method-RamigaCPU-get_config"><code>RamigaCPU$get_config()</code></a></p></li>
 <li><p><a href="#method-RamigaCPU-print"><code>RamigaCPU$print()</code></a></p></li>
 <li><p><a href="#method-RamigaCPU-clone"><code>RamigaCPU$clone()</code></a></p></li>
-</ul></div><p></p><hr><a id="method-RamigaCPU-new"></a><div class="section">
-<h3 id="method-new-">Method <code>new()</code><a class="anchor" aria-label="anchor" href="#method-new-"></a></h3>
-<p>Initialise a RamigaCPU class object.</p><div class="section">
-<h4 id="usage">Usage<a class="anchor" aria-label="anchor" href="#usage"></a></h4>
-<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va"><a href="../reference/RamigaCPU.html">RamigaCPU</a></span><span class="op">$</span><span class="fu">new</span><span class="op">(</span><span class="va">emulator</span><span class="op">)</span></span></code></pre></div><p></p></div>
-</div>
-
-<div class="section">
-<h4 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h4>
-<p></p><div class="arguments"><dl><dt><code>emulator</code></dt>
-<dd><p>An <code>RamigaEmulator</code> class object. The CPU to be created needs to be associated with a virtual machine. The initiated object will represent the CPU of the emulated machine.</p></dd>
-
-
-</dl><p></p></div>
-</div>
-
-</div><p></p><hr><a id="method-RamigaCPU-get_cycles"></a><div class="section">
+</ul></div><p><details open><summary>Inherited methods</summary><ul><li><span class="pkg-link" data-pkg="ramiga" data-topic="RamigaComponent" data-id="get_emulator"><a href="RamigaComponent.html#method-get_emulator"><code>ramiga::RamigaComponent$get_emulator()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="ramiga" data-topic="RamigaComponent" data-id="get_pointer"><a href="RamigaComponent.html#method-get_pointer"><code>ramiga::RamigaComponent$get_pointer()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="ramiga" data-topic="RamigaComponent" data-id="initialize"><a href="RamigaComponent.html#method-initialize"><code>ramiga::RamigaComponent$initialize()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="ramiga" data-topic="RamigaComponent" data-id="list_options"><a href="RamigaComponent.html#method-list_options"><code>ramiga::RamigaComponent$list_options()</code></a></span></li>
+</ul></details></p><hr><a id="method-RamigaCPU-get_cycles"></a><div class="section">
 <h3 id="method-get-cycles-">Method <code>get_cycles()</code><a class="anchor" aria-label="anchor" href="#method-get-cycles-"></a></h3>
 <p>Get the CPU cycle count since the emulator started</p><div class="section">
-<h4 id="usage-1">Usage<a class="anchor" aria-label="anchor" href="#usage-1"></a></h4>
+<h4 id="usage">Usage<a class="anchor" aria-label="anchor" href="#usage"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">RamigaCPU</span><span class="op">$</span><span class="fu">get_cycles</span><span class="op">(</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
@@ -80,7 +71,7 @@
 </div><p></p><hr><a id="method-RamigaCPU-get_program_counter"></a><div class="section">
 <h3 id="method-get-program-counter-">Method <code>get_program_counter()</code><a class="anchor" aria-label="anchor" href="#method-get-program-counter-"></a></h3>
 <p>Get the memory address of the currently running program</p><div class="section">
-<h4 id="usage-2">Usage<a class="anchor" aria-label="anchor" href="#usage-2"></a></h4>
+<h4 id="usage-1">Usage<a class="anchor" aria-label="anchor" href="#usage-1"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">RamigaCPU</span><span class="op">$</span><span class="fu">get_program_counter</span><span class="op">(</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
@@ -94,7 +85,7 @@ returned as a <code>numeric</code> (double) value.</p>
 </div><p></p><hr><a id="method-RamigaCPU-get_config"></a><div class="section">
 <h3 id="method-get-config-">Method <code>get_config()</code><a class="anchor" aria-label="anchor" href="#method-get-config-"></a></h3>
 <p>Get current CPU configuration details</p><div class="section">
-<h4 id="usage-3">Usage<a class="anchor" aria-label="anchor" href="#usage-3"></a></h4>
+<h4 id="usage-2">Usage<a class="anchor" aria-label="anchor" href="#usage-2"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">RamigaCPU</span><span class="op">$</span><span class="fu">get_config</span><span class="op">(</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
@@ -106,12 +97,12 @@ returned as a <code>numeric</code> (double) value.</p>
 </div><p></p><hr><a id="method-RamigaCPU-print"></a><div class="section">
 <h3 id="method-print-">Method <code><a href="https://rdrr.io/r/base/print.html" class="external-link">print()</a></code><a class="anchor" aria-label="anchor" href="#method-print-"></a></h3>
 <p>Print some basic information about the CPU</p><div class="section">
-<h4 id="usage-4">Usage<a class="anchor" aria-label="anchor" href="#usage-4"></a></h4>
+<h4 id="usage-3">Usage<a class="anchor" aria-label="anchor" href="#usage-3"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">RamigaCPU</span><span class="op">$</span><span class="fu">print</span><span class="op">(</span><span class="va">...</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
 <div class="section">
-<h4 id="arguments-1">Arguments<a class="anchor" aria-label="anchor" href="#arguments-1"></a></h4>
+<h4 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>...</code></dt>
 <dd><p>Ignored</p></dd>
 
@@ -122,12 +113,12 @@ returned as a <code>numeric</code> (double) value.</p>
 </div><p></p><hr><a id="method-RamigaCPU-clone"></a><div class="section">
 <h3 id="method-clone-">Method <code>clone()</code><a class="anchor" aria-label="anchor" href="#method-clone-"></a></h3>
 <p>The objects of this class are cloneable with this method.</p><div class="section">
-<h4 id="usage-5">Usage<a class="anchor" aria-label="anchor" href="#usage-5"></a></h4>
+<h4 id="usage-4">Usage<a class="anchor" aria-label="anchor" href="#usage-4"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">RamigaCPU</span><span class="op">$</span><span class="fu">clone</span><span class="op">(</span>deep <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
 <div class="section">
-<h4 id="arguments-2">Arguments<a class="anchor" aria-label="anchor" href="#arguments-2"></a></h4>
+<h4 id="arguments-1">Arguments<a class="anchor" aria-label="anchor" href="#arguments-1"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>deep</code></dt>
 <dd><p>Whether to make a deep clone.</p></dd>
 

@@ -4,6 +4,12 @@
 
 - [`RamigaCPU`](https://pepijn-devries.github.io/ramiga/reference/RamigaCPU.md)
   : The RamigaCPU R6 Class
+- [`RamigaComponent`](https://pepijn-devries.github.io/ramiga/reference/RamigaComponent.md)
+  : The RamigaComponent R6 Class
+- [`RamigaControlDevice`](https://pepijn-devries.github.io/ramiga/reference/RamigaControlDevice.md)
+  : The RamigaControlDevice R6 Class
+- [`RamigaControlPort`](https://pepijn-devries.github.io/ramiga/reference/RamigaControlPort.md)
+  : The RamigaControlPort R6 Class
 - [`RamigaEmulator`](https://pepijn-devries.github.io/ramiga/reference/RamigaEmulator.md)
   : The RamigaEmulator R6 Class
 - [`RamigaFileSystem`](https://pepijn-devries.github.io/ramiga/reference/RamigaFileSystem.md)

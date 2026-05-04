@@ -25,17 +25,19 @@ It will **not**:
 You can install the development version of ramiga like so:
 
 ``` r
+
 remotes::install_github("pepijn-devries/ramiga")
 ```
 
 ## Example
 
 ``` r
+
 library(ramiga)
 emu <- RamigaEmulator$new()
 
 emu$power_on()
-#> Amiga emulator powered on:
+#> Amiga emulator (PAL) powered on:
 #>   CPU: 68000
 #>   Memory: chip 0.5Mb; slow 0.5Mb; fast 0.0Mb; ROM: Not loaded
 ```
