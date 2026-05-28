@@ -14,7 +14,7 @@ RamigaOutput <-
       #' the virtual device.
       #' @param file A path to a png file where to store the captured frame.
       #' @param ... Ignored
-      #' @return If file is missing it returns a [grDevice::as.raster()] object.
+      #' @return If file is missing it returns a [grDevices::as.raster()] object.
       #' Otherwise, it will save it as png file to the specified path and returns
       #' nothing.
       capture_frame = function(file, ...) {
@@ -27,15 +27,24 @@ RamigaOutput <-
       },
 
       #' @description
-      #' TODO
-      #' @param file TODO
-      #' @param ... TODO
-      #' @return TODO
+      #' Capture the audio that is currently on the output buffer.
+      #' While the emulator is running, audio is continuously generated
+      #' and stored in a ring buffer. Use this function to collect data
+      #' in this buffer. It can only be read once and the buffer has
+      #' a limited capacity.
+      #' @param file A file path to store the audio (RIFF wav format).
+      #' @param ... Ignored
+      #' @return If file is omitted, the audio data is returned as
+      #' a `matrix` of `numeric` values. It returns 2 rows (for both
+      #' stereo channels). The number of columns correspond with the
+      #' number of samples available from the buffer. The waveform
+      #' is scaled between -1 and +1, such that it can be played
+      #' directly with `audio::play()`.
       capture_audio_buffer = function(file, ...) {
         if (missing(file)) {
-          #TODO
+          stereo_audio_buffer_(private$pointer)
         } else {
-          #TODO
+          save_wav_(private$pointer, file, 44100L)
         }
       },
       

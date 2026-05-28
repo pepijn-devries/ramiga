@@ -37,7 +37,7 @@ Most emulator components don't need to be initialised. It's simplest
 to create an emulator with \code{RamigaEmulator$new()}. All components
 can be accessed through the R6 object fields.
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{RamigaComponent$new(emulator, ...)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{RamigaComponent$new(emulator, component_id, ...)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
@@ -46,6 +46,9 @@ can be accessed through the R6 object fields.
 \item{\code{emulator}}{All emulator components should be part of an emulator.
 All components (except for the emulator itself) therefore needs the,
 initialised with an emulator.}
+
+\item{\code{component_id}}{Integer value used to identify different
+types of components.}
 
 \item{\code{...}}{Ignored}
 }

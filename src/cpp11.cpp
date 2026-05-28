@@ -6,82 +6,98 @@
 #include <R_ext/Visibility.h>
 
 // ramiga_audio.cpp
-cpp11::doubles mono_audio_buffer_(cpp11::external_pointer<VAmiga> amiga);
-extern "C" SEXP _ramiga_mono_audio_buffer_(SEXP amiga) {
+void clear_audio_stream_(cpp11::external_pointer<VAmigaWrapper> amiga);
+extern "C" SEXP _ramiga_clear_audio_stream_(SEXP amiga) {
   BEGIN_CPP11
-    return cpp11::as_sexp(mono_audio_buffer_(cpp11::as_cpp<cpp11::decay_t<cpp11::external_pointer<VAmiga>>>(amiga)));
+    clear_audio_stream_(cpp11::as_cpp<cpp11::decay_t<cpp11::external_pointer<VAmigaWrapper>>>(amiga));
+    return R_NilValue;
+  END_CPP11
+}
+// ramiga_audio.cpp
+cpp11::doubles_matrix<> stereo_audio_buffer_(cpp11::external_pointer<VAmigaWrapper> amiga);
+extern "C" SEXP _ramiga_stereo_audio_buffer_(SEXP amiga) {
+  BEGIN_CPP11
+    return cpp11::as_sexp(stereo_audio_buffer_(cpp11::as_cpp<cpp11::decay_t<cpp11::external_pointer<VAmigaWrapper>>>(amiga)));
+  END_CPP11
+}
+// ramiga_audio.cpp
+void save_wav_(cpp11::external_pointer<VAmigaWrapper> amiga, std::string path, int sample_rate);
+extern "C" SEXP _ramiga_save_wav_(SEXP amiga, SEXP path, SEXP sample_rate) {
+  BEGIN_CPP11
+    save_wav_(cpp11::as_cpp<cpp11::decay_t<cpp11::external_pointer<VAmigaWrapper>>>(amiga), cpp11::as_cpp<cpp11::decay_t<std::string>>(path), cpp11::as_cpp<cpp11::decay_t<int>>(sample_rate));
+    return R_NilValue;
   END_CPP11
 }
 // ramiga_components.cpp
-cpp11::list r_list_options_(int component_id, cpp11::external_pointer<VAmiga> amiga, int index);
+cpp11::list r_list_options_(int component_id, cpp11::external_pointer<VAmigaWrapper> amiga, int index);
 extern "C" SEXP _ramiga_r_list_options_(SEXP component_id, SEXP amiga, SEXP index) {
   BEGIN_CPP11
-    return cpp11::as_sexp(r_list_options_(cpp11::as_cpp<cpp11::decay_t<int>>(component_id), cpp11::as_cpp<cpp11::decay_t<cpp11::external_pointer<VAmiga>>>(amiga), cpp11::as_cpp<cpp11::decay_t<int>>(index)));
+    return cpp11::as_sexp(r_list_options_(cpp11::as_cpp<cpp11::decay_t<int>>(component_id), cpp11::as_cpp<cpp11::decay_t<cpp11::external_pointer<VAmigaWrapper>>>(amiga), cpp11::as_cpp<cpp11::decay_t<int>>(index)));
   END_CPP11
 }
 // ramiga_components.cpp
-cpp11::sexp r_get_option_(int component_id, cpp11::external_pointer<VAmiga> amiga, int index, std::string key);
+cpp11::sexp r_get_option_(int component_id, cpp11::external_pointer<VAmigaWrapper> amiga, int index, std::string key);
 extern "C" SEXP _ramiga_r_get_option_(SEXP component_id, SEXP amiga, SEXP index, SEXP key) {
   BEGIN_CPP11
-    return cpp11::as_sexp(r_get_option_(cpp11::as_cpp<cpp11::decay_t<int>>(component_id), cpp11::as_cpp<cpp11::decay_t<cpp11::external_pointer<VAmiga>>>(amiga), cpp11::as_cpp<cpp11::decay_t<int>>(index), cpp11::as_cpp<cpp11::decay_t<std::string>>(key)));
+    return cpp11::as_sexp(r_get_option_(cpp11::as_cpp<cpp11::decay_t<int>>(component_id), cpp11::as_cpp<cpp11::decay_t<cpp11::external_pointer<VAmigaWrapper>>>(amiga), cpp11::as_cpp<cpp11::decay_t<int>>(index), cpp11::as_cpp<cpp11::decay_t<std::string>>(key)));
   END_CPP11
 }
 // ramiga_components.cpp
-void r_set_option_(int component_id, cpp11::external_pointer<VAmiga> amiga, int index, std::string key, std::string value);
+void r_set_option_(int component_id, cpp11::external_pointer<VAmigaWrapper> amiga, int index, std::string key, std::string value);
 extern "C" SEXP _ramiga_r_set_option_(SEXP component_id, SEXP amiga, SEXP index, SEXP key, SEXP value) {
   BEGIN_CPP11
-    r_set_option_(cpp11::as_cpp<cpp11::decay_t<int>>(component_id), cpp11::as_cpp<cpp11::decay_t<cpp11::external_pointer<VAmiga>>>(amiga), cpp11::as_cpp<cpp11::decay_t<int>>(index), cpp11::as_cpp<cpp11::decay_t<std::string>>(key), cpp11::as_cpp<cpp11::decay_t<std::string>>(value));
+    r_set_option_(cpp11::as_cpp<cpp11::decay_t<int>>(component_id), cpp11::as_cpp<cpp11::decay_t<cpp11::external_pointer<VAmigaWrapper>>>(amiga), cpp11::as_cpp<cpp11::decay_t<int>>(index), cpp11::as_cpp<cpp11::decay_t<std::string>>(key), cpp11::as_cpp<cpp11::decay_t<std::string>>(value));
     return R_NilValue;
   END_CPP11
 }
 // ramiga_controlports.cpp
-cpp11::external_pointer<Joystick> joystick_(cpp11::external_pointer<VAmiga> amiga, int port_number);
+cpp11::external_pointer<Joystick> joystick_(cpp11::external_pointer<VAmigaWrapper> amiga, int port_number);
 extern "C" SEXP _ramiga_joystick_(SEXP amiga, SEXP port_number) {
   BEGIN_CPP11
-    return cpp11::as_sexp(joystick_(cpp11::as_cpp<cpp11::decay_t<cpp11::external_pointer<VAmiga>>>(amiga), cpp11::as_cpp<cpp11::decay_t<int>>(port_number)));
+    return cpp11::as_sexp(joystick_(cpp11::as_cpp<cpp11::decay_t<cpp11::external_pointer<VAmigaWrapper>>>(amiga), cpp11::as_cpp<cpp11::decay_t<int>>(port_number)));
   END_CPP11
 }
 // ramiga_controlports.cpp
-cpp11::external_pointer<Mouse> mouse_(cpp11::external_pointer<VAmiga> amiga, int port_number);
+cpp11::external_pointer<Mouse> mouse_(cpp11::external_pointer<VAmigaWrapper> amiga, int port_number);
 extern "C" SEXP _ramiga_mouse_(SEXP amiga, SEXP port_number) {
   BEGIN_CPP11
-    return cpp11::as_sexp(mouse_(cpp11::as_cpp<cpp11::decay_t<cpp11::external_pointer<VAmiga>>>(amiga), cpp11::as_cpp<cpp11::decay_t<int>>(port_number)));
+    return cpp11::as_sexp(mouse_(cpp11::as_cpp<cpp11::decay_t<cpp11::external_pointer<VAmigaWrapper>>>(amiga), cpp11::as_cpp<cpp11::decay_t<int>>(port_number)));
   END_CPP11
 }
 // ramiga_cpu.cpp
-double get_cpu_cycles_(cpp11::external_pointer<VAmiga> amiga);
+double get_cpu_cycles_(cpp11::external_pointer<VAmigaWrapper> amiga);
 extern "C" SEXP _ramiga_get_cpu_cycles_(SEXP amiga) {
   BEGIN_CPP11
-    return cpp11::as_sexp(get_cpu_cycles_(cpp11::as_cpp<cpp11::decay_t<cpp11::external_pointer<VAmiga>>>(amiga)));
+    return cpp11::as_sexp(get_cpu_cycles_(cpp11::as_cpp<cpp11::decay_t<cpp11::external_pointer<VAmigaWrapper>>>(amiga)));
   END_CPP11
 }
 // ramiga_cpu.cpp
-uint32_t get_cpu_pc_(cpp11::external_pointer<vamiga::VAmiga> amiga);
+uint32_t get_cpu_pc_(cpp11::external_pointer<vamiga::VAmigaWrapper> amiga);
 extern "C" SEXP _ramiga_get_cpu_pc_(SEXP amiga) {
   BEGIN_CPP11
-    return cpp11::as_sexp(get_cpu_pc_(cpp11::as_cpp<cpp11::decay_t<cpp11::external_pointer<vamiga::VAmiga>>>(amiga)));
+    return cpp11::as_sexp(get_cpu_pc_(cpp11::as_cpp<cpp11::decay_t<cpp11::external_pointer<vamiga::VAmigaWrapper>>>(amiga)));
   END_CPP11
 }
 // ramiga_cpu.cpp
-cpp11::list get_cpu_config_(cpp11::external_pointer<vamiga::VAmiga> amiga);
+cpp11::list get_cpu_config_(cpp11::external_pointer<vamiga::VAmigaWrapper> amiga);
 extern "C" SEXP _ramiga_get_cpu_config_(SEXP amiga) {
   BEGIN_CPP11
-    return cpp11::as_sexp(get_cpu_config_(cpp11::as_cpp<cpp11::decay_t<cpp11::external_pointer<vamiga::VAmiga>>>(amiga)));
+    return cpp11::as_sexp(get_cpu_config_(cpp11::as_cpp<cpp11::decay_t<cpp11::external_pointer<vamiga::VAmigaWrapper>>>(amiga)));
   END_CPP11
 }
 // ramiga_drives.cpp
-void insert_disk_into_(cpp11::external_pointer<VAmiga> amiga, cpp11::external_pointer<DiskImage> image, bool write_protected, int drive_number);
+void insert_disk_into_(cpp11::external_pointer<VAmigaWrapper> amiga, cpp11::external_pointer<DiskImage> image, bool write_protected, int drive_number);
 extern "C" SEXP _ramiga_insert_disk_into_(SEXP amiga, SEXP image, SEXP write_protected, SEXP drive_number) {
   BEGIN_CPP11
-    insert_disk_into_(cpp11::as_cpp<cpp11::decay_t<cpp11::external_pointer<VAmiga>>>(amiga), cpp11::as_cpp<cpp11::decay_t<cpp11::external_pointer<DiskImage>>>(image), cpp11::as_cpp<cpp11::decay_t<bool>>(write_protected), cpp11::as_cpp<cpp11::decay_t<int>>(drive_number));
+    insert_disk_into_(cpp11::as_cpp<cpp11::decay_t<cpp11::external_pointer<VAmigaWrapper>>>(amiga), cpp11::as_cpp<cpp11::decay_t<cpp11::external_pointer<DiskImage>>>(image), cpp11::as_cpp<cpp11::decay_t<bool>>(write_protected), cpp11::as_cpp<cpp11::decay_t<int>>(drive_number));
     return R_NilValue;
   END_CPP11
 }
 // ramiga_drives.cpp
-void eject_disk_(cpp11::external_pointer<VAmiga> amiga, int drive_number, int delay);
+void eject_disk_(cpp11::external_pointer<VAmigaWrapper> amiga, int drive_number, int delay);
 extern "C" SEXP _ramiga_eject_disk_(SEXP amiga, SEXP drive_number, SEXP delay) {
   BEGIN_CPP11
-    eject_disk_(cpp11::as_cpp<cpp11::decay_t<cpp11::external_pointer<VAmiga>>>(amiga), cpp11::as_cpp<cpp11::decay_t<int>>(drive_number), cpp11::as_cpp<cpp11::decay_t<int>>(delay));
+    eject_disk_(cpp11::as_cpp<cpp11::decay_t<cpp11::external_pointer<VAmigaWrapper>>>(amiga), cpp11::as_cpp<cpp11::decay_t<int>>(drive_number), cpp11::as_cpp<cpp11::decay_t<int>>(delay));
     return R_NilValue;
   END_CPP11
 }
@@ -93,10 +109,10 @@ extern "C" SEXP _ramiga_disk_image_(SEXP path) {
   END_CPP11
 }
 // ramiga_drives.cpp
-cpp11::list fdrive_info_(cpp11::external_pointer<VAmiga> amiga, int drive_number);
+cpp11::list fdrive_info_(cpp11::external_pointer<VAmigaWrapper> amiga, int drive_number);
 extern "C" SEXP _ramiga_fdrive_info_(SEXP amiga, SEXP drive_number) {
   BEGIN_CPP11
-    return cpp11::as_sexp(fdrive_info_(cpp11::as_cpp<cpp11::decay_t<cpp11::external_pointer<VAmiga>>>(amiga), cpp11::as_cpp<cpp11::decay_t<int>>(drive_number)));
+    return cpp11::as_sexp(fdrive_info_(cpp11::as_cpp<cpp11::decay_t<cpp11::external_pointer<VAmigaWrapper>>>(amiga), cpp11::as_cpp<cpp11::decay_t<int>>(drive_number)));
   END_CPP11
 }
 // ramiga_drives.cpp
@@ -114,75 +130,74 @@ extern "C" SEXP _ramiga_image_size_(SEXP image) {
   END_CPP11
 }
 // ramiga_emulator.cpp
-cpp11::external_pointer<VAmiga> create_amiga_();
+cpp11::external_pointer<VAmigaWrapper> create_amiga_();
 extern "C" SEXP _ramiga_create_amiga_() {
   BEGIN_CPP11
     return cpp11::as_sexp(create_amiga_());
   END_CPP11
 }
 // ramiga_emulator.cpp
-SEXP poweron_amiga_(cpp11::external_pointer<VAmiga> amiga);
+SEXP poweron_amiga_(cpp11::external_pointer<VAmigaWrapper> amiga);
 extern "C" SEXP _ramiga_poweron_amiga_(SEXP amiga) {
   BEGIN_CPP11
-    return cpp11::as_sexp(poweron_amiga_(cpp11::as_cpp<cpp11::decay_t<cpp11::external_pointer<VAmiga>>>(amiga)));
+    return cpp11::as_sexp(poweron_amiga_(cpp11::as_cpp<cpp11::decay_t<cpp11::external_pointer<VAmigaWrapper>>>(amiga)));
   END_CPP11
 }
 // ramiga_emulator.cpp
-SEXP poweroff_amiga_(cpp11::external_pointer<VAmiga> amiga);
+SEXP poweroff_amiga_(cpp11::external_pointer<VAmigaWrapper> amiga);
 extern "C" SEXP _ramiga_poweroff_amiga_(SEXP amiga) {
   BEGIN_CPP11
-    return cpp11::as_sexp(poweroff_amiga_(cpp11::as_cpp<cpp11::decay_t<cpp11::external_pointer<VAmiga>>>(amiga)));
+    return cpp11::as_sexp(poweroff_amiga_(cpp11::as_cpp<cpp11::decay_t<cpp11::external_pointer<VAmigaWrapper>>>(amiga)));
   END_CPP11
 }
 // ramiga_emulator.cpp
-SEXP softreset_amiga_(cpp11::external_pointer<VAmiga> amiga);
+SEXP softreset_amiga_(cpp11::external_pointer<VAmigaWrapper> amiga);
 extern "C" SEXP _ramiga_softreset_amiga_(SEXP amiga) {
   BEGIN_CPP11
-    return cpp11::as_sexp(softreset_amiga_(cpp11::as_cpp<cpp11::decay_t<cpp11::external_pointer<VAmiga>>>(amiga)));
+    return cpp11::as_sexp(softreset_amiga_(cpp11::as_cpp<cpp11::decay_t<cpp11::external_pointer<VAmigaWrapper>>>(amiga)));
   END_CPP11
 }
 // ramiga_emulator.cpp
-cpp11::logicals emulator_info_(cpp11::external_pointer<VAmiga> amiga);
+SEXP hardreset_amiga_(cpp11::external_pointer<VAmigaWrapper> amiga);
+extern "C" SEXP _ramiga_hardreset_amiga_(SEXP amiga) {
+  BEGIN_CPP11
+    return cpp11::as_sexp(hardreset_amiga_(cpp11::as_cpp<cpp11::decay_t<cpp11::external_pointer<VAmigaWrapper>>>(amiga)));
+  END_CPP11
+}
+// ramiga_emulator.cpp
+cpp11::logicals emulator_info_(cpp11::external_pointer<VAmigaWrapper> amiga);
 extern "C" SEXP _ramiga_emulator_info_(SEXP amiga) {
   BEGIN_CPP11
-    return cpp11::as_sexp(emulator_info_(cpp11::as_cpp<cpp11::decay_t<cpp11::external_pointer<VAmiga>>>(amiga)));
+    return cpp11::as_sexp(emulator_info_(cpp11::as_cpp<cpp11::decay_t<cpp11::external_pointer<VAmigaWrapper>>>(amiga)));
   END_CPP11
 }
 // ramiga_emulator.cpp
-cpp11::list emulator_config_(cpp11::external_pointer<VAmiga> amiga);
+cpp11::list emulator_config_(cpp11::external_pointer<VAmigaWrapper> amiga);
 extern "C" SEXP _ramiga_emulator_config_(SEXP amiga) {
   BEGIN_CPP11
-    return cpp11::as_sexp(emulator_config_(cpp11::as_cpp<cpp11::decay_t<cpp11::external_pointer<VAmiga>>>(amiga)));
+    return cpp11::as_sexp(emulator_config_(cpp11::as_cpp<cpp11::decay_t<cpp11::external_pointer<VAmigaWrapper>>>(amiga)));
   END_CPP11
 }
 // ramiga_emulator.cpp
-void run_until_interrupted_(cpp11::external_pointer<VAmiga> amiga);
+void run_until_interrupted_(cpp11::external_pointer<VAmigaWrapper> amiga);
 extern "C" SEXP _ramiga_run_until_interrupted_(SEXP amiga) {
   BEGIN_CPP11
-    run_until_interrupted_(cpp11::as_cpp<cpp11::decay_t<cpp11::external_pointer<VAmiga>>>(amiga));
+    run_until_interrupted_(cpp11::as_cpp<cpp11::decay_t<cpp11::external_pointer<VAmigaWrapper>>>(amiga));
     return R_NilValue;
   END_CPP11
 }
 // ramiga_emulator.cpp
-cpp11::strings emulator_version_(cpp11::external_pointer<VAmiga> amiga);
+cpp11::strings emulator_version_(cpp11::external_pointer<VAmigaWrapper> amiga);
 extern "C" SEXP _ramiga_emulator_version_(SEXP amiga) {
   BEGIN_CPP11
-    return cpp11::as_sexp(emulator_version_(cpp11::as_cpp<cpp11::decay_t<cpp11::external_pointer<VAmiga>>>(amiga)));
+    return cpp11::as_sexp(emulator_version_(cpp11::as_cpp<cpp11::decay_t<cpp11::external_pointer<VAmigaWrapper>>>(amiga)));
   END_CPP11
 }
 // ramiga_emulator.cpp
-void emu_set_config_scheme_(cpp11::external_pointer<VAmiga> amiga, std::string config_scheme);
+void emu_set_config_scheme_(cpp11::external_pointer<VAmigaWrapper> amiga, std::string config_scheme);
 extern "C" SEXP _ramiga_emu_set_config_scheme_(SEXP amiga, SEXP config_scheme) {
   BEGIN_CPP11
-    emu_set_config_scheme_(cpp11::as_cpp<cpp11::decay_t<cpp11::external_pointer<VAmiga>>>(amiga), cpp11::as_cpp<cpp11::decay_t<std::string>>(config_scheme));
-    return R_NilValue;
-  END_CPP11
-}
-// ramiga_filesystem.cpp
-void test_fs_(cpp11::external_pointer<DiskImage> image);
-extern "C" SEXP _ramiga_test_fs_(SEXP image) {
-  BEGIN_CPP11
-    test_fs_(cpp11::as_cpp<cpp11::decay_t<cpp11::external_pointer<DiskImage>>>(image));
+    emu_set_config_scheme_(cpp11::as_cpp<cpp11::decay_t<cpp11::external_pointer<VAmigaWrapper>>>(amiga), cpp11::as_cpp<cpp11::decay_t<std::string>>(config_scheme));
     return R_NilValue;
   END_CPP11
 }
@@ -222,40 +237,40 @@ extern "C" SEXP _ramiga_fs_num_allocated(SEXP image) {
   END_CPP11
 }
 // ramiga_memory.cpp
-void load_rom_(cpp11::external_pointer<VAmiga> amiga, std::string path);
+void load_rom_(cpp11::external_pointer<VAmigaWrapper> amiga, std::string path);
 extern "C" SEXP _ramiga_load_rom_(SEXP amiga, SEXP path) {
   BEGIN_CPP11
-    load_rom_(cpp11::as_cpp<cpp11::decay_t<cpp11::external_pointer<VAmiga>>>(amiga), cpp11::as_cpp<cpp11::decay_t<std::string>>(path));
+    load_rom_(cpp11::as_cpp<cpp11::decay_t<cpp11::external_pointer<VAmigaWrapper>>>(amiga), cpp11::as_cpp<cpp11::decay_t<std::string>>(path));
     return R_NilValue;
   END_CPP11
 }
 // ramiga_memory.cpp
-void load_rom_ext_(cpp11::external_pointer<VAmiga> amiga, std::string path);
+void load_rom_ext_(cpp11::external_pointer<VAmigaWrapper> amiga, std::string path);
 extern "C" SEXP _ramiga_load_rom_ext_(SEXP amiga, SEXP path) {
   BEGIN_CPP11
-    load_rom_ext_(cpp11::as_cpp<cpp11::decay_t<cpp11::external_pointer<VAmiga>>>(amiga), cpp11::as_cpp<cpp11::decay_t<std::string>>(path));
+    load_rom_ext_(cpp11::as_cpp<cpp11::decay_t<cpp11::external_pointer<VAmigaWrapper>>>(amiga), cpp11::as_cpp<cpp11::decay_t<std::string>>(path));
     return R_NilValue;
   END_CPP11
 }
 // ramiga_memory.cpp
-bool has_rom_(cpp11::external_pointer<VAmiga> amiga);
+bool has_rom_(cpp11::external_pointer<VAmigaWrapper> amiga);
 extern "C" SEXP _ramiga_has_rom_(SEXP amiga) {
   BEGIN_CPP11
-    return cpp11::as_sexp(has_rom_(cpp11::as_cpp<cpp11::decay_t<cpp11::external_pointer<VAmiga>>>(amiga)));
+    return cpp11::as_sexp(has_rom_(cpp11::as_cpp<cpp11::decay_t<cpp11::external_pointer<VAmigaWrapper>>>(amiga)));
   END_CPP11
 }
 // ramiga_memory.cpp
-cpp11::list get_rom_traits_(cpp11::external_pointer<VAmiga> amiga);
+cpp11::list get_rom_traits_(cpp11::external_pointer<VAmigaWrapper> amiga);
 extern "C" SEXP _ramiga_get_rom_traits_(SEXP amiga) {
   BEGIN_CPP11
-    return cpp11::as_sexp(get_rom_traits_(cpp11::as_cpp<cpp11::decay_t<cpp11::external_pointer<VAmiga>>>(amiga)));
+    return cpp11::as_sexp(get_rom_traits_(cpp11::as_cpp<cpp11::decay_t<cpp11::external_pointer<VAmigaWrapper>>>(amiga)));
   END_CPP11
 }
 // ramiga_memory.cpp
-cpp11::list get_mem_config_(cpp11::external_pointer<VAmiga> amiga);
+cpp11::list get_mem_config_(cpp11::external_pointer<VAmigaWrapper> amiga);
 extern "C" SEXP _ramiga_get_mem_config_(SEXP amiga) {
   BEGIN_CPP11
-    return cpp11::as_sexp(get_mem_config_(cpp11::as_cpp<cpp11::decay_t<cpp11::external_pointer<VAmiga>>>(amiga)));
+    return cpp11::as_sexp(get_mem_config_(cpp11::as_cpp<cpp11::decay_t<cpp11::external_pointer<VAmigaWrapper>>>(amiga)));
   END_CPP11
 }
 // ramiga_video.cpp
@@ -266,39 +281,40 @@ extern "C" SEXP _ramiga_rgb_to_hex(SEXP val) {
   END_CPP11
 }
 // ramiga_video.cpp
-cpp11::strings get_framebuffer_vport_(cpp11::external_pointer<VAmiga> amiga);
+cpp11::strings get_framebuffer_vport_(cpp11::external_pointer<VAmigaWrapper> amiga);
 extern "C" SEXP _ramiga_get_framebuffer_vport_(SEXP amiga) {
   BEGIN_CPP11
-    return cpp11::as_sexp(get_framebuffer_vport_(cpp11::as_cpp<cpp11::decay_t<cpp11::external_pointer<VAmiga>>>(amiga)));
+    return cpp11::as_sexp(get_framebuffer_vport_(cpp11::as_cpp<cpp11::decay_t<cpp11::external_pointer<VAmigaWrapper>>>(amiga)));
   END_CPP11
 }
 // ramiga_video.cpp
-void update_screen_(cpp11::external_pointer<VAmiga> amiga);
+void update_screen_(cpp11::external_pointer<VAmigaWrapper> amiga);
 extern "C" SEXP _ramiga_update_screen_(SEXP amiga) {
   BEGIN_CPP11
-    update_screen_(cpp11::as_cpp<cpp11::decay_t<cpp11::external_pointer<VAmiga>>>(amiga));
+    update_screen_(cpp11::as_cpp<cpp11::decay_t<cpp11::external_pointer<VAmigaWrapper>>>(amiga));
     return R_NilValue;
   END_CPP11
 }
 // ramiga_video.cpp
-void update_scanline_(cpp11::external_pointer<VAmiga> amiga);
+void update_scanline_(cpp11::external_pointer<VAmigaWrapper> amiga);
 extern "C" SEXP _ramiga_update_scanline_(SEXP amiga) {
   BEGIN_CPP11
-    update_scanline_(cpp11::as_cpp<cpp11::decay_t<cpp11::external_pointer<VAmiga>>>(amiga));
+    update_scanline_(cpp11::as_cpp<cpp11::decay_t<cpp11::external_pointer<VAmigaWrapper>>>(amiga));
     return R_NilValue;
   END_CPP11
 }
 // ramiga_video.cpp
-void save_framebuffer_(cpp11::external_pointer<VAmiga> amiga, std::string path);
+void save_framebuffer_(cpp11::external_pointer<VAmigaWrapper> amiga, std::string path);
 extern "C" SEXP _ramiga_save_framebuffer_(SEXP amiga, SEXP path) {
   BEGIN_CPP11
-    save_framebuffer_(cpp11::as_cpp<cpp11::decay_t<cpp11::external_pointer<VAmiga>>>(amiga), cpp11::as_cpp<cpp11::decay_t<std::string>>(path));
+    save_framebuffer_(cpp11::as_cpp<cpp11::decay_t<cpp11::external_pointer<VAmigaWrapper>>>(amiga), cpp11::as_cpp<cpp11::decay_t<std::string>>(path));
     return R_NilValue;
   END_CPP11
 }
 
 extern "C" {
 static const R_CallMethodDef CallEntries[] = {
+    {"_ramiga_clear_audio_stream_",    (DL_FUNC) &_ramiga_clear_audio_stream_,    1},
     {"_ramiga_create_amiga_",          (DL_FUNC) &_ramiga_create_amiga_,          0},
     {"_ramiga_disk_image_",            (DL_FUNC) &_ramiga_disk_image_,            1},
     {"_ramiga_eject_disk_",            (DL_FUNC) &_ramiga_eject_disk_,            3},
@@ -318,6 +334,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_ramiga_get_framebuffer_vport_", (DL_FUNC) &_ramiga_get_framebuffer_vport_, 1},
     {"_ramiga_get_mem_config_",        (DL_FUNC) &_ramiga_get_mem_config_,        1},
     {"_ramiga_get_rom_traits_",        (DL_FUNC) &_ramiga_get_rom_traits_,        1},
+    {"_ramiga_hardreset_amiga_",       (DL_FUNC) &_ramiga_hardreset_amiga_,       1},
     {"_ramiga_has_rom_",               (DL_FUNC) &_ramiga_has_rom_,               1},
     {"_ramiga_image_info_",            (DL_FUNC) &_ramiga_image_info_,            1},
     {"_ramiga_image_size_",            (DL_FUNC) &_ramiga_image_size_,            1},
@@ -325,7 +342,6 @@ static const R_CallMethodDef CallEntries[] = {
     {"_ramiga_joystick_",              (DL_FUNC) &_ramiga_joystick_,              2},
     {"_ramiga_load_rom_",              (DL_FUNC) &_ramiga_load_rom_,              2},
     {"_ramiga_load_rom_ext_",          (DL_FUNC) &_ramiga_load_rom_ext_,          2},
-    {"_ramiga_mono_audio_buffer_",     (DL_FUNC) &_ramiga_mono_audio_buffer_,     1},
     {"_ramiga_mouse_",                 (DL_FUNC) &_ramiga_mouse_,                 2},
     {"_ramiga_poweroff_amiga_",        (DL_FUNC) &_ramiga_poweroff_amiga_,        1},
     {"_ramiga_poweron_amiga_",         (DL_FUNC) &_ramiga_poweron_amiga_,         1},
@@ -335,8 +351,9 @@ static const R_CallMethodDef CallEntries[] = {
     {"_ramiga_rgb_to_hex",             (DL_FUNC) &_ramiga_rgb_to_hex,             1},
     {"_ramiga_run_until_interrupted_", (DL_FUNC) &_ramiga_run_until_interrupted_, 1},
     {"_ramiga_save_framebuffer_",      (DL_FUNC) &_ramiga_save_framebuffer_,      2},
+    {"_ramiga_save_wav_",              (DL_FUNC) &_ramiga_save_wav_,              3},
     {"_ramiga_softreset_amiga_",       (DL_FUNC) &_ramiga_softreset_amiga_,       1},
-    {"_ramiga_test_fs_",               (DL_FUNC) &_ramiga_test_fs_,               1},
+    {"_ramiga_stereo_audio_buffer_",   (DL_FUNC) &_ramiga_stereo_audio_buffer_,   1},
     {"_ramiga_update_scanline_",       (DL_FUNC) &_ramiga_update_scanline_,       1},
     {"_ramiga_update_screen_",         (DL_FUNC) &_ramiga_update_screen_,         1},
     {NULL, NULL, 0}

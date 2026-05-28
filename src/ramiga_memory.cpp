@@ -1,29 +1,29 @@
 #include "ramiga_types.h"
 
-MemoryAPI & get_memory_(cpp11::external_pointer<VAmiga> amiga) {
+MemoryAPI & get_memory_(cpp11::external_pointer<VAmigaWrapper> amiga) {
   check_amiga(amiga);
   return amiga->mem;
 }
 
 [[cpp11::register]]
-void load_rom_(cpp11::external_pointer<VAmiga> amiga, std::string path) {
+void load_rom_(cpp11::external_pointer<VAmigaWrapper> amiga, std::string path) {
   get_memory_(amiga).loadRom(std::filesystem::path(path));
   return;
 }
 
 [[cpp11::register]]
-void load_rom_ext_(cpp11::external_pointer<VAmiga> amiga, std::string path) {
+void load_rom_ext_(cpp11::external_pointer<VAmigaWrapper> amiga, std::string path) {
   get_memory_(amiga).loadExt(std::filesystem::path(path));
   return;
 }
 
 [[cpp11::register]]
-bool has_rom_(cpp11::external_pointer<VAmiga> amiga) {
+bool has_rom_(cpp11::external_pointer<VAmigaWrapper> amiga) {
   return get_memory_(amiga).mem->hasRom();
 }
 
 [[cpp11::register]]
-cpp11::list get_rom_traits_(cpp11::external_pointer<VAmiga> amiga) {
+cpp11::list get_rom_traits_(cpp11::external_pointer<VAmigaWrapper> amiga) {
   // return get_memory_(amiga).mem->hasRom();
   const RomTraits traits = get_memory_(amiga).getRomTraits();
   return cpp11::writable::list({
@@ -35,7 +35,7 @@ cpp11::list get_rom_traits_(cpp11::external_pointer<VAmiga> amiga) {
 }
 
 [[cpp11::register]]
-cpp11::list get_mem_config_(cpp11::external_pointer<VAmiga> amiga) {
+cpp11::list get_mem_config_(cpp11::external_pointer<VAmigaWrapper> amiga) {
   // return get_memory_(amiga).mem->hasRom();
   const auto conf = get_memory_(amiga).getConfig();
   return cpp11::writable::list({

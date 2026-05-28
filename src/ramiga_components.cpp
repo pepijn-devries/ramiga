@@ -1,7 +1,7 @@
 #include "ramiga_types.h"
 
 Configurable& configurable_from_id(int component_id,
-                                   cpp11::external_pointer<VAmiga> amiga,
+                                   cpp11::external_pointer<VAmigaWrapper> amiga,
                                    int index) {
   check_amiga(amiga);
   switch(component_id) {
@@ -56,7 +56,7 @@ cpp11::sexp get_option_(Configurable & conf, const std::string & key) {
     }
   }
   
-  cpp11::stop("Uknown option '%s'. Check available options with `list_options()`", key.c_str());
+  cpp11::stop("Unknown option '%s'. Check available options with `list_options()`", key.c_str());
 }
 
 void set_option_(Configurable & conf, const std::string & key,
@@ -71,19 +71,19 @@ void set_option_(Configurable & conf, const std::string & key,
     }
   }
   
-  cpp11::stop("Uknown option '%s'. Check available options with `list_options()`", key.c_str());
+  cpp11::stop("Unknown option '%s'. Check available options with `list_options()`", key.c_str());
 }
 
 [[cpp11::register]]
 cpp11::list r_list_options_(int component_id,
-                            cpp11::external_pointer<VAmiga> amiga,
+                            cpp11::external_pointer<VAmigaWrapper> amiga,
                             int index) {
   return list_options_(configurable_from_id(component_id, amiga, index));
 }
 
 [[cpp11::register]]
 cpp11::sexp r_get_option_(int component_id,
-                          cpp11::external_pointer<VAmiga> amiga,
+                          cpp11::external_pointer<VAmigaWrapper> amiga,
                           int index,
                           std::string key) {
   return (get_option_(configurable_from_id(component_id, amiga, index), key));
@@ -91,7 +91,7 @@ cpp11::sexp r_get_option_(int component_id,
 
 [[cpp11::register]]
 void r_set_option_(int component_id,
-                   cpp11::external_pointer<VAmiga> amiga,
+                   cpp11::external_pointer<VAmigaWrapper> amiga,
                    int index,
                    std::string key, std::string value) {
   set_option_(configurable_from_id(component_id, amiga, index), key, value);

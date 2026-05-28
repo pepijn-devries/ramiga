@@ -48,7 +48,7 @@ the virtual device.
 \if{html}{\out{</div>}}
 }
 \subsection{Returns}{
-If file is missing it returns a \code{\link[grDevice:as.raster]{grDevice::as.raster()}} object.
+If file is missing it returns a \code{\link[grDevices:as.raster]{grDevices::as.raster()}} object.
 Otherwise, it will save it as png file to the specified path and returns
 nothing.
 }
@@ -57,7 +57,11 @@ nothing.
 \if{html}{\out{<a id="method-RamigaOutput-capture_audio_buffer"></a>}}
 \if{latex}{\out{\hypertarget{method-RamigaOutput-capture_audio_buffer}{}}}
 \subsection{Method \code{capture_audio_buffer()}}{
-TODO
+Capture the audio that is currently on the output buffer.
+While the emulator is running, audio is continuously generated
+and stored in a ring buffer. Use this function to collect data
+in this buffer. It can only be read once and the buffer has
+a limited capacity.
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{RamigaOutput$capture_audio_buffer(file, ...)}\if{html}{\out{</div>}}
 }
@@ -65,14 +69,19 @@ TODO
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
-\item{\code{file}}{TODO}
+\item{\code{file}}{A file path to store the audio (RIFF wav format).}
 
-\item{\code{...}}{TODO}
+\item{\code{...}}{Ignored}
 }
 \if{html}{\out{</div>}}
 }
 \subsection{Returns}{
-TODO
+If file is omitted, the audio data is returned as
+a \code{matrix} of \code{numeric} values. It returns 2 rows (for both
+stereo channels). The number of columns correspond with the
+number of samples available from the buffer. The waveform
+is scaled between -1 and +1, such that it can be played
+directly with \code{audio::play()}.
 }
 }
 \if{html}{\out{<hr>}}

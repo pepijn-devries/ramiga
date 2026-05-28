@@ -11,41 +11,48 @@ void vamiga_callback(const void* listener, Message msg) {
   // Rprintf("TODO Emulator message: %u\n", msg);
 }
 
-void check_amiga(cpp11::external_pointer<VAmiga> amiga) {
+void check_amiga(cpp11::external_pointer<VAmigaWrapper> amiga) {
   if (!amiga) cpp11::stop("Emulator no longer available");
 }
 
 [[cpp11::register]]
-cpp11::external_pointer<VAmiga> create_amiga_() {
-  VAmiga* vm = new VAmiga();
+cpp11::external_pointer<VAmigaWrapper> create_amiga_() {
+  VAmigaWrapper* vm = new VAmigaWrapper();
   // TODO call halt to end the currently launched thread.
   vm->launch(nullptr, vamiga_callback);
-  return cpp11::external_pointer<VAmiga>(vm);
+  return cpp11::external_pointer<VAmigaWrapper>(vm);
 }
 
 [[cpp11::register]]
-SEXP poweron_amiga_(cpp11::external_pointer<VAmiga> amiga) {
+SEXP poweron_amiga_(cpp11::external_pointer<VAmigaWrapper> amiga) {
   check_amiga(amiga);
   amiga->powerOn();
   return amiga;
 }
 
 [[cpp11::register]]
-SEXP poweroff_amiga_(cpp11::external_pointer<VAmiga> amiga) {
+SEXP poweroff_amiga_(cpp11::external_pointer<VAmigaWrapper> amiga) {
   check_amiga(amiga);
   amiga->powerOff();
   return amiga;
 }
 
 [[cpp11::register]]
-SEXP softreset_amiga_(cpp11::external_pointer<VAmiga> amiga) {
+SEXP softreset_amiga_(cpp11::external_pointer<VAmigaWrapper> amiga) {
   check_amiga(amiga);
   amiga->softReset();
   return amiga;
 }
 
 [[cpp11::register]]
-cpp11::logicals emulator_info_(cpp11::external_pointer<VAmiga> amiga) {
+SEXP hardreset_amiga_(cpp11::external_pointer<VAmigaWrapper> amiga) {
+  check_amiga(amiga);
+  amiga->hardReset();
+  return amiga;
+}
+
+[[cpp11::register]]
+cpp11::logicals emulator_info_(cpp11::external_pointer<VAmigaWrapper> amiga) {
   check_amiga(amiga);
   auto& emuinfo = amiga->getInfo();
   writable::logicals result({
@@ -58,7 +65,7 @@ cpp11::logicals emulator_info_(cpp11::external_pointer<VAmiga> amiga) {
 }
 
 [[cpp11::register]]
-cpp11::list emulator_config_(cpp11::external_pointer<VAmiga> amiga) {
+cpp11::list emulator_config_(cpp11::external_pointer<VAmigaWrapper> amiga) {
   check_amiga(amiga);
   auto & conf = amiga->amiga.getConfig();
   return writable::list({
@@ -77,8 +84,7 @@ cpp11::list emulator_config_(cpp11::external_pointer<VAmiga> amiga) {
 }
 
 [[cpp11::register]]
-void run_until_interrupted_(cpp11::external_pointer<VAmiga> amiga) {
-  check_amiga(amiga);
+void run_until_interrupted_(cpp11::external_pointer<VAmigaWrapper> amiga) {
   amiga->run();
   cpp11::message("Emulator running, press <ESC> to pause");
 
@@ -87,8 +93,7 @@ void run_until_interrupted_(cpp11::external_pointer<VAmiga> amiga) {
     count++;
     if (count > 10000) {
       count = 0;
-      //amiga->audioPort.port->clear();//TODO
-      
+
       try {
         cpp11::check_user_interrupt();
       } catch (...) {
@@ -103,13 +108,13 @@ void run_until_interrupted_(cpp11::external_pointer<VAmiga> amiga) {
 }
 
 [[cpp11::register]]
-cpp11::strings emulator_version_(cpp11::external_pointer<VAmiga> amiga) {
+cpp11::strings emulator_version_(cpp11::external_pointer<VAmigaWrapper> amiga) {
   check_amiga(amiga);
   return writable::strings({amiga->version()});
 }
 
 [[cpp11::register]]
-void emu_set_config_scheme_(cpp11::external_pointer<VAmiga> amiga,
+void emu_set_config_scheme_(cpp11::external_pointer<VAmigaWrapper> amiga,
                                      std::string config_scheme) {
   check_amiga(amiga);
   bool success = false;

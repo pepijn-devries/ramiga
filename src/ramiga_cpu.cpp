@@ -1,23 +1,23 @@
 #include <filesystem>
 #include "ramiga_types.h"
 
-CPUAPI & get_cpu_(cpp11::external_pointer<VAmiga> amiga) {
+CPUAPI & get_cpu_(cpp11::external_pointer<VAmigaWrapper> amiga) {
   check_amiga(amiga);
   return amiga->cpu;
 }
 
 [[cpp11::register]]
-double get_cpu_cycles_(cpp11::external_pointer<VAmiga> amiga) {
+double get_cpu_cycles_(cpp11::external_pointer<VAmigaWrapper> amiga) {
   return get_cpu_(amiga).cpu->getCpuClock();
 }
 
 [[cpp11::register]]
-uint32_t get_cpu_pc_(cpp11::external_pointer<vamiga::VAmiga> amiga) {
+uint32_t get_cpu_pc_(cpp11::external_pointer<vamiga::VAmigaWrapper> amiga) {
   return get_cpu_(amiga).cpu->getPC();
 }
 
 [[cpp11::register]]
-cpp11::list get_cpu_config_(cpp11::external_pointer<vamiga::VAmiga> amiga) {
+cpp11::list get_cpu_config_(cpp11::external_pointer<vamiga::VAmigaWrapper> amiga) {
   const CPUConfig conf = get_cpu_(amiga).getConfig();
   return cpp11::writable::list({
     "revision"_nm =
