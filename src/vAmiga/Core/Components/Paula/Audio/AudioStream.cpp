@@ -26,29 +26,6 @@ AudioStream::wipeOut()
 void
 AudioStream::eliminateCracks()
 {
-    {   SYNCHRONIZED
-
-        loginfo(AUDVOL_DEBUG, "Eliminating cracks (%ld samples)...\n", count());
-
-        float scale = 1.0f;
-        float delta = 1.0f / float(count());
-
-        // Rescale the existing samples
-        for (isize i = begin(); i != end(); i = next(i)) {
-
-            scale -= delta;
-            assert(scale >= -0.1 && scale < 1.0);
-
-            elements[i].l *= scale;
-            elements[i].r *= scale;
-        }
-
-        // Wipe out the rest of the buffer
-        for (isize i = end(); i != begin(); i = next(i)) {
-
-            elements[i] = { 0, 0 };
-        }
-    }
 }
 
 void

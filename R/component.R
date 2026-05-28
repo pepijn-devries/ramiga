@@ -14,15 +14,18 @@ RamigaComponent <-
       #' can be accessed through the R6 object fields.
       #' @param emulator All emulator components should be part of an emulator.
       #' All components (except for the emulator itself) therefore needs the,
-      #' initialised with an emulator. 
+      #' initialised with an emulator.
+      #' @param component_id Integer value used to identify different
+      #' types of components.
       #' @param ... Ignored
-      initialize = function(emulator, ...) {
+      initialize = function(emulator, component_id, ...) {
         if (identical(class(self)[1], "RamigaComponent")) {
           stop("RamigaComponent is an abstract class and cannot be instantiated directly.")
         } else if (missing(emulator) || !inherits(emulator, "RamigaEmulator"))
           stop("The `emulator` argument should enherit from RamigaEmulator")
         private$emulator <- emulator
         private$pointer <- emulator$get_pointer()
+        if (!missing(component_id)) private$component_id <- component_id
       },
       
       #' @description

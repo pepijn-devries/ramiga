@@ -1,6 +1,6 @@
 #include "ramiga_types.h"
 
-ControlPort& get_control_port_(cpp11::external_pointer<VAmiga> amiga,
+ControlPort& get_control_port_(cpp11::external_pointer<VAmigaWrapper> amiga,
                                int port_number) {
   check_amiga(amiga);
   if (port_number < 1 || port_number > 2)
@@ -11,7 +11,7 @@ ControlPort& get_control_port_(cpp11::external_pointer<VAmiga> amiga,
 }
 
 [[cpp11::register]]
-cpp11::external_pointer<Joystick> joystick_(cpp11::external_pointer<VAmiga> amiga,
+cpp11::external_pointer<Joystick> joystick_(cpp11::external_pointer<VAmigaWrapper> amiga,
                                             int port_number) {
   auto & port = get_control_port_(amiga, port_number);
   Joystick * joy = new Joystick(*amiga->amiga.amiga, port);
@@ -19,7 +19,7 @@ cpp11::external_pointer<Joystick> joystick_(cpp11::external_pointer<VAmiga> amig
 }
 
 [[cpp11::register]]
-cpp11::external_pointer<Mouse> mouse_(cpp11::external_pointer<VAmiga> amiga,
+cpp11::external_pointer<Mouse> mouse_(cpp11::external_pointer<VAmigaWrapper> amiga,
                                             int port_number) {
   auto & port = get_control_port_(amiga, port_number);
   Mouse * m = new Mouse(*amiga->amiga.amiga, port);

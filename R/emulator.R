@@ -80,6 +80,11 @@ RamigaEmulator <-
       initialize = function() {
         private$pointer <- create_amiga_()
         private$emulator <- self
+        ## These options are critical for proper
+        ## audio recording
+        self$output$options$audio$AUD.ASR <- FALSE
+        self$output$options$audio$AUD.FASTPATH <- FALSE
+        
         ## We need to keep track of the actual R-object as the
         ## C++ object is unaware of devices connected to the port
         private$cports <- lapply(1:2, \(x) RamigaControlPort$new(self, x)) |>
@@ -118,6 +123,16 @@ RamigaEmulator <-
         Sys.sleep(0.1)
         self
       },
+
+      #' @description
+      #' A hard reset. Same as powering of the machine, then powering
+      #' it back on.
+      #' @return Returns the emulator object
+      hard_reset = function() {
+        hardreset_amiga_(private$pointer)
+        Sys.sleep(0.1)
+        self
+      },
       
       #' @description
       #' When initialised, the emulator is paused. Call this to start
@@ -128,6 +143,15 @@ RamigaEmulator <-
       run = function() {
         run_until_interrupted_(private$pointer)
         invisible()
+      },
+      
+      #' @description
+      #' Update the machines state to the next video frame. The machine
+      #' runs until the vertical blank is reached and pauses imediately.
+      #' @return Returns the emulator object
+      next_frame = function() {
+        update_screen_(private$pointer)
+        self
       },
       
       #' @description

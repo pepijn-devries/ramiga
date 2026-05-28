@@ -1,4 +1,3 @@
-#include <filesystem>
 #include "ramiga_types.h"
 
 [[cpp11::register]]
@@ -15,7 +14,7 @@ std::string rgb_to_hex(uint32_t val) {
 }
 
 [[cpp11::register]]
-cpp11::strings get_framebuffer_vport_(cpp11::external_pointer<VAmiga> amiga) {
+cpp11::strings get_framebuffer_vport_(cpp11::external_pointer<VAmigaWrapper> amiga) {
   check_amiga(amiga);
   auto& vport = amiga->videoPort;
   vport.lockTexture();
@@ -33,8 +32,6 @@ cpp11::strings get_framebuffer_vport_(cpp11::external_pointer<VAmiga> amiga) {
   for (int y = 0; y < height; ++y) {
     for (int x = 0; x < width; ++x) {
       int buf_idx = (y + (int)y1) * HPIXELS + (x + (int)x1);
-      if (x == 0 && y == 0)
-        Rprintf("TODO %x\n", texture[buf_idx]);
       result[y + x * height] = rgb_to_hex(texture[buf_idx]);
     }
   }
@@ -46,35 +43,27 @@ cpp11::strings get_framebuffer_vport_(cpp11::external_pointer<VAmiga> amiga) {
 
 
 [[cpp11::register]]
-void update_screen_(cpp11::external_pointer<VAmiga> amiga) {
+void update_screen_(cpp11::external_pointer<VAmigaWrapper> amiga) {
   check_amiga(amiga);
-  //auto* a = amiga->amiga.amiga;
-  
   amiga->finishFrame();
-  while (amiga->isRunning()) {
+  while (!amiga->isPaused()) {
+    std::this_thread::sleep_for(std::chrono::microseconds(21));
   }
-  
-  // TODO check what happens if audio buffer isn't cleared
-  //a->audioPort.clear();
-  
   return;
 }
 
 [[cpp11::register]]
-void update_scanline_(cpp11::external_pointer<VAmiga> amiga) {
+void update_scanline_(cpp11::external_pointer<VAmigaWrapper> amiga) {
   check_amiga(amiga);
-  //auto* a = amiga->amiga.amiga;
-  
   amiga->finishLine();
-  while (amiga->isRunning()) {
+  while (!amiga->isPaused()) {
+    std::this_thread::sleep_for(std::chrono::microseconds(1)); 
   }
-  
-  //a->audioPort.clear(); //TODO
   return;
 }
 
 [[cpp11::register]]
-void save_framebuffer_(cpp11::external_pointer<VAmiga> amiga,
+void save_framebuffer_(cpp11::external_pointer<VAmigaWrapper> amiga,
                        std::string path) {
 #ifdef USE_ZLIB
   check_amiga(amiga);

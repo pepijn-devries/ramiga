@@ -5,6 +5,7 @@
 #include <config.h>
 #include <VAmigaTypes.h>
 #include <VAmiga.h>
+#include <VAmigaWrapper.h>
 #include <Amiga.h>
 #include <Memory.h>
 #include <utl/storage/Buffer.h>
@@ -33,8 +34,9 @@
 using namespace vamiga;
 using namespace cpp11::literals;
 
-void check_amiga(cpp11::external_pointer<VAmiga> amiga);
+void check_amiga(cpp11::external_pointer<VAmigaWrapper> amiga);
 void check_disk(cpp11::external_pointer<DiskImage> image);
+double get_cpu_cycles_(cpp11::external_pointer<VAmigaWrapper> amiga);
 
 #ifdef USE_ZLIB
 void save_png(const char* path, VideoPortAPI & vport, bool is_pal);

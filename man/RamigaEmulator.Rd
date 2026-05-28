@@ -35,7 +35,9 @@ by \link{RamigaOutput}.}
 \item \href{#method-RamigaEmulator-power_on}{\code{RamigaEmulator$power_on()}}
 \item \href{#method-RamigaEmulator-power_off}{\code{RamigaEmulator$power_off()}}
 \item \href{#method-RamigaEmulator-soft_reset}{\code{RamigaEmulator$soft_reset()}}
+\item \href{#method-RamigaEmulator-hard_reset}{\code{RamigaEmulator$hard_reset()}}
 \item \href{#method-RamigaEmulator-run}{\code{RamigaEmulator$run()}}
+\item \href{#method-RamigaEmulator-next_frame}{\code{RamigaEmulator$next_frame()}}
 \item \href{#method-RamigaEmulator-get_info}{\code{RamigaEmulator$get_info()}}
 \item \href{#method-RamigaEmulator-get_config}{\code{RamigaEmulator$get_config()}}
 \item \href{#method-RamigaEmulator-set_config}{\code{RamigaEmulator$set_config()}}
@@ -107,6 +109,20 @@ Returns the emulator object
 }
 }
 \if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-RamigaEmulator-hard_reset"></a>}}
+\if{latex}{\out{\hypertarget{method-RamigaEmulator-hard_reset}{}}}
+\subsection{Method \code{hard_reset()}}{
+A hard reset. Same as powering of the machine, then powering
+it back on.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{RamigaEmulator$hard_reset()}\if{html}{\out{</div>}}
+}
+
+\subsection{Returns}{
+Returns the emulator object
+}
+}
+\if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-RamigaEmulator-run"></a>}}
 \if{latex}{\out{\hypertarget{method-RamigaEmulator-run}{}}}
 \subsection{Method \code{run()}}{
@@ -120,6 +136,20 @@ the machine will be paused.
 
 \subsection{Returns}{
 Returns NULL invisibly.
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-RamigaEmulator-next_frame"></a>}}
+\if{latex}{\out{\hypertarget{method-RamigaEmulator-next_frame}{}}}
+\subsection{Method \code{next_frame()}}{
+Update the machines state to the next video frame. The machine
+runs until the vertical blank is reached and pauses imediately.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{RamigaEmulator$next_frame()}\if{html}{\out{</div>}}
+}
+
+\subsection{Returns}{
+Returns the emulator object
 }
 }
 \if{html}{\out{<hr>}}

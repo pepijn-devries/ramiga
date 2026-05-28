@@ -4,15 +4,6 @@
 using namespace retro::vault;
 
 [[cpp11::register]]
-void test_fs_(cpp11::external_pointer<DiskImage> image) {
-  check_disk(image);
-  retro::vault::Volume vol(*image);
-  amiga::FileSystem fs = amiga::FileSystem(vol);
-  Rprintf("TODO\n");
-  return;
-}
-
-[[cpp11::register]]
 cpp11::list fs_get_traits_(cpp11::external_pointer<DiskImage> image) {
   check_disk(image);
   auto vol = retro::vault::Volume(*image);

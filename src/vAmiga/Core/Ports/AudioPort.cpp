@@ -477,13 +477,10 @@ AudioPort::synthesize(Cycle clock, long count, double cyclesPerSample)
         if (ledEnabled) filter.ledFilter.applyLP(l, r);
         if (hiEnabled) filter.hiFilter.applyHP(l, r);
 
-        // Modulate the master volume
-        if (fading) { volL.shift(); volR.shift(); }
-
         // Apply master volume
-        l *= volL;
-        r *= volR;
-
+        l *= volL.maximum;
+        r *= volL.maximum;
+        
         // Prevent hearing loss
         assert(std::abs(l) < 1.0);
         assert(std::abs(r) < 1.0);

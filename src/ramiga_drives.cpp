@@ -7,7 +7,7 @@ void check_disk(cpp11::external_pointer<DiskImage> image) {
   if (!image) cpp11::stop("Disk image is no longer valid");
 }
 
-FloppyDrive& get_floppy_drive_(cpp11::external_pointer<VAmiga> amiga,
+FloppyDrive& get_floppy_drive_(cpp11::external_pointer<VAmigaWrapper> amiga,
                                int drive_number) {
   check_amiga(amiga);
   if (drive_number < 0 || drive_number > 3)
@@ -18,7 +18,7 @@ FloppyDrive& get_floppy_drive_(cpp11::external_pointer<VAmiga> amiga,
 }
 
 [[cpp11::register]]
-void insert_disk_into_(cpp11::external_pointer<VAmiga> amiga, 
+void insert_disk_into_(cpp11::external_pointer<VAmigaWrapper> amiga, 
                        cpp11::external_pointer<DiskImage> image,
                        bool write_protected, int drive_number) {
   check_disk(image);
@@ -33,7 +33,7 @@ void insert_disk_into_(cpp11::external_pointer<VAmiga> amiga,
 }
 
 [[cpp11::register]]
-void eject_disk_(cpp11::external_pointer<VAmiga> amiga,
+void eject_disk_(cpp11::external_pointer<VAmigaWrapper> amiga,
                  int drive_number, int delay) {
   auto& drive = get_floppy_drive_(amiga, drive_number);
   drive.ejectDisk(delay);
@@ -52,7 +52,7 @@ cpp11::external_pointer<DiskImage> disk_image_(std::string path) {
 }
 
 [[cpp11::register]]
-cpp11::list fdrive_info_(cpp11::external_pointer<VAmiga> amiga,
+cpp11::list fdrive_info_(cpp11::external_pointer<VAmigaWrapper> amiga,
                             int drive_number) {
   check_amiga(amiga);
   auto& drive = get_floppy_drive_(amiga, drive_number);
