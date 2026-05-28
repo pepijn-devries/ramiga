@@ -37,7 +37,7 @@ accessed through the R6 object fields.
 
 #### Usage
 
-    RamigaComponent$new(emulator, ...)
+    RamigaComponent$new(emulator, component_id, ...)
 
 #### Arguments
 
@@ -46,6 +46,10 @@ accessed through the R6 object fields.
   All emulator components should be part of an emulator. All components
   (except for the emulator itself) therefore needs the, initialised with
   an emulator.
+
+- `component_id`:
+
+  Integer value used to identify different types of components.
 
 - `...`:
 

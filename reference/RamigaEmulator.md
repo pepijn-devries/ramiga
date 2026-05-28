@@ -49,7 +49,11 @@ A class representing the emulator for emulating an Amiga.
 
 - [`RamigaEmulator$soft_reset()`](#method-RamigaEmulator-soft_reset)
 
+- [`RamigaEmulator$hard_reset()`](#method-RamigaEmulator-hard_reset)
+
 - [`RamigaEmulator$run()`](#method-RamigaEmulator-run)
+
+- [`RamigaEmulator$next_frame()`](#method-RamigaEmulator-next_frame)
 
 - [`RamigaEmulator$get_info()`](#method-RamigaEmulator-get_info)
 
@@ -126,6 +130,20 @@ Returns the emulator object
 
 ------------------------------------------------------------------------
 
+### Method `hard_reset()`
+
+A hard reset. Same as powering of the machine, then powering it back on.
+
+#### Usage
+
+    RamigaEmulator$hard_reset()
+
+#### Returns
+
+Returns the emulator object
+
+------------------------------------------------------------------------
+
 ### Method `run()`
 
 When initialised, the emulator is paused. Call this to start running the
@@ -139,6 +157,21 @@ pressing ). After the interrupt the machine will be paused.
 #### Returns
 
 Returns NULL invisibly.
+
+------------------------------------------------------------------------
+
+### Method `next_frame()`
+
+Update the machines state to the next video frame. The machine runs
+until the vertical blank is reached and pauses imediately.
+
+#### Usage
+
+    RamigaEmulator$next_frame()
+
+#### Returns
+
+Returns the emulator object
 
 ------------------------------------------------------------------------
 

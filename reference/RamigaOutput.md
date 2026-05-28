@@ -51,15 +51,19 @@ virtual device.
 
 #### Returns
 
-If file is missing it returns a `grDevice::as.raster()` object.
-Otherwise, it will save it as png file to the specified path and returns
-nothing.
+If file is missing it returns a
+[`grDevices::as.raster()`](https://rdrr.io/r/grDevices/as.raster.html)
+object. Otherwise, it will save it as png file to the specified path and
+returns nothing.
 
 ------------------------------------------------------------------------
 
 ### Method `capture_audio_buffer()`
 
-TODO
+Capture the audio that is currently on the output buffer. While the
+emulator is running, audio is continuously generated and stored in a
+ring buffer. Use this function to collect data in this buffer. It can
+only be read once and the buffer has a limited capacity.
 
 #### Usage
 
@@ -69,15 +73,19 @@ TODO
 
 - `file`:
 
-  TODO
+  A file path to store the audio (RIFF wav format).
 
 - `...`:
 
-  TODO
+  Ignored
 
 #### Returns
 
-TODO
+If file is omitted, the audio data is returned as a `matrix` of
+`numeric` values. It returns 2 rows (for both stereo channels). The
+number of columns correspond with the number of samples available from
+the buffer. The waveform is scaled between -1 and +1, such that it can
+be played directly with `audio::play()`.
 
 ------------------------------------------------------------------------
 
