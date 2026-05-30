@@ -245,10 +245,26 @@ extern "C" SEXP _ramiga_load_rom_(SEXP amiga, SEXP path) {
   END_CPP11
 }
 // ramiga_memory.cpp
+void load_rom_raw_(cpp11::external_pointer<VAmigaWrapper> amiga, cpp11::writable::raws rom_data);
+extern "C" SEXP _ramiga_load_rom_raw_(SEXP amiga, SEXP rom_data) {
+  BEGIN_CPP11
+    load_rom_raw_(cpp11::as_cpp<cpp11::decay_t<cpp11::external_pointer<VAmigaWrapper>>>(amiga), cpp11::as_cpp<cpp11::decay_t<cpp11::writable::raws>>(rom_data));
+    return R_NilValue;
+  END_CPP11
+}
+// ramiga_memory.cpp
 void load_rom_ext_(cpp11::external_pointer<VAmigaWrapper> amiga, std::string path);
 extern "C" SEXP _ramiga_load_rom_ext_(SEXP amiga, SEXP path) {
   BEGIN_CPP11
     load_rom_ext_(cpp11::as_cpp<cpp11::decay_t<cpp11::external_pointer<VAmigaWrapper>>>(amiga), cpp11::as_cpp<cpp11::decay_t<std::string>>(path));
+    return R_NilValue;
+  END_CPP11
+}
+// ramiga_memory.cpp
+void load_rom_ext_raw_(cpp11::external_pointer<VAmigaWrapper> amiga, cpp11::writable::raws rom_data);
+extern "C" SEXP _ramiga_load_rom_ext_raw_(SEXP amiga, SEXP rom_data) {
+  BEGIN_CPP11
+    load_rom_ext_raw_(cpp11::as_cpp<cpp11::decay_t<cpp11::external_pointer<VAmigaWrapper>>>(amiga), cpp11::as_cpp<cpp11::decay_t<cpp11::writable::raws>>(rom_data));
     return R_NilValue;
   END_CPP11
 }
@@ -342,6 +358,8 @@ static const R_CallMethodDef CallEntries[] = {
     {"_ramiga_joystick_",              (DL_FUNC) &_ramiga_joystick_,              2},
     {"_ramiga_load_rom_",              (DL_FUNC) &_ramiga_load_rom_,              2},
     {"_ramiga_load_rom_ext_",          (DL_FUNC) &_ramiga_load_rom_ext_,          2},
+    {"_ramiga_load_rom_ext_raw_",      (DL_FUNC) &_ramiga_load_rom_ext_raw_,      2},
+    {"_ramiga_load_rom_raw_",          (DL_FUNC) &_ramiga_load_rom_raw_,          2},
     {"_ramiga_mouse_",                 (DL_FUNC) &_ramiga_mouse_,                 2},
     {"_ramiga_poweroff_amiga_",        (DL_FUNC) &_ramiga_poweroff_amiga_,        1},
     {"_ramiga_poweron_amiga_",         (DL_FUNC) &_ramiga_poweron_amiga_,         1},

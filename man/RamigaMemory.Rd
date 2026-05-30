@@ -14,6 +14,7 @@ Use this object to interact with the machines memory.
 \subsection{Public methods}{
 \itemize{
 \item \href{#method-RamigaEmulator-load_rom}{\code{RamigaMemory$load_rom()}}
+\item \href{#method-RamigaEmulator-load_rom_extension}{\code{RamigaMemory$load_rom_extension()}}
 \item \href{#method-RamigaEmulator-has_rom}{\code{RamigaMemory$has_rom()}}
 \item \href{#method-RamigaEmulator-get_rom_traits}{\code{RamigaMemory$get_rom_traits()}}
 \item \href{#method-RamigaEmulator-get_config}{\code{RamigaMemory$get_config()}}
@@ -45,6 +46,26 @@ ROM image, or the rom provided for AROS Research Operating System.
 \if{html}{\out{<div class="arguments">}}
 \describe{
 \item{\code{path}}{File path pointing to the location of the ROM file.}
+}
+\if{html}{\out{</div>}}
+}
+\subsection{Returns}{
+Returns the updated RamigaMemory object.
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-RamigaEmulator-load_rom_extension"></a>}}
+\if{latex}{\out{\hypertarget{method-RamigaEmulator-load_rom_extension}{}}}
+\subsection{Method \code{load_rom_extension()}}{
+Load an extension to a ROM file.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{RamigaMemory$load_rom_extension(path)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{path}}{File path pointing to the location of the ROM extension file.}
 }
 \if{html}{\out{</div>}}
 }

@@ -12,8 +12,20 @@ void load_rom_(cpp11::external_pointer<VAmigaWrapper> amiga, std::string path) {
 }
 
 [[cpp11::register]]
+void load_rom_raw_(cpp11::external_pointer<VAmigaWrapper> amiga, cpp11::writable::raws rom_data) {
+  get_memory_(amiga).loadRom(RAW(rom_data.data()), rom_data.size());
+  return;
+}
+
+[[cpp11::register]]
 void load_rom_ext_(cpp11::external_pointer<VAmigaWrapper> amiga, std::string path) {
   get_memory_(amiga).loadExt(std::filesystem::path(path));
+  return;
+}
+
+[[cpp11::register]]
+void load_rom_ext_raw_(cpp11::external_pointer<VAmigaWrapper> amiga, cpp11::writable::raws rom_data) {
+  get_memory_(amiga).loadExt(RAW(rom_data.data()), rom_data.size());
   return;
 }
 

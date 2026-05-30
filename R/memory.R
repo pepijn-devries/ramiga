@@ -16,7 +16,16 @@ RamigaMemory <-
       #' @param path File path pointing to the location of the ROM file.
       #' @return Returns the updated RamigaMemory object.
       load_rom = function(path) {
-        load_rom_(private$pointer, path)
+        .read_raw(private$pointer, path, load_rom_, load_rom_raw_)
+        self
+      },
+      
+      #' @description
+      #' Load an extension to a ROM file.
+      #' @param path File path pointing to the location of the ROM extension file.
+      #' @return Returns the updated RamigaMemory object.
+      load_rom_extension = function(path) {
+        .read_raw(private$pointer, path, load_rom_ext_, load_rom_ext_raw_)
         self
       },
       

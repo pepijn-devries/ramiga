@@ -9,7 +9,18 @@ RamigaImage <-
       #' @description
       #' Initialise an image from a disk image file.
       #' @param path File pointing to disk image file.
-      initialize = function(path) private$image <- disk_image_(path),
+      initialize = function(path) {
+        xt <- tools::file_ext(path)
+        
+        .fun_p <- function(pointer, path) disk_image_(path)
+        .fun_r <- function(pointer, data, ext = xt) {
+          tf <- tempfile(fileext = paste0(".", ext))
+          writeBin(data, tf)
+          disk_image_(tf)
+        }
+        
+        private$image <- .read_raw(NULL, path, .fun_p, .fun_r)
+      },
       
       #' @description
       #' Get information about the image.
