@@ -14,6 +14,8 @@ Use this object to interact with the machines memory.
 
 - [`RamigaMemory$load_rom()`](#method-RamigaEmulator-load_rom)
 
+- [`RamigaMemory$load_rom_extension()`](#method-RamigaEmulator-load_rom_extension)
+
 - [`RamigaMemory$has_rom()`](#method-RamigaEmulator-has_rom)
 
 - [`RamigaMemory$get_rom_traits()`](#method-RamigaEmulator-get_rom_traits)
@@ -47,6 +49,26 @@ image, or the rom provided for AROS Research Operating System.
 - `path`:
 
   File path pointing to the location of the ROM file.
+
+#### Returns
+
+Returns the updated RamigaMemory object.
+
+------------------------------------------------------------------------
+
+### Method `load_rom_extension()`
+
+Load an extension to a ROM file.
+
+#### Usage
+
+    RamigaMemory$load_rom_extension(path)
+
+#### Arguments
+
+- `path`:
+
+  File path pointing to the location of the ROM extension file.
 
 #### Returns
 
