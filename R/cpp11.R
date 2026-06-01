@@ -132,8 +132,16 @@ load_rom_ <- function(amiga, path) {
   invisible(.Call(`_ramiga_load_rom_`, amiga, path))
 }
 
+load_rom_raw_ <- function(amiga, rom_data) {
+  invisible(.Call(`_ramiga_load_rom_raw_`, amiga, rom_data))
+}
+
 load_rom_ext_ <- function(amiga, path) {
   invisible(.Call(`_ramiga_load_rom_ext_`, amiga, path))
+}
+
+load_rom_ext_raw_ <- function(amiga, rom_data) {
+  invisible(.Call(`_ramiga_load_rom_ext_raw_`, amiga, rom_data))
 }
 
 has_rom_ <- function(amiga) {

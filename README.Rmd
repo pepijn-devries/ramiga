@@ -67,10 +67,9 @@ were to be submitted to CRAN there are several hurdles to be taken:
     (like -Wa,-mbig-obj)
     * This could be fixed by splitting up large objects into multiple
       smaller ones.
-  * This package relies heavily on C++20 features. This will
-    not fly on all CRAN build and check machines (which is a requirement).
-    * This will take way too much effort to convert to CRAN acceptable
-      alternatives.
+  * This package relies heavily on C++20 features. C++20 is standardised
+    since R 4.6.0, we need to wait until this becomes old-release.
+    as CRAN expects compatibility with old- and new-release.
 
 I pay as much attention to quality as any of my other R packages, so
 you should be able to enjoy using this package. But for the reasons stated
