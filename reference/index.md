@@ -22,3 +22,5 @@
   : The RamigaMemory R6 Class
 - [`RamigaOutput`](https://pepijn-devries.github.io/ramiga/reference/RamigaOutput.md)
   : The RamigaOutput R6 Class
+- [`save_wav()`](https://pepijn-devries.github.io/ramiga/reference/save_wav.md)
+  : Save audio to WAV file

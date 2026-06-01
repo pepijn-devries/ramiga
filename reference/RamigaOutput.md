@@ -13,7 +13,7 @@ class).
 
 ### Public methods
 
-- [`RamigaOutput$capture_frame()`](#method-RamigaOutput-capture_frame)
+- [`RamigaOutput$capture_video_frame()`](#method-RamigaOutput-capture_video_frame)
 
 - [`RamigaOutput$capture_audio_buffer()`](#method-RamigaOutput-capture_audio_buffer)
 
@@ -30,14 +30,14 @@ Inherited methods
 
 ------------------------------------------------------------------------
 
-### Method `capture_frame()`
+### Method `capture_video_frame()`
 
 Captures the current pixel information as sent to the monitor of the
 virtual device.
 
 #### Usage
 
-    RamigaOutput$capture_frame(file, ...)
+    RamigaOutput$capture_video_frame(file, ...)
 
 #### Arguments
 

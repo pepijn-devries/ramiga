@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">ramiga</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.0.9006</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.0.9007</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -82,6 +82,7 @@ by <a href="RamigaOutput.html">RamigaOutput</a>.</p></dd>
 <li><p><a href="#method-RamigaEmulator-hard_reset"><code>RamigaEmulator$hard_reset()</code></a></p></li>
 <li><p><a href="#method-RamigaEmulator-run"><code>RamigaEmulator$run()</code></a></p></li>
 <li><p><a href="#method-RamigaEmulator-next_frame"><code>RamigaEmulator$next_frame()</code></a></p></li>
+<li><p><a href="#method-RamigaEmulator-fast_forward"><code>RamigaEmulator$fast_forward()</code></a></p></li>
 <li><p><a href="#method-RamigaEmulator-get_info"><code>RamigaEmulator$get_info()</code></a></p></li>
 <li><p><a href="#method-RamigaEmulator-get_config"><code>RamigaEmulator$get_config()</code></a></p></li>
 <li><p><a href="#method-RamigaEmulator-set_config"><code>RamigaEmulator$set_config()</code></a></p></li>
@@ -170,7 +171,7 @@ the machine will be paused.</esc></p><div class="section">
 </div><p></p><hr><a id="method-RamigaEmulator-next_frame"></a><div class="section">
 <h3 id="method-next-frame-">Method <code>next_frame()</code><a class="anchor" aria-label="anchor" href="#method-next-frame-"></a></h3>
 <p>Update the machines state to the next video frame. The machine
-runs until the vertical blank is reached and pauses imediately.</p><div class="section">
+runs until the vertical blank is reached and pauses immediately.</p><div class="section">
 <h4 id="usage-6">Usage<a class="anchor" aria-label="anchor" href="#usage-6"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">RamigaEmulator</span><span class="op">$</span><span class="fu">next_frame</span><span class="op">(</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
@@ -180,23 +181,24 @@ runs until the vertical blank is reached and pauses imediately.</p><div class="s
 <p>Returns the emulator object</p>
 </div>
 
-</div><p></p><hr><a id="method-RamigaEmulator-get_info"></a><div class="section">
-<h3 id="method-get-info-">Method <code>get_info()</code><a class="anchor" aria-label="anchor" href="#method-get-info-"></a></h3>
-<p>Get information about the emulator state.</p><div class="section">
+</div><p></p><hr><a id="method-RamigaEmulator-fast_forward"></a><div class="section">
+<h3 id="method-fast-forward-">Method <code>fast_forward()</code><a class="anchor" aria-label="anchor" href="#method-fast-forward-"></a></h3>
+<p>Runs the emulator at warp speed and skips the specified number
+of frames</p><div class="section">
 <h4 id="usage-7">Usage<a class="anchor" aria-label="anchor" href="#usage-7"></a></h4>
-<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">RamigaEmulator</span><span class="op">$</span><span class="fu">get_info</span><span class="op">(</span><span class="op">)</span></span></code></pre></div><p></p></div>
+<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">RamigaEmulator</span><span class="op">$</span><span class="fu">fast_forward</span><span class="op">(</span><span class="va">frames</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
 <div class="section">
 <h4 id="returns-6">Returns<a class="anchor" aria-label="anchor" href="#returns-6"></a></h4>
-<p>Returns a named list.</p>
+<p>Returns the emulator object</p>
 </div>
 
-</div><p></p><hr><a id="method-RamigaEmulator-get_config"></a><div class="section">
-<h3 id="method-get-config-">Method <code>get_config()</code><a class="anchor" aria-label="anchor" href="#method-get-config-"></a></h3>
-<p>Get information about the emulator configuration.</p><div class="section">
+</div><p></p><hr><a id="method-RamigaEmulator-get_info"></a><div class="section">
+<h3 id="method-get-info-">Method <code>get_info()</code><a class="anchor" aria-label="anchor" href="#method-get-info-"></a></h3>
+<p>Get information about the emulator state.</p><div class="section">
 <h4 id="usage-8">Usage<a class="anchor" aria-label="anchor" href="#usage-8"></a></h4>
-<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">RamigaEmulator</span><span class="op">$</span><span class="fu">get_config</span><span class="op">(</span><span class="op">)</span></span></code></pre></div><p></p></div>
+<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">RamigaEmulator</span><span class="op">$</span><span class="fu">get_info</span><span class="op">(</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
 <div class="section">
@@ -204,11 +206,23 @@ runs until the vertical blank is reached and pauses imediately.</p><div class="s
 <p>Returns a named list.</p>
 </div>
 
+</div><p></p><hr><a id="method-RamigaEmulator-get_config"></a><div class="section">
+<h3 id="method-get-config-">Method <code>get_config()</code><a class="anchor" aria-label="anchor" href="#method-get-config-"></a></h3>
+<p>Get information about the emulator configuration.</p><div class="section">
+<h4 id="usage-9">Usage<a class="anchor" aria-label="anchor" href="#usage-9"></a></h4>
+<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">RamigaEmulator</span><span class="op">$</span><span class="fu">get_config</span><span class="op">(</span><span class="op">)</span></span></code></pre></div><p></p></div>
+</div>
+
+<div class="section">
+<h4 id="returns-8">Returns<a class="anchor" aria-label="anchor" href="#returns-8"></a></h4>
+<p>Returns a named list.</p>
+</div>
+
 </div><p></p><hr><a id="method-RamigaEmulator-set_config"></a><div class="section">
 <h3 id="method-set-config-">Method <code>set_config()</code><a class="anchor" aria-label="anchor" href="#method-set-config-"></a></h3>
 <p>Quickly set the emulator configuration to one of the pre-specified
 schemes.</p><div class="section">
-<h4 id="usage-9">Usage<a class="anchor" aria-label="anchor" href="#usage-9"></a></h4>
+<h4 id="usage-10">Usage<a class="anchor" aria-label="anchor" href="#usage-10"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">RamigaEmulator</span><span class="op">$</span><span class="fu">set_config</span><span class="op">(</span>scheme <span class="op">=</span> <span class="st">"A500_OCS_1MB"</span>, <span class="va">...</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
@@ -227,14 +241,14 @@ or <code>"A500_PLUS_1MB"</code>.</p></dd>
 </dl><p></p></div>
 </div>
 <div class="section">
-<h4 id="returns-8">Returns<a class="anchor" aria-label="anchor" href="#returns-8"></a></h4>
+<h4 id="returns-9">Returns<a class="anchor" aria-label="anchor" href="#returns-9"></a></h4>
 <p>Returns a string</p>
 </div>
 
 </div><p></p><hr><a id="method-RamigaEmulator-get_version"></a><div class="section">
 <h3 id="method-get-version-">Method <code>get_version()</code><a class="anchor" aria-label="anchor" href="#method-get-version-"></a></h3>
 <p>Get the version number of the vAmiga core used by this package</p><div class="section">
-<h4 id="usage-10">Usage<a class="anchor" aria-label="anchor" href="#usage-10"></a></h4>
+<h4 id="usage-11">Usage<a class="anchor" aria-label="anchor" href="#usage-11"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">RamigaEmulator</span><span class="op">$</span><span class="fu">get_version</span><span class="op">(</span><span class="va">...</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
@@ -247,14 +261,14 @@ or <code>"A500_PLUS_1MB"</code>.</p></dd>
 </dl><p></p></div>
 </div>
 <div class="section">
-<h4 id="returns-9">Returns<a class="anchor" aria-label="anchor" href="#returns-9"></a></h4>
+<h4 id="returns-10">Returns<a class="anchor" aria-label="anchor" href="#returns-10"></a></h4>
 <p>Returns a string</p>
 </div>
 
 </div><p></p><hr><a id="method-RamigaEmulator-print"></a><div class="section">
 <h3 id="method-print-">Method <code><a href="https://rdrr.io/r/base/print.html" class="external-link">print()</a></code><a class="anchor" aria-label="anchor" href="#method-print-"></a></h3>
 <p>Prints basic information about the emulator.</p><div class="section">
-<h4 id="usage-11">Usage<a class="anchor" aria-label="anchor" href="#usage-11"></a></h4>
+<h4 id="usage-12">Usage<a class="anchor" aria-label="anchor" href="#usage-12"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">RamigaEmulator</span><span class="op">$</span><span class="fu">print</span><span class="op">(</span><span class="va">...</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
@@ -270,7 +284,7 @@ or <code>"A500_PLUS_1MB"</code>.</p></dd>
 </div><p></p><hr><a id="method-RamigaEmulator-clone"></a><div class="section">
 <h3 id="method-clone-">Method <code>clone()</code><a class="anchor" aria-label="anchor" href="#method-clone-"></a></h3>
 <p>The objects of this class are cloneable with this method.</p><div class="section">
-<h4 id="usage-12">Usage<a class="anchor" aria-label="anchor" href="#usage-12"></a></h4>
+<h4 id="usage-13">Usage<a class="anchor" aria-label="anchor" href="#usage-13"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">RamigaEmulator</span><span class="op">$</span><span class="fu">clone</span><span class="op">(</span>deep <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 

@@ -28,7 +28,7 @@
 
     <a class="navbar-brand me-2" href="index.html">ramiga</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.0.9006</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.0.9007</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -86,18 +86,83 @@
 <p>You can install the development version of ramiga like so:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">remotes</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"pepijn-devries/ramiga"</span><span class="op">)</span></span></code></pre></div>
+<p>If available for your OS, you can install from R-Universe:</p>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"ramiga"</span>, repos <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'https://pepijn-devries.r-universe.dev'</span>, <span class="st">'https://cloud.r-project.org'</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="example">Example<a class="anchor" aria-label="anchor" href="#example"></a>
 </h2>
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<p>In order to get started, you need to create a new RamigaEmulator object. As the emulator only emulates the Commodore Amiga machine, you need to provide a ROM image. For this you could use official licensed Kickstart ROM images, or you use an AROS ROM image, which is released in the public domain. In the example below we start the machine with the AROS ROM, for which we also need the extension.</p>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://pepijn-devries.github.io/ramiga/">ramiga</a></span><span class="op">)</span></span>
 <span><span class="va">emu</span> <span class="op">&lt;-</span> <span class="va"><a href="reference/RamigaEmulator.html">RamigaEmulator</a></span><span class="op">$</span><span class="fu">new</span><span class="op">(</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">emu</span><span class="op">$</span><span class="va">memory</span><span class="op">$</span><span class="fu">load_rom</span><span class="op">(</span></span>
+<span>  <span class="st">"https://github.com/vAmigaWeb/vAmigaWeb/raw/refs/heads/main/roms/aros-rom-20250219.bin"</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Memory: chip 0.5Mb; slow 0.5Mb; fast 0.0Mb; ROM: AROS Kickstart replacement</span></span>
+<span></span>
+<span><span class="va">emu</span><span class="op">$</span><span class="va">memory</span><span class="op">$</span><span class="fu">load_rom_extension</span><span class="op">(</span></span>
+<span>  <span class="st">"https://github.com/vAmigaWeb/vAmigaWeb/raw/refs/heads/main/roms/aros-ext-20250219.bin"</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Memory: chip 0.5Mb; slow 0.5Mb; fast 0.0Mb; ROM: AROS Kickstart replacement</span></span></code></pre></div>
+<p>Next we load a disk image, which represents a virtual floppy disk. We use the ‘State of the Art’ demo by Spaceballs as an ultimate 90s test case. We insert the virtual disk in the first floppy drive of the emulator, then power on the virtual machine.</p>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">disk</span> <span class="op">&lt;-</span> <span class="va"><a href="reference/RamigaImage.html">RamigaImage</a></span><span class="op">$</span><span class="fu">new</span><span class="op">(</span></span>
+<span>  <span class="st">"https://ftp.amigascne.org/pub/amiga/Groups/S/Spaceballs/Spaceballs-StateOfTheArt.dms"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">emu</span><span class="op">$</span><span class="va">floppy_drives</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">$</span><span class="fu">insert_disk</span><span class="op">(</span> <span class="va">disk</span> <span class="op">)</span></span>
+<span><span class="co">#&gt; DF0: With disk</span></span>
 <span></span>
 <span><span class="va">emu</span><span class="op">$</span><span class="fu">power_on</span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Amiga emulator (PAL) powered on:</span></span>
 <span><span class="co">#&gt;   CPU: 68000</span></span>
-<span><span class="co">#&gt;   Memory: chip 0.5Mb; slow 0.5Mb; fast 0.0Mb; ROM: Not loaded</span></span></code></pre></div>
+<span><span class="co">#&gt;   Memory: chip 0.5Mb; slow 0.5Mb; fast 0.0Mb; ROM: AROS Kickstart replacement</span></span></code></pre></div>
+<p>The emulator starts in a paused state, as we don’t want to block the main R thread. You actively have to tell the emulator to progress. Let’s skip 1,269 frames while the machine boots. They are not that interesting.</p>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">emu</span><span class="op">$</span><span class="fu">fast_forward</span><span class="op">(</span><span class="fl">1269L</span><span class="op">)</span></span></code></pre></div>
+<p>Now we can progress frame by frame, and capture the video image and the audio output buffer for each frame. In the example below, we store the audio in a <code>matrix</code>, and the frames as <code>".png"</code> files in the temporary directory.</p>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">audio</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/double.html" class="external-link">double</a></span><span class="op">(</span><span class="op">)</span>, <span class="fl">2</span>, <span class="fl">0</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co">#drain whatever is in the buffer first:</span></span>
+<span><span class="va">dummy</span> <span class="op">&lt;-</span> <span class="va">emu</span><span class="op">$</span><span class="va">output</span><span class="op">$</span><span class="fu">capture_audio_buffer</span><span class="op">(</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co">## Update frame, refill audio buffer with one frame worth of audio:</span></span>
+<span><span class="va">emu</span><span class="op">$</span><span class="fu">next_frame</span><span class="op">(</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co">## vector of frame indices:</span></span>
+<span><span class="va">idxs</span> <span class="op">&lt;-</span> <span class="fl">1L</span><span class="op">:</span><span class="fl">1550L</span></span>
+<span><span class="va">frame_files</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir</a></span><span class="op">(</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/sprintf.html" class="external-link">sprintf</a></span><span class="op">(</span><span class="st">"fr%04i.png"</span>, <span class="va">idxs</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="kw">for</span> <span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="va">idxs</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="va">audio</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html" class="external-link">cbind</a></span><span class="op">(</span><span class="va">audio</span>, <span class="va">emu</span><span class="op">$</span><span class="va">output</span><span class="op">$</span><span class="fu">capture_audio_buffer</span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
+<span>  <span class="va">emu</span><span class="op">$</span><span class="fu">next_frame</span><span class="op">(</span><span class="op">)</span></span>
+<span>  <span class="va">emu</span><span class="op">$</span><span class="va">output</span><span class="op">$</span><span class="fu">capture_video_frame</span><span class="op">(</span> <span class="va">frame_files</span><span class="op">[[</span><span class="va">i</span><span class="op">]</span><span class="op">]</span> <span class="op">)</span></span>
+<span><span class="op">}</span></span></code></pre></div>
+<p>Now save the <code>matrix</code> as a <code>".wav"</code> file, such that it can be used for rendering a video. We can also use the audio to calculate the emulated time span.</p>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">## Save the samples as a ".wav" such that we can use it for rendering</span></span>
+<span><span class="va">audio_file</span>  <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempfile</a></span><span class="op">(</span>fileext <span class="op">=</span> <span class="st">".wav"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="reference/save_wav.html">save_wav</a></span><span class="op">(</span><span class="va">audio</span>, <span class="va">audio_file</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co">## The duration is dictated by the number of samples</span></span>
+<span><span class="co">## divided by the sample rate</span></span>
+<span><span class="va">sample_rate</span> <span class="op">&lt;-</span> <span class="fl">44100L</span></span>
+<span><span class="va">duration</span>    <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/nrow.html" class="external-link">ncol</a></span><span class="op">(</span><span class="va">audio</span><span class="op">)</span><span class="op">/</span><span class="va">sample_rate</span></span>
+<span><span class="va">frame_rate</span>  <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">idxs</span><span class="op">)</span><span class="op">/</span><span class="va">duration</span></span></code></pre></div>
+<p>If we have the <a href="https://docs.ropensci.org/av/" class="external-link">av</a> package installed, we can render the captured frames and audio to a video file.</p>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/ns-load.html" class="external-link">requireNamespace</a></span><span class="op">(</span><span class="st">"av"</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="va">video_file</span>  <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempfile</a></span><span class="op">(</span>fileext <span class="op">=</span> <span class="st">".mp4"</span><span class="op">)</span></span>
+<span>  </span>
+<span>  <span class="co">## We use the 'vfilter' argument to correct the aspect ratio</span></span>
+<span>  <span class="co">## of the captured video frames.</span></span>
+<span>  <span class="fu">av</span><span class="fu">::</span><span class="fu">av_encode_video</span><span class="op">(</span></span>
+<span>    <span class="va">frame_files</span>, <span class="va">video_file</span>, <span class="va">frame_rate</span>,</span>
+<span>    vfilter <span class="op">=</span> <span class="st">"scale=iw:2*ih:flags=neighbor,setdar=4/3"</span>,</span>
+<span>    audio <span class="op">=</span> <span class="va">audio_file</span><span class="op">)</span></span>
+<span><span class="op">}</span></span></code></pre></div>
+<p>We have now successfully rendered the boot block intro of the demo:</p>
+<video width="100%" controls><source src="https://github.com/pepijn-devries/ramiga/raw/refs/heads/main/data-raw/state-of-the-art.mp4" type="video/mp4" srcset="NA"><p>Your browser does not support the video tag. </p></source></video>
 </div>
 <div class="section level2">
 <h2 id="not-on-cran">Not on CRAN<a class="anchor" aria-label="anchor" href="#not-on-cran"></a>
@@ -107,8 +172,6 @@
 <li>All code should comply with ISO standards.
 <ul>
 <li>With some effort this would be achievable</li>
-</ul>
-</li>
 <li>Package size should not exceed 5 MB, but should at best be below 10 MB
 <ul>
 <li>This will be difficult, if we want to keep all features</li>
@@ -119,14 +182,12 @@
 <li>This could be fixed by splitting up large objects into multiple smaller ones.</li>
 </ul>
 </li>
-<li>This package relies heavily on C++20 features. This will not fly on all CRAN build and check machines (which is a requirement).
-<ul>
-<li>This will take way too much effort to convert to CRAN acceptable alternatives.</li>
+<li>This package relies heavily on C++20 features. C++20 is standardised since R 4.6.0, we need to wait until this becomes old-release. as CRAN expects compatibility with old- and new-release.</li>
 </ul>
 </li>
 </ul>
 <p>I pay as much attention to quality as any of my other R packages, so you should be able to enjoy using this package. But for the reasons stated above, I will not submit to CRAN. You can install it from R-Universe as specified above.</p>
-<p><em>Why not use libretro?</em> I did explore this avenue. It doesn’t need C++20, so in that respect it would be easier to get on CRAN. However, the library is much bulkier than vAmiga. It also doesn’t have a sleek and easy to implement API like vAmiga. So I’ll leave this challenge for someone else to confront.</p>
+<p><em>Why not use libretro?</em> I did explore this avenue. It doesn’t need C++20, so in that respect it would be easier to get on CRAN. However, the library is much bulkier than vAmiga. It also doesn’t have a sleek and easy to implement API like vAmiga. So I’ll leave this challenge for someone else to pick up.</p>
 </div>
 </div>
   </main><aside class="col-md-3"><div class="links">

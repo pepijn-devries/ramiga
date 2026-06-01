@@ -55,6 +55,8 @@ A class representing the emulator for emulating an Amiga.
 
 - [`RamigaEmulator$next_frame()`](#method-RamigaEmulator-next_frame)
 
+- [`RamigaEmulator$fast_forward()`](#method-RamigaEmulator-fast_forward)
+
 - [`RamigaEmulator$get_info()`](#method-RamigaEmulator-get_info)
 
 - [`RamigaEmulator$get_config()`](#method-RamigaEmulator-get_config)
@@ -163,11 +165,25 @@ Returns NULL invisibly.
 ### Method `next_frame()`
 
 Update the machines state to the next video frame. The machine runs
-until the vertical blank is reached and pauses imediately.
+until the vertical blank is reached and pauses immediately.
 
 #### Usage
 
     RamigaEmulator$next_frame()
+
+#### Returns
+
+Returns the emulator object
+
+------------------------------------------------------------------------
+
+### Method `fast_forward()`
+
+Runs the emulator at warp speed and skips the specified number of frames
+
+#### Usage
+
+    RamigaEmulator$fast_forward(frames)
 
 #### Returns
 
