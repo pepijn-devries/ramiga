@@ -36,17 +36,124 @@ You can install the development version of ramiga like so:
 remotes::install_github("pepijn-devries/ramiga")
 ```
 
+If available for your OS, you can install from R-Universe:
+
+``` r
+install.packages("ramiga", repos = c('https://pepijn-devries.r-universe.dev', 'https://cloud.r-project.org'))
+```
+
 ## Example
+
+In order to get started, you need to create a new RamigaEmulator object.
+As the emulator only emulates the Commodore Amiga machine, you need to
+provide a ROM image. For this you could use official licensed Kickstart
+ROM images, or you use an AROS ROM image, which is released in the
+public domain. In the example below we start the machine with the AROS
+ROM, for which we also need the extension.
 
 ``` r
 library(ramiga)
 emu <- RamigaEmulator$new()
 
+emu$memory$load_rom(
+  "https://github.com/vAmigaWeb/vAmigaWeb/raw/refs/heads/main/roms/aros-rom-20250219.bin")
+#> Memory: chip 0.5Mb; slow 0.5Mb; fast 0.0Mb; ROM: AROS Kickstart replacement
+
+emu$memory$load_rom_extension(
+  "https://github.com/vAmigaWeb/vAmigaWeb/raw/refs/heads/main/roms/aros-ext-20250219.bin")
+#> Memory: chip 0.5Mb; slow 0.5Mb; fast 0.0Mb; ROM: AROS Kickstart replacement
+```
+
+Next we load a disk image, which represents a virtual floppy disk. We
+use the ‘State of the Art’ demo by Spaceballs as an ultimate 90s test
+case. We insert the virtual disk in the first floppy drive of the
+emulator, then power on the virtual machine.
+
+``` r
+disk <- RamigaImage$new(
+  "https://ftp.amigascne.org/pub/amiga/Groups/S/Spaceballs/Spaceballs-StateOfTheArt.dms")
+
+emu$floppy_drives[[1]]$insert_disk( disk )
+#> DF0: With disk
+
 emu$power_on()
 #> Amiga emulator (PAL) powered on:
 #>   CPU: 68000
-#>   Memory: chip 0.5Mb; slow 0.5Mb; fast 0.0Mb; ROM: Not loaded
+#>   Memory: chip 0.5Mb; slow 0.5Mb; fast 0.0Mb; ROM: AROS Kickstart replacement
 ```
+
+The emulator starts in a paused state, as we don’t want to block the
+main R thread. You actively have to tell the emulator to progress. Let’s
+skip 1,269 frames while the machine boots. They are not that
+interesting.
+
+``` r
+emu$fast_forward(1269L)
+```
+
+Now we can progress frame by frame, and capture the video image and the
+audio output buffer for each frame. In the example below, we store the
+audio in a `matrix`, and the frames as `".png"` files in the temporary
+directory.
+
+``` r
+audio <- matrix(double(), 2, 0)
+
+#drain whatever is in the buffer first:
+dummy <- emu$output$capture_audio_buffer()
+
+## Update frame, refill audio buffer with one frame worth of audio:
+emu$next_frame()
+
+## vector of frame indices:
+idxs <- 1L:1550L
+frame_files <- file.path(tempdir(), sprintf("fr%04i.png", idxs))
+for (i in idxs) {
+  audio <- cbind(audio, emu$output$capture_audio_buffer())
+  emu$next_frame()
+  emu$output$capture_video_frame( frame_files[[i]] )
+}
+```
+
+Now save the `matrix` as a `".wav"` file, such that it can be used for
+rendering a video. We can also use the audio to calculate the emulated
+time span.
+
+``` r
+## Save the samples as a ".wav" such that we can use it for rendering
+audio_file  <- tempfile(fileext = ".wav")
+save_wav(audio, audio_file)
+
+## The duration is dictated by the number of samples
+## divided by the sample rate
+sample_rate <- 44100L
+duration    <- ncol(audio)/sample_rate
+frame_rate  <- length(idxs)/duration
+```
+
+If we have the [av](https://docs.ropensci.org/av/) package installed, we
+can render the captured frames and audio to a video file.
+
+``` r
+if (requireNamespace("av")) {
+  video_file  <- tempfile(fileext = ".mp4")
+  
+  ## We use the 'vfilter' argument to correct the aspect ratio
+  ## of the captured video frames.
+  av::av_encode_video(
+    frame_files, video_file, frame_rate,
+    vfilter = "scale=iw:2*ih:flags=neighbor,setdar=4/3",
+    audio = audio_file)
+}
+```
+
+We have now successfully rendered the boot block intro of the demo:
+
+<video width="100%" controls>
+
+<source src="https://github.com/pepijn-devries/ramiga/raw/refs/heads/main/data-raw/state-of-the-art.mp4" type="video/mp4">
+
+Your browser does not support the video tag. </video>
 
 ## Not on CRAN
 
@@ -56,16 +163,16 @@ taken:
 
 - All code should comply with ISO standards.
   - With some effort this would be achievable
-- Package size should not exceed 5 MB, but should at best be below 10 MB
-  - This will be difficult, if we want to keep all features
-- We should avoid using non-standard compilation flags (like
-  -Wa,-mbig-obj)
-  - This could be fixed by splitting up large objects into multiple
-    smaller ones.
-- This package relies heavily on C++20 features. This will not fly on
-  all CRAN build and check machines (which is a requirement).
-  - This will take way too much effort to convert to CRAN acceptable
-    alternatives.
+  - Package size should not exceed 5 MB, but should at best be below 10
+    MB
+    - This will be difficult, if we want to keep all features
+  - We should avoid using non-standard compilation flags (like
+    -Wa,-mbig-obj)
+    - This could be fixed by splitting up large objects into multiple
+      smaller ones.
+  - This package relies heavily on C++20 features. C++20 is standardised
+    since R 4.6.0, we need to wait until this becomes old-release. as
+    CRAN expects compatibility with old- and new-release.
 
 I pay as much attention to quality as any of my other R packages, so you
 should be able to enjoy using this package. But for the reasons stated
@@ -76,4 +183,4 @@ specified above.
 C++20, so in that respect it would be easier to get on CRAN. However,
 the library is much bulkier than vAmiga. It also doesn’t have a sleek
 and easy to implement API like vAmiga. So I’ll leave this challenge for
-someone else to confront.
+someone else to pick up.

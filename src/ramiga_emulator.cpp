@@ -129,3 +129,35 @@ void emu_set_config_scheme_(cpp11::external_pointer<VAmigaWrapper> amiga,
   if (!success) cpp11::stop("Failed to set emulator scheme");
   return;
 }
+
+[[cpp11::register]]
+void update_screen_(cpp11::external_pointer<VAmigaWrapper> amiga) {
+  check_amiga(amiga);
+  amiga->finishFrame();
+  while (!amiga->isPaused()) {
+    std::this_thread::sleep_for(std::chrono::microseconds(21));
+  }
+  return;
+}
+
+[[cpp11::register]]
+void update_scanline_(cpp11::external_pointer<VAmigaWrapper> amiga) {
+  check_amiga(amiga);
+  amiga->finishLine();
+  while (!amiga->isPaused()) {
+    std::this_thread::sleep_for(std::chrono::microseconds(1)); 
+  }
+  return;
+}
+
+[[cpp11::register]]
+void ffw_(cpp11::external_pointer<VAmigaWrapper> amiga, int frames) {
+  if (frames <= 0)
+    cpp11::stop("Can only fast forward positive number of frames");
+  check_amiga(amiga);
+  amiga->amiga.amiga->fastForward(frames);
+  while (!amiga->isPaused()) {
+    std::this_thread::sleep_for(std::chrono::microseconds(21));
+  }
+  return;
+}
