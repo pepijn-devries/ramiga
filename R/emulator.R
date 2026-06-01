@@ -147,10 +147,19 @@ RamigaEmulator <-
       
       #' @description
       #' Update the machines state to the next video frame. The machine
-      #' runs until the vertical blank is reached and pauses imediately.
+      #' runs until the vertical blank is reached and pauses immediately.
       #' @return Returns the emulator object
       next_frame = function() {
         update_screen_(private$pointer)
+        self
+      },
+      
+      #' @description
+      #' Runs the emulator at warp speed and skips the specified number
+      #' of frames
+      #' @return Returns the emulator object
+      fast_forward = function(frames) {
+        ffw_(private$pointer, frames)
         self
       },
       

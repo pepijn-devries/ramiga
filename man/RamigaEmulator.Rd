@@ -38,6 +38,7 @@ by \link{RamigaOutput}.}
 \item \href{#method-RamigaEmulator-hard_reset}{\code{RamigaEmulator$hard_reset()}}
 \item \href{#method-RamigaEmulator-run}{\code{RamigaEmulator$run()}}
 \item \href{#method-RamigaEmulator-next_frame}{\code{RamigaEmulator$next_frame()}}
+\item \href{#method-RamigaEmulator-fast_forward}{\code{RamigaEmulator$fast_forward()}}
 \item \href{#method-RamigaEmulator-get_info}{\code{RamigaEmulator$get_info()}}
 \item \href{#method-RamigaEmulator-get_config}{\code{RamigaEmulator$get_config()}}
 \item \href{#method-RamigaEmulator-set_config}{\code{RamigaEmulator$set_config()}}
@@ -143,9 +144,23 @@ Returns NULL invisibly.
 \if{latex}{\out{\hypertarget{method-RamigaEmulator-next_frame}{}}}
 \subsection{Method \code{next_frame()}}{
 Update the machines state to the next video frame. The machine
-runs until the vertical blank is reached and pauses imediately.
+runs until the vertical blank is reached and pauses immediately.
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{RamigaEmulator$next_frame()}\if{html}{\out{</div>}}
+}
+
+\subsection{Returns}{
+Returns the emulator object
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-RamigaEmulator-fast_forward"></a>}}
+\if{latex}{\out{\hypertarget{method-RamigaEmulator-fast_forward}{}}}
+\subsection{Method \code{fast_forward()}}{
+Runs the emulator at warp speed and skips the specified number
+of frames
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{RamigaEmulator$fast_forward(frames)}\if{html}{\out{</div>}}
 }
 
 \subsection{Returns}{

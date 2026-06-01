@@ -43,26 +43,6 @@ cpp11::strings get_framebuffer_vport_(cpp11::external_pointer<VAmigaWrapper> ami
 
 
 [[cpp11::register]]
-void update_screen_(cpp11::external_pointer<VAmigaWrapper> amiga) {
-  check_amiga(amiga);
-  amiga->finishFrame();
-  while (!amiga->isPaused()) {
-    std::this_thread::sleep_for(std::chrono::microseconds(21));
-  }
-  return;
-}
-
-[[cpp11::register]]
-void update_scanline_(cpp11::external_pointer<VAmigaWrapper> amiga) {
-  check_amiga(amiga);
-  amiga->finishLine();
-  while (!amiga->isPaused()) {
-    std::this_thread::sleep_for(std::chrono::microseconds(1)); 
-  }
-  return;
-}
-
-[[cpp11::register]]
 void save_framebuffer_(cpp11::external_pointer<VAmigaWrapper> amiga,
                        std::string path) {
 #ifdef USE_ZLIB

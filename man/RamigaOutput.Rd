@@ -12,7 +12,7 @@ A class to capture output from the Amiga emulator (\link{RamigaEmulator} class).
 \section{Methods}{
 \subsection{Public methods}{
 \itemize{
-\item \href{#method-RamigaOutput-capture_frame}{\code{RamigaOutput$capture_frame()}}
+\item \href{#method-RamigaOutput-capture_video_frame}{\code{RamigaOutput$capture_video_frame()}}
 \item \href{#method-RamigaOutput-capture_audio_buffer}{\code{RamigaOutput$capture_audio_buffer()}}
 \item \href{#method-RamigaOutput-print}{\code{RamigaOutput$print()}}
 \item \href{#method-RamigaOutput-clone}{\code{RamigaOutput$clone()}}
@@ -29,13 +29,13 @@ A class to capture output from the Amiga emulator (\link{RamigaEmulator} class).
 </details>
 }}
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-RamigaOutput-capture_frame"></a>}}
-\if{latex}{\out{\hypertarget{method-RamigaOutput-capture_frame}{}}}
-\subsection{Method \code{capture_frame()}}{
+\if{html}{\out{<a id="method-RamigaOutput-capture_video_frame"></a>}}
+\if{latex}{\out{\hypertarget{method-RamigaOutput-capture_video_frame}{}}}
+\subsection{Method \code{capture_video_frame()}}{
 Captures the current pixel information as sent to the monitor of
 the virtual device.
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{RamigaOutput$capture_frame(file, ...)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{RamigaOutput$capture_video_frame(file, ...)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{

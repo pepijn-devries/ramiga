@@ -17,7 +17,7 @@ RamigaOutput <-
       #' @return If file is missing it returns a [grDevices::as.raster()] object.
       #' Otherwise, it will save it as png file to the specified path and returns
       #' nothing.
-      capture_frame = function(file, ...) {
+      capture_video_frame = function(file, ...) {
         if (missing(file)) {
           get_framebuffer_vport_(private$pointer) |>
             grDevices::as.raster()
@@ -44,7 +44,7 @@ RamigaOutput <-
         if (missing(file)) {
           stereo_audio_buffer_(private$pointer)
         } else {
-          save_wav_(private$pointer, file, 44100L)
+          save_buffer_wav_(private$pointer, file, 44100L)
         }
       },
       

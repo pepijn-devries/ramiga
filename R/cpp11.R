@@ -8,8 +8,12 @@ stereo_audio_buffer_ <- function(amiga) {
   .Call(`_ramiga_stereo_audio_buffer_`, amiga)
 }
 
-save_wav_ <- function(amiga, path, sample_rate) {
-  invisible(.Call(`_ramiga_save_wav_`, amiga, path, sample_rate))
+save_wav_ <- function(samples, path, sample_rate) {
+  invisible(.Call(`_ramiga_save_wav_`, samples, path, sample_rate))
+}
+
+save_buffer_wav_ <- function(amiga, path, sample_rate) {
+  invisible(.Call(`_ramiga_save_buffer_wav_`, amiga, path, sample_rate))
 }
 
 r_list_options_ <- function(component_id, amiga, index) {
@@ -108,6 +112,18 @@ emu_set_config_scheme_ <- function(amiga, config_scheme) {
   invisible(.Call(`_ramiga_emu_set_config_scheme_`, amiga, config_scheme))
 }
 
+update_screen_ <- function(amiga) {
+  invisible(.Call(`_ramiga_update_screen_`, amiga))
+}
+
+update_scanline_ <- function(amiga) {
+  invisible(.Call(`_ramiga_update_scanline_`, amiga))
+}
+
+ffw_ <- function(amiga, frames) {
+  invisible(.Call(`_ramiga_ffw_`, amiga, frames))
+}
+
 fs_get_traits_ <- function(image) {
   .Call(`_ramiga_fs_get_traits_`, image)
 }
@@ -162,14 +178,6 @@ rgb_to_hex <- function(val) {
 
 get_framebuffer_vport_ <- function(amiga) {
   .Call(`_ramiga_get_framebuffer_vport_`, amiga)
-}
-
-update_screen_ <- function(amiga) {
-  invisible(.Call(`_ramiga_update_screen_`, amiga))
-}
-
-update_scanline_ <- function(amiga) {
-  invisible(.Call(`_ramiga_update_scanline_`, amiga))
 }
 
 save_framebuffer_ <- function(amiga, path) {

@@ -21,10 +21,18 @@ extern "C" SEXP _ramiga_stereo_audio_buffer_(SEXP amiga) {
   END_CPP11
 }
 // ramiga_audio.cpp
-void save_wav_(cpp11::external_pointer<VAmigaWrapper> amiga, std::string path, int sample_rate);
-extern "C" SEXP _ramiga_save_wav_(SEXP amiga, SEXP path, SEXP sample_rate) {
+void save_wav_(cpp11::doubles_matrix<> samples, std::string path, int sample_rate);
+extern "C" SEXP _ramiga_save_wav_(SEXP samples, SEXP path, SEXP sample_rate) {
   BEGIN_CPP11
-    save_wav_(cpp11::as_cpp<cpp11::decay_t<cpp11::external_pointer<VAmigaWrapper>>>(amiga), cpp11::as_cpp<cpp11::decay_t<std::string>>(path), cpp11::as_cpp<cpp11::decay_t<int>>(sample_rate));
+    save_wav_(cpp11::as_cpp<cpp11::decay_t<cpp11::doubles_matrix<>>>(samples), cpp11::as_cpp<cpp11::decay_t<std::string>>(path), cpp11::as_cpp<cpp11::decay_t<int>>(sample_rate));
+    return R_NilValue;
+  END_CPP11
+}
+// ramiga_audio.cpp
+void save_buffer_wav_(cpp11::external_pointer<VAmigaWrapper> amiga, std::string path, int sample_rate);
+extern "C" SEXP _ramiga_save_buffer_wav_(SEXP amiga, SEXP path, SEXP sample_rate) {
+  BEGIN_CPP11
+    save_buffer_wav_(cpp11::as_cpp<cpp11::decay_t<cpp11::external_pointer<VAmigaWrapper>>>(amiga), cpp11::as_cpp<cpp11::decay_t<std::string>>(path), cpp11::as_cpp<cpp11::decay_t<int>>(sample_rate));
     return R_NilValue;
   END_CPP11
 }
@@ -201,6 +209,30 @@ extern "C" SEXP _ramiga_emu_set_config_scheme_(SEXP amiga, SEXP config_scheme) {
     return R_NilValue;
   END_CPP11
 }
+// ramiga_emulator.cpp
+void update_screen_(cpp11::external_pointer<VAmigaWrapper> amiga);
+extern "C" SEXP _ramiga_update_screen_(SEXP amiga) {
+  BEGIN_CPP11
+    update_screen_(cpp11::as_cpp<cpp11::decay_t<cpp11::external_pointer<VAmigaWrapper>>>(amiga));
+    return R_NilValue;
+  END_CPP11
+}
+// ramiga_emulator.cpp
+void update_scanline_(cpp11::external_pointer<VAmigaWrapper> amiga);
+extern "C" SEXP _ramiga_update_scanline_(SEXP amiga) {
+  BEGIN_CPP11
+    update_scanline_(cpp11::as_cpp<cpp11::decay_t<cpp11::external_pointer<VAmigaWrapper>>>(amiga));
+    return R_NilValue;
+  END_CPP11
+}
+// ramiga_emulator.cpp
+void ffw_(cpp11::external_pointer<VAmigaWrapper> amiga, int frames);
+extern "C" SEXP _ramiga_ffw_(SEXP amiga, SEXP frames) {
+  BEGIN_CPP11
+    ffw_(cpp11::as_cpp<cpp11::decay_t<cpp11::external_pointer<VAmigaWrapper>>>(amiga), cpp11::as_cpp<cpp11::decay_t<int>>(frames));
+    return R_NilValue;
+  END_CPP11
+}
 // ramiga_filesystem.cpp
 cpp11::list fs_get_traits_(cpp11::external_pointer<DiskImage> image);
 extern "C" SEXP _ramiga_fs_get_traits_(SEXP image) {
@@ -304,22 +336,6 @@ extern "C" SEXP _ramiga_get_framebuffer_vport_(SEXP amiga) {
   END_CPP11
 }
 // ramiga_video.cpp
-void update_screen_(cpp11::external_pointer<VAmigaWrapper> amiga);
-extern "C" SEXP _ramiga_update_screen_(SEXP amiga) {
-  BEGIN_CPP11
-    update_screen_(cpp11::as_cpp<cpp11::decay_t<cpp11::external_pointer<VAmigaWrapper>>>(amiga));
-    return R_NilValue;
-  END_CPP11
-}
-// ramiga_video.cpp
-void update_scanline_(cpp11::external_pointer<VAmigaWrapper> amiga);
-extern "C" SEXP _ramiga_update_scanline_(SEXP amiga) {
-  BEGIN_CPP11
-    update_scanline_(cpp11::as_cpp<cpp11::decay_t<cpp11::external_pointer<VAmigaWrapper>>>(amiga));
-    return R_NilValue;
-  END_CPP11
-}
-// ramiga_video.cpp
 void save_framebuffer_(cpp11::external_pointer<VAmigaWrapper> amiga, std::string path);
 extern "C" SEXP _ramiga_save_framebuffer_(SEXP amiga, SEXP path) {
   BEGIN_CPP11
@@ -339,6 +355,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_ramiga_emulator_info_",         (DL_FUNC) &_ramiga_emulator_info_,         1},
     {"_ramiga_emulator_version_",      (DL_FUNC) &_ramiga_emulator_version_,      1},
     {"_ramiga_fdrive_info_",           (DL_FUNC) &_ramiga_fdrive_info_,           2},
+    {"_ramiga_ffw_",                   (DL_FUNC) &_ramiga_ffw_,                   2},
     {"_ramiga_fs_describe_",           (DL_FUNC) &_ramiga_fs_describe_,           1},
     {"_ramiga_fs_get_name_",           (DL_FUNC) &_ramiga_fs_get_name_,           1},
     {"_ramiga_fs_get_traits_",         (DL_FUNC) &_ramiga_fs_get_traits_,         1},
@@ -368,6 +385,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_ramiga_r_set_option_",          (DL_FUNC) &_ramiga_r_set_option_,          5},
     {"_ramiga_rgb_to_hex",             (DL_FUNC) &_ramiga_rgb_to_hex,             1},
     {"_ramiga_run_until_interrupted_", (DL_FUNC) &_ramiga_run_until_interrupted_, 1},
+    {"_ramiga_save_buffer_wav_",       (DL_FUNC) &_ramiga_save_buffer_wav_,       3},
     {"_ramiga_save_framebuffer_",      (DL_FUNC) &_ramiga_save_framebuffer_,      2},
     {"_ramiga_save_wav_",              (DL_FUNC) &_ramiga_save_wav_,              3},
     {"_ramiga_softreset_amiga_",       (DL_FUNC) &_ramiga_softreset_amiga_,       1},

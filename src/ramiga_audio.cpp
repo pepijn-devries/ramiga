@@ -48,10 +48,8 @@ void write_binary_(std::ofstream& stream, const T& value) {
 }
 
 [[cpp11::register]]
-void save_wav_(
-    cpp11::external_pointer<VAmigaWrapper> amiga, std::string path,
-    int sample_rate) {
-  cpp11::doubles_matrix<> samples = stereo_audio_buffer_(amiga);
+void save_wav_(cpp11::doubles_matrix<> samples,
+               std::string path, int sample_rate) {
   int num_channels = samples.nrow();
   int num_samples = samples.ncol();
   
@@ -96,5 +94,13 @@ void save_wav_(
   }
   
   wav_file.close();
+  return;
+}
+
+[[cpp11::register]]
+void save_buffer_wav_(
+    cpp11::external_pointer<VAmigaWrapper> amiga, std::string path,
+    int sample_rate) {
+  save_wav_(stereo_audio_buffer_(amiga), path, sample_rate);
   return;
 }
